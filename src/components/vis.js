@@ -11,13 +11,11 @@ class Vis extends Component {
   }
 
   componentWillMount(){
-    axios.get("../data/simple.json")
+    axios.get("./src/data/simple.json")
       .then((response)=>{
         var { data }  = response;
-        this.state({
-          data: _.sortBy(data, (value) => {
-            return value.y;
-          })
+        this.setState({
+          data: data.sort((a, b) => { return a.y - b.y })
         });
       })
   }
@@ -36,3 +34,5 @@ class Vis extends Component {
     }
   }
 }
+
+export default Vis;

@@ -1,124 +1,124 @@
 [
   {
-    "x" : 0,
-    "y" : 0,
-    "event_name" : "Event 0",
-    "n" : 2,
-    "characters" : [
+    "x": 0,
+    "y": 0,
+    "event_name": "Event 0",
+    "n": 2,
+    "characters": [
       {
-        "color" : 1,
-        "name" : "Buni Yani",
-        "role" : "Saksi terlapor",
-        "social_status" : [
+        "color": 1,
+        "name": "Buni Yani",
+        "role": "Saksi terlapor",
+        "social_status": [
           "Dosen"
         ]
       },
       {
-        "color" : 2,
-        "name" : "Aldwin",
-        "role" : "Kuasa hukum buni yani",
-        "social_status" : []
+        "color": 2,
+        "name": "Aldwin",
+        "role": "Kuasa hukum buni yani",
+        "social_status": []
       }
     ],
-    "published_date" : "2018-03-31",
-    "law_stage" : "Penyelidikan"
+    "published_date": "2018-03-31",
+    "law_stage": "Penyelidikan"
   },
   {
-    "x" : 1,
-    "y" : 1,
-    "event_name" : "Event 1",
-    "n" : 2,
-    "characters" : [
+    "x": 1,
+    "y": 1,
+    "event_name": "Event 1",
+    "n": 2,
+    "characters": [
       {
-        "color" : 1,
-        "name" : "Buni Yani",
-        "role" : "Saksi terlapor",
-        "social_status" : [
+        "color": 1,
+        "name": "Buni Yani",
+        "role": "Saksi terlapor",
+        "social_status": [
           "Dosen"
         ]
       },
       {
-        "color" : 2,
-        "name" : "Aldwin",
-        "role" : "Kuasa hukum buni yani",
-        "social_status" : []
+        "color": 2,
+        "name": "Aldwin",
+        "role": "Kuasa hukum buni yani",
+        "social_status": []
       }
     ],
-    "published_date" : "2018-03-31",
-    "law_stage" : "Penyelidikan"
+    "published_date": "2018-03-31",
+    "law_stage": "Penyelidikan"
   },
   {
-    "x" : 2,
-    "y" : 5,
-    "event_name" : "Event 1",
-    "n" : 2,
-    "characters" : [
+    "x": 2,
+    "y": 5,
+    "event_name": "Event 1",
+    "n": 2,
+    "characters": [
       {
-        "color" : 1,
-        "name" : "Buni Yani",
-        "role" : "Saksi terlapor",
-        "social_status" : [
+        "color": 1,
+        "name": "Buni Yani",
+        "role": "Saksi terlapor",
+        "social_status": [
           "Dosen"
         ]
       },
       {
-        "color" : 2,
-        "name" : "Aldwin",
-        "role" : "Kuasa hukum buni yani",
-        "social_status" : []
+        "color": 2,
+        "name": "Aldwin",
+        "role": "Kuasa hukum buni yani",
+        "social_status": []
       }
     ],
-    "published_date" : "2018-03-31",
-    "law_stage" : "Penyidikan"
+    "published_date": "2018-03-31",
+    "law_stage": "Penyidikan"
   },
   {
-    "x" : 3,
-    "y" : 4,
-    "event_name" : "Event 3",
-    "n" : 1,
-    "characters" : [
+    "x": 3,
+    "y": 4,
+    "event_name": "Event 3",
+    "n": 1,
+    "characters": [
       {
-        "color" : 1,
-        "name" : "Buni Yani",
-        "role" : "Saksi terlapor",
-        "social_status" : [
+        "color": 1,
+        "name": "Buni Yani",
+        "role": "Saksi terlapor",
+        "social_status": [
           "Dosen"
         ]
       }
     ],
-    "published_date" : "2018-03-31",
-    "law_stage" : "Penyelidikan"
+    "published_date": "2018-03-31",
+    "law_stage": "Penyelidikan"
   },
   {
-    "x" : 4,
-    "y" : 8,
-    "event_name" : "Event 4",
-    "n" : 3,
-    "characters" : [
+    "x": 4,
+    "y": 8,
+    "event_name": "Event 4",
+    "n": 3,
+    "characters": [
       {
-        "color" : 1,
-        "name" : "Buni Yani",
-        "role" : "Saksi terlapor",
-        "social_status" : [
+        "color": 1,
+        "name": "Buni Yani",
+        "role": "Saksi terlapor",
+        "social_status": [
           "Dosen"
         ]
       },
       {
-        "color" : 2,
-        "name" : "Aldwin",
-        "role" : "Kuasa hukum buni yani",
-        "social_status" : []
+        "color": 2,
+        "name": "Aldwin",
+        "role": "Kuasa hukum buni yani",
+        "social_status": []
       },
       {
-        "color" : 3,
-        "name" : "Joko Susilo",
-        "role" : "Kerabat buni yani",
-        "social_status" : [
+        "color": 3,
+        "name": "Joko Susilo",
+        "role": "Kerabat buni yani",
+        "social_status": [
           "Dosen"
         ]
-      },
+      }
     ],
-    "published_date" : "2018-04-1",
-    "law_stage" : "Penyidikan"
+    "published_date": "2018-04-1",
+    "law_stage": "Penyidikan"
   }
 ]

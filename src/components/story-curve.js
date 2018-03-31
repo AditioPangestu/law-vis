@@ -52,10 +52,10 @@ class StoryCurve extends Component {
   }
 
   componentWillMount(){
-    const event_positions = preprocessRectData(this.props.data);
+    const event_positions = this.preprocessRectData(this.props.data);
     const { date_tic_values, date_tic_names } = this.generateDateTic(this.props.data);
     const { stage_tic_values, stage_tic_names } = this.generateLawStageTic(this.props.data);
-    this.state({
+    this.setState({
       event_positions: event_positions,
       date_tic_values: date_tic_values,
       date_tic_names: date_tic_names,
@@ -69,8 +69,8 @@ class StoryCurve extends Component {
     for(var i=0;i<data.length;i++){
       const datum = data[i];
       var y_base = datum.y;
-      for (var j = 0; j < n; j++) {
-        event_positions.append({
+      for (var j = 0; j < datum.n; j++) {
+        event_positions.push({
           x0: (datum.x - 1),
           x: datum.x,
           y0: y_base,
@@ -84,27 +84,27 @@ class StoryCurve extends Component {
   }
   
   generateLawStageTic(data){
-    var tic_values = [];
-    var tic_names = [];
+    var stage_tic_names = [];
+    var stage_tic_values = [];
     if(data.length >= 2) {
       var prev_stage = data[0].law_stage;
       var curr_stage = "";
       var prev_idx = 0;
-      tic_names.append(prev_stage);
+      stage_tic_names.push(prev_stage);
       for (var i = 1; i < data.length; i++) {
         const datum = data[i];
         curr_stage = datum.law_stage;
         if(curr_stage != prev_stage){
-          tic_values.append((prev_idx+i-1)/2);
+          stage_tic_values.push((prev_idx+i-1)/2);
           prev_idx = i;
-          tic_names.append(curr_stage);
+          stage_tic_names.push(curr_stage);
         }
         prev_stage = curr_stage;
       }
-      tic_values.append((prev_idx+i-1)/2);
+      stage_tic_values.push((prev_idx+i-1)/2);
     } else if (data.length == 1) {
-      tic_values = [0];
-      tic_names = [data[0].law_stage];
+      stage_tic_values = [0];
+      stage_tic_names = [data[0].law_stage];
     }
     return {
       stage_tic_values,
@@ -113,27 +113,27 @@ class StoryCurve extends Component {
   }
   
   generateDateTic(data){
-    var tic_names = [];
-    var tic_values = [];
+    var date_tic_names = [];
+    var date_tic_values = [];
     if (data.length >= 2) {
       var prev_date = data[0].published_date;
       var curr_date = "";
       var prev_idx = 0;
-      tic_names.append(moment(prev_date).format("DD MMM YYYY"));
+      date_tic_names.push(moment(prev_date).format("DD MMM YYYY"));
       for (var i = 1; i < data.length; i++) {
         const datum = data[i];
         curr_date = datum.law_stage;
         if (moment(prev_date).isSame(curr_date,'day')) {
-          tic_values.append((prev_idx + i - 1) / 2);
+          date_tic_values.push((prev_idx + i - 1) / 2);
           prev_idx = i;
-          tic_names.append(moment(curr_date).format("DD MMM YYYY"));
+          date_tic_names.push(moment(curr_date).format("DD MMM YYYY"));
         }
         prev_date = curr_date;
       }
-      tic_values.append((prev_idx + i - 1) / 2);
+      date_tic_values.push((prev_idx + i - 1) / 2);
     } else if (data.length == 1) {
-      tic_values = [0];
-      tic_names = [data[0].published_date];
+      date_tic_values = [0];
+      date_tic_names = [data[0].published_date];
     }
     return {
       date_tic_values,
