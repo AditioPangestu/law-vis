@@ -3,12 +3,11 @@ import _ from "lodash";
 import moment from "moment";
 import { 
   XYPlot,
-  HorizontalRectSeries,
+  VerticalRectSeries,
   VerticalGridLines,
   HorizontalGridLines,
   XAxis,
-  YAxis,
-  MarkSeries
+  YAxis
 } from 'react-vis';
 
 /*
@@ -62,23 +61,58 @@ function generateLawStageTic(data){
     tic_values.append((prev_idx+i-1)/2);
   } else if (data.length == 1) {
     tic_values = [0];
-    tic_names = data[0].law_stage;
+    tic_names = [data[0].law_stage];
   }
   return {
-    tic_values,
-    tic_names
+    stage_tic_values,
+    stage_tic_names
   };
 }
 
 function generateDateTic(data){
-  
+  var tic_names = [];
+  var tic_values = [];
+  if (data.length >= 2) {
+    var prev_date = data[0].published_date;
+    var curr_date = "";
+    var prev_idx = 0;
+    tic_names.append(moment(prev_date).format("DD MMM YYYY"));
+    for (var i = 1; i < data.length; i++) {
+      const datum = data[i];
+      curr_date = datum.law_stage;
+      if (moment(prev_date).isSame(curr_date,'day')) {
+        tic_values.append((prev_idx + i - 1) / 2);
+        prev_idx = i;
+        tic_names.append(moment(curr_date).format("DD MMM YYYY"));
+      }
+      prev_date = curr_date;
+    }
+    tic_values.append((prev_idx + i - 1) / 2);
+  } else if (data.length == 1) {
+    tic_values = [0];
+    tic_names = [data[0].published_date];
+  }
+  return {
+    date_tic_values,
+    date_tic_names
+  };
 }
 
 function StoryCurve({ data }) {
   const rect_data = preprocessRectData(data);
-
+  const { date_tic_values, date_tic_names } = generateDateTic(data);
+  const { stage_tic_values, stage_tic_names } = generateLawStageTic(data);
   return (
-    
+    <XYPlot
+      width={300}
+      height={300}>
+      <VerticalRectSeries
+        data={rect_data}/>
+      <YAxis hideTicks tickValues={stage_tic_values} tickFormat={stage_tic_names} />
+      <XAxis top={0} hideTicks tickValues={date_tic_values} tickFormat={date_tic_names}></XAxis>
+      <VerticalGridLines/>
+      <HorizontalGridLines/>
+    </XYPlot>
   );
 }
 
