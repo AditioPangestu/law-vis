@@ -8,7 +8,8 @@ import {
   VerticalGridLines,
   HorizontalGridLines,
   XAxis,
-  YAxis
+  YAxis,
+  Borders
 } from 'react-vis';
 
 /*
@@ -68,11 +69,11 @@ class StoryCurve extends Component {
     var event_positions = []
     for(var i=0;i<data.length;i++){
       const datum = data[i];
-      var y_base = datum.y;
+      var y_base = datum.y - datum.n/2;
       for (var j = 0; j < datum.n; j++) {
         event_positions.push({
-          x0: (datum.x - 1),
-          x: datum.x,
+          x0: (datum.x),
+          x: (datum.x+1),
           y0: y_base,
           y: (y_base + 1),
           color: datum.characters[j].color
@@ -87,21 +88,20 @@ class StoryCurve extends Component {
     var stage_tic_names = [];
     var stage_tic_values = [];
     if(data.length >= 2) {
-      var prev_stage = data[0].law_stage;
-      var curr_stage = "";
-      var prev_idx = 0;
-      stage_tic_names.push(prev_stage);
+      var prev_datum = data[0];
+      var curr_datum = {};
+      var prev_idx = prev_datum.y;
+      stage_tic_names.push(prev_datum.law_stage);
       for (var i = 1; i < data.length; i++) {
-        const datum = data[i];
-        curr_stage = datum.law_stage;
-        if(curr_stage != prev_stage){
-          stage_tic_values.push((prev_idx+i-1)/2);
+        curr_datum = data[i];
+        if (curr_datum.law_stage != prev_datum.law_stage){
+          stage_tic_values.push(prev_idx+(prev_idx + curr_datum.y)/2);
           prev_idx = i;
-          stage_tic_names.push(curr_stage);
+          stage_tic_names.push(curr_datum.law_stage);
         }
-        prev_stage = curr_stage;
+        prev_datum = curr_datum;
       }
-      stage_tic_values.push((prev_idx+i-1)/2);
+      stage_tic_values.push((prev_idx + curr_datum.y)/2);
     } else if (data.length == 1) {
       stage_tic_values = [0];
       stage_tic_names = [data[0].law_stage];
@@ -162,12 +162,18 @@ class StoryCurve extends Component {
   render(){
     return (
       <XYPlot
-        width={300}
+        margin={{ left: 100 }}
+        width={500}
         height={300}>
         <VerticalRectSeries
           data={this.state.event_positions}/>
-        <YAxis hideTicks tickValues={this.state.stage_tic_values} tickFormat={this.stageTicFormat} />
-        <XAxis top={0} hideTicks tickValues={this.state.date_tic_values} tickFormat={this.dateTicFormat}/>
+        <Borders style={{
+          bottom: { fill: '#fff' },
+          left: { fill: '#fff' },
+          right: { fill: '#fff' },
+          top: { fill: '#fff' }
+        }}/>
+        <YAxis tickValues={this.state.stage_tic_values} tickFormat={this.stageTicFormat} />
         <VerticalGridLines/>
         <HorizontalGridLines/>
       </XYPlot>

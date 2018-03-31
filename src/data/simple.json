@@ -20,7 +20,7 @@
         "social_status": []
       }
     ],
-    "published_date": "2018-03-31",
+    "published_date": "2018-03-30T18:35:49.262Z",
     "law_stage": "Penyelidikan"
   },
   {
@@ -44,12 +44,12 @@
         "social_status": []
       }
     ],
-    "published_date": "2018-03-31",
+    "published_date": "2018-03-30T18:35:49.262Z",
     "law_stage": "Penyelidikan"
   },
   {
     "x": 2,
-    "y": 5,
+    "y": 4,
     "event_name": "Event 1",
     "n": 2,
     "characters": [
@@ -68,12 +68,12 @@
         "social_status": []
       }
     ],
-    "published_date": "2018-03-31",
+    "published_date": "2018-03-31T18:35:49.262Z",
     "law_stage": "Penyidikan"
   },
   {
     "x": 3,
-    "y": 4,
+    "y": 2,
     "event_name": "Event 3",
     "n": 1,
     "characters": [
@@ -86,12 +86,12 @@
         ]
       }
     ],
-    "published_date": "2018-03-31",
+    "published_date": "2018-03-31T18:35:49.262Z",
     "law_stage": "Penyelidikan"
   },
   {
     "x": 4,
-    "y": 8,
+    "y": 3,
     "event_name": "Event 4",
     "n": 3,
     "characters": [
@@ -118,7 +118,7 @@
         ]
       }
     ],
-    "published_date": "2018-04-1",
+    "published_date": "2018-03-31T18:35:49.262Z",
     "law_stage": "Penyidikan"
   }
 ]
