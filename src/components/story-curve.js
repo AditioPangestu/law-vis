@@ -43,7 +43,15 @@ class StoryCurve extends Component {
       date_tic_values : [],
       date_tic_names : [], 
       stage_tic_values : [], 
-      stage_tic_names : []
+      stage_tic_names : [],
+      stage_areas : [
+        /* 
+          {
+            start : start,
+            end : end,
+          } 
+        */
+      ],
     }
     this.preprocessRectData = this.preprocessRectData.bind(this);
     this.generateLawStageTic = this.generateLawStageTic.bind(this);
@@ -67,19 +75,55 @@ class StoryCurve extends Component {
 
   preprocessRectData(data){
     var event_positions = []
+    var stage_areas = [];
+    var stage_area = {};
+    var prev_datum = {};
     for(var i=0;i<data.length;i++){
       const datum = data[i];
-      var y_base = datum.y - datum.n/2;
-      for (var j = 0; j < datum.n; j++) {
-        event_positions.push({
-          x0: (datum.x),
-          x: (datum.x+1),
-          y0: y_base,
-          y: (y_base + 1),
-          color: datum.characters[j].color
-        });
-        y_base++;
+      if(i == 0){
+        var y_base = datum.y - datum.n/2;
+        stage_area.start = y_base;
+        for (var j = 0; j < datum.n; j++) {
+          event_positions.push({
+            x0: (datum.x),
+            x: (datum.x+1),
+            y0: y_base,
+            y: (y_base + 1),
+            color: datum.characters[j].color
+          });
+          y_base++;
+        }
+      } else {
+        if (prev_datum.law_stage == datum.law_stage){
+          var y_base = event_positions[event_positions.length - 1].y - (prev_datum.n / 2) + 1 - (datum.n / 2);
+          for (var j = 0; j < datum.n; j++) {
+            event_positions.push({
+              x0: (datum.x),
+              x: (datum.x + 1),
+              y0: y_base,
+              y: (y_base + 1),
+              color: datum.characters[j].color
+            });
+            y_base++;
+          }
+        } else {
+          stage_area.end = prev_datum.y + (prev_datum.n/2);
+          stage_areas.push(stage_area);
+          stage_area.start = prev_datum.y + (prev_datum.n/2);
+          var y_base = stage_area.start;
+          for (var j = 0; j < datum.n; j++) {
+            event_positions.push({
+              x0: (datum.x),
+              x: (datum.x + 1),
+              y0: y_base,
+              y: (y_base + 1),
+              color: datum.characters[j].color
+            });
+            y_base++;
+          }
+        }
       }
+      prev_datum = datum;
     }
     return event_positions;
   }
