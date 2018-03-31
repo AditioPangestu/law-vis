@@ -4,7 +4,7 @@ import _ from "lodash";
 
 import StoryCurve from "./story-curve";
 
-class VIs extends Component {
+class Vis extends Component {
   constructor(props){
     super(props);
     this.state = { data : []};

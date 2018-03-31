@@ -29,6 +29,7 @@ function preprocessRectData(data){
     var y_base = datum.y - (n / 2);
     for (var j = 0; j < n; j++) {
       rect_data.append({
+        x0: (datum.x - 1),
         x: datum.x,
         y0: y_base,
         y: (y_base + 1),
