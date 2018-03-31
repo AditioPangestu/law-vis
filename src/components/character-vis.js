@@ -4,7 +4,7 @@ import _ from "lodash";
 import moment from "moment";
 import {
   XYPlot,
-  HorizontalRectSeries,
+  VerticalRectSeries,
   VerticalGridLines,
   HorizontalGridLines,
   XAxis,
@@ -52,6 +52,7 @@ class CharacterVis extends Component {
 
       ],
     }
+    this.characterTicFormat = this.characterTicFormat.bind(this);
   }
 
   /*
@@ -133,14 +134,32 @@ class CharacterVis extends Component {
     });
   }
   
+  characterTicFormat(value){
+    const index = _.findIndex(this.state.character_tic_values, (character_tic_value) => {
+      return (character_tic_value == character_tic_value);
+    });
+    if(index != -1){
+      return this.state.character_tic_names[index];
+    }
+  }
+
   render(){
     return (
-
+      <XYPlot
+        width={300}
+        height={300}>
+        {
+          _.mapKey(this.state.character_positions, (character_position)=>{
+            return (
+              <VerticalRectSeries
+                data={character_position.positions}/>
+            )
+          })
+        }
+        <YAxis hideTicks hideLine tickValues={this.state.character_tic_values} tickFormat={this.characterTicFormat} />
+      </XYPlot>
     );
   }
 }
 
-
-StoryCurve.StoryCurve = {
-  data: PropTypes.array.isRequired
-};
+export default CharacterVis;
