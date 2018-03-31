@@ -212,9 +212,18 @@ class StoryCurve extends Component {
           right: { fill: '#fff' },
           top: { fill: '#fff' }
         }}/>
-        <YAxis tickValues={this.state.stage_tic_values} tickFormat={this.stageTicFormat} />
+        <YAxis 
+          tickValues={this.state.stage_tic_values}
+          tickFormat={this.stageTicFormat}/>
+        <YAxis
+          tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end })}
+          tickFormat={(value)=>{return ""}} />        
+        <HorizontalGridLines 
+          tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}
+          style={{ borderStyle: "dashed"}}/>
+        <XAxis tickValues={this.state.date_tic_values}
+          tickFormat={this.dateTicFormat}/>
         <VerticalGridLines/>
-        <HorizontalGridLines/>
       </XYPlot>
     );
   }
