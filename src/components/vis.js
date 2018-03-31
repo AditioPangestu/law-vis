@@ -13,13 +13,26 @@ class Vis extends Component {
   componentWillMount(){
     axios.get("../data/simple.json")
       .then((response)=>{
-        
+        var { data }  = response;
+        this.state({
+          data: _.sortBy(data, (value) => {
+            return value.y;
+          })
+        });
       })
   }
 
   render(){
-    return (
-
-    );
+    if (this.state.data.length){
+      return (
+        <StoryCurve data={this.state.data}/>
+      );
+    } else {
+      return (
+        <div>
+          Loading...
+        </div>
+      )
+    }
   }
 }

@@ -11,6 +11,27 @@ import {
   YAxis
 } from 'react-vis';
 
+/*
+  data = array of datum
+  datum = {
+    x : horizontal position,
+    y : vertical position,
+    n : number of characters,
+    published_date : date,
+    law_stage : penyelidikan/penyidikan/penyidikan+praperadilan/penuntutan/penuntutan+praperadilan/praperadilan/pemeriksaan/upaya hukum ,
+    characters : [
+      {
+        color : color of representation,
+        name : name,
+        role : saksi, tersangka, terdakwa, penasihat hukum , penyelidik, penyidik, penuntut umum, hakim
+        social_status : [
+
+        ]
+      }
+    ]
+  }
+*/
+
 class CharacterVis extends Component {
   
   constructor(props){
@@ -53,26 +74,12 @@ class CharacterVis extends Component {
       ],
     }
     this.characterTicFormat = this.characterTicFormat.bind(this);
+    this.preprocessData = this.preprocessData.bind(this);
   }
 
-  /*
-    data = array of datum
-    datum = {
-      x : horizontal position,
-      y : vertical position,
-      n : number of characters,
-      characters : [
-        {
-          color : color of representation,
-          name : name,
-          role : saksi, tersangka, terdakwa, penasihat hukum , penyelidik, penyidik, penuntut umum, hakim
-          social_status : [
-
-          ]
-        }
-      ]
-    }
-  */
+  componentWillMount(){
+    this.preprocessData(this.props.data);
+  }
 
   preprocessData(data){
     var character_positions = [];
@@ -136,7 +143,7 @@ class CharacterVis extends Component {
   
   characterTicFormat(value){
     const index = _.findIndex(this.state.character_tic_values, (character_tic_value) => {
-      return (character_tic_value == character_tic_value);
+      return (character_tic_value == value);
     });
     if(index != -1){
       return this.state.character_tic_names[index];
@@ -161,5 +168,9 @@ class CharacterVis extends Component {
     );
   }
 }
+
+CharacterVis.propTypes  = {
+  data: PropTypes.array.isRequired
+};
 
 export default CharacterVis;
