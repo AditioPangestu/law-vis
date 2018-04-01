@@ -43,6 +43,7 @@ class StoryCurve extends Component {
     this.rect_height = 1;
     this.state = {
       event_positions : [],
+      line_data : [],
       date_tic_values : [],
       date_tic_names : [], 
       stage_tic_values : [], 
@@ -59,6 +60,7 @@ class StoryCurve extends Component {
       date_areas : []
     }
     this.preprocessRectData = this.preprocessRectData.bind(this);
+    this.preprocessLineData = this.preprocessLineData.bind(this);
     this.generateLawStageTic = this.generateLawStageTic.bind(this);
     this.generateDateTic = this.generateDateTic.bind(this);
     this.stageTicFormat = this.stageTicFormat.bind(this);
@@ -66,7 +68,7 @@ class StoryCurve extends Component {
   }
 
   componentWillMount(){
-    const {event_positions, stage_areas} = this.preprocessRectData(this.props.data);
+    const { event_positions, stage_areas, line_data} = this.preprocessRectData(this.props.data);
     const { stage_tic_values, stage_tic_names } = this.generateLawStageTic(stage_areas);
     const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(this.props.data);
     this.setState({
@@ -77,11 +79,13 @@ class StoryCurve extends Component {
       date_tic_values: date_tic_values,
       date_tic_names: date_tic_names,
       date_areas: date_areas,
+      line_data: line_data,
     });
   }
 
   preprocessRectData(data){
-    var event_positions = []
+    var line_data = [];
+    var event_positions = [];
     var stage_areas = [];
     var stage_area = {};
     var prev_datum = {};
@@ -89,6 +93,10 @@ class StoryCurve extends Component {
       const datum = data[i];
       if(i == 0){
         var y_base = datum.y - this.rect_height*datum.n/2;
+        line_data.push({
+          x : datum.x,
+          y: (y_base + (this.rect_height*datum.n/2)),
+        });
         stage_area.start = y_base;
         stage_area.law_stage = datum.law_stage;
         for (var j = 0; j < datum.n; j++) {
@@ -104,6 +112,10 @@ class StoryCurve extends Component {
       } else {
         if (prev_datum.law_stage == datum.law_stage){
           var y_base = event_positions[event_positions.length - 1].y - (this.rect_height * prev_datum.n / 2) + this.rect_height - (this.rect_height*datum.n / 2);
+          line_data.push({
+            x: datum.x,
+            y: (y_base + this.rect_height * datum.n / 2),
+          });
           for (var j = 0; j < datum.n; j++) {
             event_positions.push({
               x0: (datum.x + this.horizotal_white_space),
@@ -120,6 +132,10 @@ class StoryCurve extends Component {
           stage_area.start = event_positions[event_positions.length - 1].y;
           stage_area.law_stage = datum.law_stage;
           var y_base = stage_area.start;
+          line_data.push({
+            x: datum.x,
+            y: (y_base + this.rect_height * datum.n / 2),
+          });
           for (var j = 0; j < datum.n; j++) {
             event_positions.push({
               x0: (datum.x + this.horizotal_white_space),
@@ -136,12 +152,33 @@ class StoryCurve extends Component {
     }
     stage_area.end = event_positions[event_positions.length - 1].y;
     stage_areas.push({ ...stage_area });
+    line_data = line_data.sort((a, b) => { return a.x - b.x });
+    const last_line_data = line_data[line_data.length - 1];
+    line_data.push({
+      x: (last_line_data.x+1),
+      y: last_line_data.y,
+    })
     return {
       event_positions,
-      stage_areas
+      stage_areas,
+      line_data
     };
   }
-  
+
+  preprocessLineData(data){
+    const sorted_data = data.sort((a, b) => { return a.x - b.x });
+    var line_data = [];
+    var i = 0;
+    for(i = 0; i<data.length;i++){
+      const datum = data[i];
+      line_data.push({
+        x : datum.x,
+        y : datum.y
+      });
+    }
+    return line_data;
+  }
+
   generateLawStageTic(stage_areas){
     var stage_tic_names = [];
     var stage_tic_values = [];
@@ -223,10 +260,6 @@ class StoryCurve extends Component {
         margin={{ left: 100 }}
         width={500}
         height={300}>
-        <VerticalRectSeries
-          data={this.state.event_positions}/>
-        <LineSeries
-          data={this.state.event_positions}/>
         <Borders style={{
           bottom: { fill: '#fff' },
           left: { fill: '#fff' },
@@ -239,10 +272,15 @@ class StoryCurve extends Component {
         <YAxis
           tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end })}
           tickFormat={(value)=>{return ""}} />        
-        <HorizontalGridLines 
-          tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
         <XAxis tickValues={this.state.date_tic_values}
           tickFormat={this.dateTicFormat}/>
+        <HorizontalGridLines 
+          tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
+        <LineSeries
+          curve={'curveStepAfter'}
+          data={this.state.line_data} />
+        <VerticalRectSeries
+          data={this.state.event_positions} />
       </XYPlot>
     );
   }
