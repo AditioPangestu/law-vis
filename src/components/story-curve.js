@@ -267,7 +267,7 @@ class StoryCurve extends Component {
         margin={{ left: 100, top: 50, bottom: 10  }}
         width={this.props.width}
         height={this.props.height}
-        yRange={[0, 240]}>
+        yRange={[0, this.props.height-60]}>
         <YAxis 
           tickSize={0}        
           tickValues={this.state.stage_tic_values}

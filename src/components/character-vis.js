@@ -102,10 +102,10 @@ class CharacterVis extends Component {
             role: character_datum.role,
             positions : [
               {
-                x0 : datum.x,
-                x : (datum.x+1),
-                y0 : datum.y,
-                y : (datum.y+1),
+                x0 : (datum.x + this.props.horizontal_white_space),
+                x: (datum.x + 1 - this.props.horizontal_white_space),
+                y0: (character_index - 1 + this.props.vertical_white_space),
+                y: (character_index - this.props.vertical_white_space),
                 color: character_datum.color
               }
             ]
@@ -119,10 +119,10 @@ class CharacterVis extends Component {
           ]);
         } else {
           character_positions[index].positions.push({
-            x0: datum.x,
-            x: (datum.x + 1),
-            y0: datum.y,
-            y: (datum.y + 1),
+            x0: (datum.x + this.props.horizontal_white_space),
+            x: (datum.x + 1 - this.props.horizontal_white_space),
+            y0: (character_positions[index].positions[0].y0),
+            y: (character_positions[index].positions[0].y),
             color: character_datum.color
           });
           character_hints[index].push({
@@ -155,13 +155,14 @@ class CharacterVis extends Component {
       <XYPlot
         margin={{ left: 100, top: 0, bottom: 10 }}
         width={this.props.width}
-        height={this.props.height}>
-        <HorizontalGridLines/>
+        height={this.props.height}
+        yRange={[0, this.props.height - 10]}>
         <YAxis hideTicks hideLine tickValues={this.state.character_tic_values} tickFormat={this.characterTicFormat} />
         {
           _.map(this.state.character_positions, (character_position, index)=>{
             return (
-              <VerticalRectSeries key={index}
+              <VerticalRectSeries
+                key={index}
                 data={character_position.positions}/>
             )
           })
@@ -174,6 +175,7 @@ class CharacterVis extends Component {
 CharacterVis.propTypes  = {
   data: PropTypes.array.isRequired,
   horizontal_white_space: PropTypes.number.isRequired,
+  vertical_white_space: PropTypes.number.isRequired,  
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
 };

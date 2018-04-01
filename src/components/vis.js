@@ -34,7 +34,8 @@ class Vis extends Component {
             width={500}
             height={100}
             data={this.state.data}
-            horizontal_white_space={0.1}/>
+            horizontal_white_space={0.1}
+            vertical_white_space={0.2}/>
         </div>
       );
     } else {
