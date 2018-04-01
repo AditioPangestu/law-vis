@@ -23,7 +23,9 @@ class Vis extends Component {
   render(){
     if (this.state.data.length){
       return (
-        <StoryCurve data={this.state.data}/>
+        <StoryCurve
+          data={this.state.data}
+          horizontal_white_space={0.1}/>
       );
     } else {
       return (

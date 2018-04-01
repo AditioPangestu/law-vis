@@ -120,5 +120,37 @@
     ],
     "published_date": "2018-04-01 17:07:56",
     "law_stage": "Penyidikan"
+  },
+  {
+    "x": 5,
+    "y": 5,
+    "event_name": "Event 4",
+    "n": 1,
+    "characters": [
+      {
+        "color": 1,
+        "name": "Buni Yani",
+        "role": "Saksi terlapor",
+        "social_status": [
+          "Dosen"
+        ]
+      },
+      {
+        "color": 2,
+        "name": "Aldwin",
+        "role": "Kuasa hukum buni yani",
+        "social_status": []
+      },
+      {
+        "color": 3,
+        "name": "Joko Susilo",
+        "role": "Kerabat buni yani",
+        "social_status": [
+          "Dosen"
+        ]
+      }
+    ],
+    "published_date": "2018-04-02 17:07:56",
+    "law_stage": "Penuntutan"
   }
 ]

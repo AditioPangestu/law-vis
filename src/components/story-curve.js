@@ -39,7 +39,6 @@ class StoryCurve extends Component {
 
   constructor(props){
     super(props);
-    this.horizotal_white_space = 0.1;
     this.rect_height = 1;
     this.state = {
       event_positions : [],
@@ -101,8 +100,8 @@ class StoryCurve extends Component {
         stage_area.law_stage = datum.law_stage;
         for (var j = 0; j < datum.n; j++) {
           event_positions.push({
-            x0: (datum.x + this.horizotal_white_space),
-            x: (datum.x + 1 - this.horizotal_white_space),
+            x0: (datum.x + this.props.horizontal_white_space),
+            x: (datum.x + 1 - this.props.horizontal_white_space),
             y0: (y_base),
             y: (y_base + this.rect_height),
             color: datum.characters[j].color
@@ -118,8 +117,8 @@ class StoryCurve extends Component {
           });
           for (var j = 0; j < datum.n; j++) {
             event_positions.push({
-              x0: (datum.x + this.horizotal_white_space),
-              x: (datum.x + 1 - this.horizotal_white_space),
+              x0: (datum.x + this.props.horizontal_white_space),
+              x: (datum.x + 1 - this.props.horizontal_white_space),
               y0: (y_base),
               y: (y_base + this.rect_height),
               color: datum.characters[j].color
@@ -138,8 +137,8 @@ class StoryCurve extends Component {
           });
           for (var j = 0; j < datum.n; j++) {
             event_positions.push({
-              x0: (datum.x + this.horizotal_white_space),
-              x: (datum.x + 1 - this.horizotal_white_space),
+              x0: (datum.x + this.props.horizontal_white_space),
+              x: (datum.x + 1 - this.props.horizontal_white_space),
               y0: (y_base),
               y: (y_base + this.rect_height),
               color: datum.characters[j].color
@@ -202,7 +201,7 @@ class StoryCurve extends Component {
       var prev_date = data[0].published_date;
       var curr_date = "";
       var prev_idx = 0;
-      date_tic_names.push(moment(prev_date, "YYYY-MM-DD").format("DD MMM YYYY"));
+      date_tic_names.push(moment(prev_date, "YYYY-MM-DD").format("DD MMM YY"));
       date_area.start = 0;
       var i = 1
       for (i = 1; i < data.length; i++) {
@@ -214,7 +213,7 @@ class StoryCurve extends Component {
           date_areas.push({...date_area});
           date_area.start = prev_idx + i;
           prev_idx = i;
-          date_tic_names.push(moment(curr_date, "YYYY-MM-DD").format("DD MMM YYYY"));
+          date_tic_names.push(moment(curr_date, "YYYY-MM-DD").format("DD MMM YY"));
         }
         prev_date = curr_date;
       }
@@ -288,7 +287,8 @@ class StoryCurve extends Component {
 }
 
 StoryCurve.propTypes  = { 
-  data: PropTypes.array.isRequired 
+  data: PropTypes.array.isRequired, 
+  horizontal_white_space: PropTypes.number.isRequired, 
 };
 
 export default StoryCurve;
