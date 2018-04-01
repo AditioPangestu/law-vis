@@ -95,40 +95,40 @@ class CharacterVis extends Component {
           return (value.role == character_datum.role);
         });
         if(index == -1){
-          character_tic_names.append(character_datum.characters.role);
-          character_tic_values.append(character_index);
+          character_tic_names.push(character_datum.role);
+          character_tic_values.push(character_index);
           character_index++;
-          character_positions.append({
-            role: character_datum.characters.role,
+          character_positions.push({
+            role: character_datum.role,
             positions : [
               {
                 x0 : datum.x,
                 x : (datum.x+1),
                 y0 : datum.y,
                 y : (datum.y+1),
-                color: character_datum.characters.color
+                color: character_datum.color
               }
             ]
           });
-          character_hints.append([
+          character_hints.push([
             {
-              name: character_datum.characters.name,
-              role: character_datum.characters.role,
-              social_status: character_datum.characters.social_status,
+              name: character_datum.name,
+              role: character_datum.role,
+              social_status: character_datum.social_status,
             }
           ]);
         } else {
-          character_positions[index].positions.append({
+          character_positions[index].positions.push({
             x0: datum.x,
             x: (datum.x + 1),
             y0: datum.y,
             y: (datum.y + 1),
-            color: character_datum.characters.color
+            color: character_datum.color
           });
-          character_hints[index].append({
-            name: character_datum.characters.name,
-            role: character_datum.characters.role,
-            social_status: character_datum.characters.social_status,
+          character_hints[index].push({
+            name: character_datum.name,
+            role: character_datum.role,
+            social_status: character_datum.social_status,
           })
         }
       }
@@ -153,24 +153,29 @@ class CharacterVis extends Component {
   render(){
     return (
       <XYPlot
-        width={300}
-        height={300}>
+        margin={{ left: 100, top: 0, bottom: 10 }}
+        width={this.props.width}
+        height={this.props.height}>
+        <HorizontalGridLines/>
+        <YAxis hideTicks hideLine tickValues={this.state.character_tic_values} tickFormat={this.characterTicFormat} />
         {
-          _.mapKey(this.state.character_positions, (character_position)=>{
+          _.map(this.state.character_positions, (character_position, index)=>{
             return (
-              <VerticalRectSeries
+              <VerticalRectSeries key={index}
                 data={character_position.positions}/>
             )
           })
         }
-        <YAxis hideTicks hideLine tickValues={this.state.character_tic_values} tickFormat={this.characterTicFormat} />
       </XYPlot>
     );
   }
 }
 
 CharacterVis.propTypes  = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  horizontal_white_space: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
 export default CharacterVis;

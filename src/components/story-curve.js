@@ -265,8 +265,8 @@ class StoryCurve extends Component {
     return (
       <XYPlot
         margin={{ left: 100, top: 50, bottom: 10  }}
-        width={500}
-        height={300}
+        width={this.props.width}
+        height={this.props.height}
         yRange={[0, 240]}>
         <YAxis 
           tickSize={0}        
@@ -296,7 +296,9 @@ class StoryCurve extends Component {
 
 StoryCurve.propTypes  = { 
   data: PropTypes.array.isRequired, 
-  horizontal_white_space: PropTypes.number.isRequired, 
+  horizontal_white_space: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
 export default StoryCurve;
