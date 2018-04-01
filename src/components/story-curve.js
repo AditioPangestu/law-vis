@@ -56,7 +56,9 @@ class StoryCurve extends Component {
           } 
         */
       ],
-      date_areas : []
+      date_areas : [],
+      y_max : 0,
+      y_min : 0
     }
     this.preprocessRectData = this.preprocessRectData.bind(this);
     this.preprocessLineData = this.preprocessLineData.bind(this);
@@ -70,6 +72,10 @@ class StoryCurve extends Component {
     const { event_positions, stage_areas, line_data} = this.preprocessRectData(this.props.data);
     const { stage_tic_values, stage_tic_names } = this.generateLawStageTic(stage_areas);
     const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(this.props.data);
+    const top_datum = _.max(event_positions,(datum)=>datum.y);
+    const bottom_datum = _.min(event_positions,(datum)=>datum.y);
+    const y_max = top_datum.y;
+    const y_min = bottom_datum.y0;
     this.setState({
       event_positions: event_positions,
       stage_areas: stage_areas,
@@ -79,6 +85,8 @@ class StoryCurve extends Component {
       date_tic_names: date_tic_names,
       date_areas: date_areas,
       line_data: line_data,
+      y_max: y_max,
+      y_min: y_min,
     });
   }
 
@@ -256,23 +264,23 @@ class StoryCurve extends Component {
   render(){
     return (
       <XYPlot
-        margin={{ left: 100 }}
+        margin={{ left: 100, top: 50, bottom: 10  }}
         width={500}
-        height={300}>
-        <Borders style={{
-          bottom: { fill: '#fff' },
-          left: { fill: '#fff' },
-          right: { fill: '#fff' },
-          top: { fill: '#fff' }
-        }}/>
+        height={300}
+        yRange={[0, 240]}>
         <YAxis 
+          tickSize={0}        
           tickValues={this.state.stage_tic_values}
           tickFormat={this.stageTicFormat}/>
         <YAxis
           tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end })}
           tickFormat={(value)=>{return ""}} />        
-        <XAxis tickValues={this.state.date_tic_values}
+        <XAxis
+          orientation="top"
+          tickValues={this.state.date_tic_values}
           tickFormat={this.dateTicFormat}/>
+        <XAxis
+          hideTicks/>
         <HorizontalGridLines 
           tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
         <LineSeries
