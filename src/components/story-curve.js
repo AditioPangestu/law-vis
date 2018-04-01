@@ -39,6 +39,7 @@ class StoryCurve extends Component {
   constructor(props){
     super(props);
     this.margin = 0.1;
+    this.rect_height = 1;
     this.state = {
       event_positions : [],
       date_tic_values : [],
@@ -86,7 +87,7 @@ class StoryCurve extends Component {
     for(var i=0;i<data.length;i++){
       const datum = data[i];
       if(i == 0){
-        var y_base = datum.y - datum.n/2;
+        var y_base = datum.y - this.rect_height*datum.n/2;
         stage_area.start = y_base;
         stage_area.law_stage = datum.law_stage;
         for (var j = 0; j < datum.n; j++) {
@@ -119,7 +120,7 @@ class StoryCurve extends Component {
         }
       } else {
         if (prev_datum.law_stage == datum.law_stage){
-          var y_base = event_positions[event_positions.length - 1].y - (prev_datum.n / 2) + 1 - (datum.n / 2);
+          var y_base = event_positions[event_positions.length - 1].y - (this.rect_height * prev_datum.n / 2) + this.rect_height - (this.rect_height*datum.n / 2);
           for (var j = 0; j < datum.n; j++) {
             if (j == 0) {
               event_positions.push({
