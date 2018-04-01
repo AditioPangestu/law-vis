@@ -38,7 +38,7 @@ class StoryCurve extends Component {
 
   constructor(props){
     super(props);
-    this.margin = 0.2;
+    this.margin = 0.1;
     this.state = {
       event_positions : [],
       date_tic_values : [],
@@ -90,26 +90,62 @@ class StoryCurve extends Component {
         stage_area.start = y_base;
         stage_area.law_stage = datum.law_stage;
         for (var j = 0; j < datum.n; j++) {
-          event_positions.push({
-            x0: (datum.x),
-            x: (datum.x+1),
-            y0: y_base,
-            y: (y_base + 1),
-            color: datum.characters[j].color
-          });
+          if ( j == 0){
+            event_positions.push({
+              x0: (datum.x + this.margin),
+              x: (datum.x + 1 - this.margin),
+              y0: (y_base + this.margin),
+              y: (y_base + 1),
+              color: datum.characters[j].color
+            });
+          } else if(j == (datum.n-1)){
+            event_positions.push({
+              x0: (datum.x + this.margin),
+              x: (datum.x + 1 - this.margin),
+              y0: (y_base),
+              y: (y_base + 1 - + this.margin),
+              color: datum.characters[j].color
+            });
+          } else {
+            event_positions.push({
+              x0: (datum.x + this.margin),
+              x: (datum.x + 1 - this.margin),
+              y0: (y_base),
+              y: (y_base + 1),
+              color: datum.characters[j].color
+            });
+          }
           y_base++;
         }
       } else {
         if (prev_datum.law_stage == datum.law_stage){
           var y_base = event_positions[event_positions.length - 1].y - (prev_datum.n / 2) + 1 - (datum.n / 2);
           for (var j = 0; j < datum.n; j++) {
-            event_positions.push({
-              x0: (datum.x),
-              x: (datum.x + 1),
-              y0: y_base,
-              y: (y_base + 1),
-              color: datum.characters[j].color
-            });
+            if (j == 0) {
+              event_positions.push({
+                x0: (datum.x + this.margin),
+                x: (datum.x + 1 - this.margin),
+                y0: (y_base + this.margin),
+                y: (y_base + 1),
+                color: datum.characters[j].color
+              });
+            } else if (j == (datum.n - 1)) {
+              event_positions.push({
+                x0: (datum.x + this.margin),
+                x: (datum.x + 1 - this.margin),
+                y0: (y_base),
+                y: (y_base + 1 - + this.margin),
+                color: datum.characters[j].color
+              });
+            } else {
+              event_positions.push({
+                x0: (datum.x + this.margin),
+                x: (datum.x + 1 - this.margin),
+                y0: (y_base),
+                y: (y_base + 1),
+                color: datum.characters[j].color
+              });
+            }
             y_base++;
           }
         } else {
@@ -120,9 +156,9 @@ class StoryCurve extends Component {
           var y_base = stage_area.start;
           for (var j = 0; j < datum.n; j++) {
             event_positions.push({
-              x0: (datum.x),
-              x: (datum.x + 1),
-              y0: y_base,
+              x0: (datum.x + this.margin),
+              x: (datum.x + 1 - this.margin),
+              y0: (y_base),
               y: (y_base + 1),
               color: datum.characters[j].color
             });
@@ -239,8 +275,6 @@ class StoryCurve extends Component {
           tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
         <XAxis tickValues={this.state.date_tic_values}
           tickFormat={this.dateTicFormat}/>
-        <VerticalGridLines
-          tickValues={_.map(this.state.date_areas, (date_area) => { return date_area.end })}/>
       </XYPlot>
     );
   }
