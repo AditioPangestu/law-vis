@@ -5,6 +5,7 @@ import moment from "moment";
 import { 
   XYPlot,
   VerticalRectSeries,
+  LineSeries,
   VerticalGridLines,
   HorizontalGridLines,
   XAxis,
@@ -38,7 +39,7 @@ class StoryCurve extends Component {
 
   constructor(props){
     super(props);
-    this.margin = 0.1;
+    this.horizotal_white_space = 0.1;
     this.rect_height = 1;
     this.state = {
       event_positions : [],
@@ -91,63 +92,27 @@ class StoryCurve extends Component {
         stage_area.start = y_base;
         stage_area.law_stage = datum.law_stage;
         for (var j = 0; j < datum.n; j++) {
-          if ( j == 0){
-            event_positions.push({
-              x0: (datum.x + this.margin),
-              x: (datum.x + 1 - this.margin),
-              y0: (y_base + this.margin),
-              y: (y_base + 1),
-              color: datum.characters[j].color
-            });
-          } else if(j == (datum.n-1)){
-            event_positions.push({
-              x0: (datum.x + this.margin),
-              x: (datum.x + 1 - this.margin),
-              y0: (y_base),
-              y: (y_base + 1 - + this.margin),
-              color: datum.characters[j].color
-            });
-          } else {
-            event_positions.push({
-              x0: (datum.x + this.margin),
-              x: (datum.x + 1 - this.margin),
-              y0: (y_base),
-              y: (y_base + 1),
-              color: datum.characters[j].color
-            });
-          }
-          y_base++;
+          event_positions.push({
+            x0: (datum.x + this.horizotal_white_space),
+            x: (datum.x + 1 - this.horizotal_white_space),
+            y0: (y_base),
+            y: (y_base + this.rect_height),
+            color: datum.characters[j].color
+          });
+          y_base += this.rect_height;
         }
       } else {
         if (prev_datum.law_stage == datum.law_stage){
           var y_base = event_positions[event_positions.length - 1].y - (this.rect_height * prev_datum.n / 2) + this.rect_height - (this.rect_height*datum.n / 2);
           for (var j = 0; j < datum.n; j++) {
-            if (j == 0) {
-              event_positions.push({
-                x0: (datum.x + this.margin),
-                x: (datum.x + 1 - this.margin),
-                y0: (y_base + this.margin),
-                y: (y_base + 1),
-                color: datum.characters[j].color
-              });
-            } else if (j == (datum.n - 1)) {
-              event_positions.push({
-                x0: (datum.x + this.margin),
-                x: (datum.x + 1 - this.margin),
-                y0: (y_base),
-                y: (y_base + 1 - + this.margin),
-                color: datum.characters[j].color
-              });
-            } else {
-              event_positions.push({
-                x0: (datum.x + this.margin),
-                x: (datum.x + 1 - this.margin),
-                y0: (y_base),
-                y: (y_base + 1),
-                color: datum.characters[j].color
-              });
-            }
-            y_base++;
+            event_positions.push({
+              x0: (datum.x + this.horizotal_white_space),
+              x: (datum.x + 1 - this.horizotal_white_space),
+              y0: (y_base),
+              y: (y_base + this.rect_height),
+              color: datum.characters[j].color
+            });
+            y_base+=this.rect_height;
           }
         } else {
           stage_area.end = event_positions[event_positions.length - 1].y;
@@ -157,13 +122,13 @@ class StoryCurve extends Component {
           var y_base = stage_area.start;
           for (var j = 0; j < datum.n; j++) {
             event_positions.push({
-              x0: (datum.x + this.margin),
-              x: (datum.x + 1 - this.margin),
+              x0: (datum.x + this.horizotal_white_space),
+              x: (datum.x + 1 - this.horizotal_white_space),
               y0: (y_base),
-              y: (y_base + 1),
+              y: (y_base + this.rect_height),
               color: datum.characters[j].color
             });
-            y_base++;
+            y_base += this.rect_height;
           }
         }
       }
@@ -259,6 +224,8 @@ class StoryCurve extends Component {
         width={500}
         height={300}>
         <VerticalRectSeries
+          data={this.state.event_positions}/>
+        <LineSeries
           data={this.state.event_positions}/>
         <Borders style={{
           bottom: { fill: '#fff' },
