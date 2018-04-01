@@ -38,6 +38,7 @@ class StoryCurve extends Component {
 
   constructor(props){
     super(props);
+    this.margin = 0.2;
     this.state = {
       event_positions : [],
       date_tic_values : [],
@@ -53,6 +54,7 @@ class StoryCurve extends Component {
           } 
         */
       ],
+      date_areas : []
     }
     this.preprocessRectData = this.preprocessRectData.bind(this);
     this.generateLawStageTic = this.generateLawStageTic.bind(this);
@@ -64,14 +66,15 @@ class StoryCurve extends Component {
   componentWillMount(){
     const {event_positions, stage_areas} = this.preprocessRectData(this.props.data);
     const { stage_tic_values, stage_tic_names } = this.generateLawStageTic(stage_areas);
-    const { date_tic_values, date_tic_names } = this.generateDateTic(this.props.data);
+    const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(this.props.data);
     this.setState({
       event_positions: event_positions,
       stage_areas: stage_areas,
-      date_tic_values: date_tic_values,
-      date_tic_names: date_tic_names,
       stage_tic_values: stage_tic_values,
       stage_tic_names: stage_tic_names,
+      date_tic_values: date_tic_values,
+      date_tic_names: date_tic_names,
+      date_areas: date_areas,
     });
   }
 
@@ -154,29 +157,43 @@ class StoryCurve extends Component {
   generateDateTic(data){
     var date_tic_names = [];
     var date_tic_values = [];
+    var date_areas = [];
+    var date_area = {};
     if (data.length >= 2) {
       var prev_date = data[0].published_date;
       var curr_date = "";
       var prev_idx = 0;
-      date_tic_names.push(moment(prev_date).format("DD MMM YYYY"));
-      for (var i = 1; i < data.length; i++) {
+      date_tic_names.push(moment(prev_date, "YYYY-MM-DD").format("DD MMM YYYY"));
+      date_area.start = 0;
+      var i = 1
+      for (i = 1; i < data.length; i++) {
         const datum = data[i];
-        curr_date = datum.law_stage;
-        if (moment(prev_date).isSame(curr_date,'day')) {
-          date_tic_values.push((prev_idx + i - 1) / 2);
+        curr_date = datum.published_date;
+        if (!moment(prev_date, "YYYY-MM-DD").isSame(curr_date,'day')) {
+          date_tic_values.push((prev_idx + i) / 2);
+          date_area.end = i;
+          date_areas.push({...date_area});
+          date_area.start = prev_idx + i;
           prev_idx = i;
-          date_tic_names.push(moment(curr_date).format("DD MMM YYYY"));
+          date_tic_names.push(moment(curr_date, "YYYY-MM-DD").format("DD MMM YYYY"));
         }
         prev_date = curr_date;
       }
-      date_tic_values.push((prev_idx + i - 1) / 2);
+      date_tic_values.push((prev_idx + i) / 2);
+      date_area.end = i;
+      date_areas.push({...date_area});
     } else if (data.length == 1) {
       date_tic_values = [0];
       date_tic_names = [data[0].published_date];
+      date_areas.push({
+        start : 0,
+        end : 1
+      });
     }
     return {
       date_tic_values,
-      date_tic_names
+      date_tic_names,
+      date_areas
     };
   }
   
@@ -219,11 +236,11 @@ class StoryCurve extends Component {
           tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end })}
           tickFormat={(value)=>{return ""}} />        
         <HorizontalGridLines 
-          tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}
-          style={{ borderStyle: "dashed"}}/>
+          tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
         <XAxis tickValues={this.state.date_tic_values}
           tickFormat={this.dateTicFormat}/>
-        <VerticalGridLines/>
+        <VerticalGridLines
+          tickValues={_.map(this.state.date_areas, (date_area) => { return date_area.end })}/>
       </XYPlot>
     );
   }
