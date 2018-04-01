@@ -6,7 +6,7 @@
     "n": 2,
     "characters": [
       {
-        "color": 1,
+        "color": "#cd3b54",
         "name": "Buni Yani",
         "role": "Saksi terlapor",
         "social_status": [
@@ -14,7 +14,7 @@
         ]
       },
       {
-        "color": 2,
+        "color": "#ba4fb9",
         "name": "Aldwin",
         "role": "Kuasa hukum buni yani",
         "social_status": []
@@ -30,7 +30,7 @@
     "n": 2,
     "characters": [
       {
-        "color": 1,
+        "color": "#cd3b54",
         "name": "Buni Yani",
         "role": "Saksi terlapor",
         "social_status": [
@@ -38,7 +38,7 @@
         ]
       },
       {
-        "color": 2,
+        "color": "#ba4fb9",
         "name": "Aldwin",
         "role": "Kuasa hukum buni yani",
         "social_status": []
@@ -54,7 +54,7 @@
     "n": 2,
     "characters": [
       {
-        "color": 1,
+        "color": "#cd3b54",
         "name": "Buni Yani",
         "role": "Saksi terlapor",
         "social_status": [
@@ -62,7 +62,7 @@
         ]
       },
       {
-        "color": 2,
+        "color": "#ba4fb9",
         "name": "Aldwin",
         "role": "Kuasa hukum buni yani",
         "social_status": []
@@ -78,7 +78,7 @@
     "n": 1,
     "characters": [
       {
-        "color": 1,
+        "color": "#cd3b54",
         "name": "Buni Yani",
         "role": "Saksi terlapor",
         "social_status": [
@@ -96,7 +96,7 @@
     "n": 3,
     "characters": [
       {
-        "color": 1,
+        "color": "#cd3b54",
         "name": "Buni Yani",
         "role": "Saksi terlapor",
         "social_status": [
@@ -104,13 +104,13 @@
         ]
       },
       {
-        "color": 2,
+        "color": "#ba4fb9",
         "name": "Aldwin",
         "role": "Kuasa hukum buni yani",
         "social_status": []
       },
       {
-        "color": 3,
+        "color": "#5ea0d8",
         "name": "Joko Susilo",
         "role": "Kerabat buni yani",
         "social_status": [
@@ -128,7 +128,7 @@
     "n": 3,
     "characters": [
       {
-        "color": 1,
+        "color": "#cd3b54",
         "name": "Buni Yani",
         "role": "Saksi terlapor",
         "social_status": [
@@ -136,13 +136,13 @@
         ]
       },
       {
-        "color": 2,
+        "color": "#ba4fb9",
         "name": "Aldwin",
         "role": "Kuasa hukum buni yani",
         "social_status": []
       },
       {
-        "color": 3,
+        "color": "#5ea0d8",
         "name": "Joko Susilo",
         "role": "Kerabat buni yani",
         "social_status": [

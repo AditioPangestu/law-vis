@@ -73,7 +73,6 @@ class CharacterVis extends Component {
 
       ],
     }
-    this.characterTicFormat = this.characterTicFormat.bind(this);
     this.preprocessData = this.preprocessData.bind(this);
   }
 
@@ -104,8 +103,8 @@ class CharacterVis extends Component {
               {
                 x0 : (datum.x + this.props.horizontal_white_space),
                 x: (datum.x + 1 - this.props.horizontal_white_space),
-                y0: (character_index - 1 + this.props.vertical_white_space),
-                y: (character_index - this.props.vertical_white_space),
+                y0: 0,
+                y: 1,
                 color: character_datum.color
               }
             ]
@@ -121,8 +120,8 @@ class CharacterVis extends Component {
           character_positions[index].positions.push({
             x0: (datum.x + this.props.horizontal_white_space),
             x: (datum.x + 1 - this.props.horizontal_white_space),
-            y0: (character_positions[index].positions[0].y0),
-            y: (character_positions[index].positions[0].y),
+            y0: 0,
+            y: 1,
             color: character_datum.color
           });
           character_hints[index].push({
@@ -140,40 +139,43 @@ class CharacterVis extends Component {
       character_tic_values: character_tic_values,
     });
   }
-  
-  characterTicFormat(value){
-    const index = _.findIndex(this.state.character_tic_values, (character_tic_value) => {
-      return (character_tic_value == value);
-    });
-    if(index != -1){
-      return this.state.character_tic_names[index];
-    }
-  }
 
   render(){
     return (
-      <XYPlot
-        margin={{ left: 100, top: 0, bottom: 10 }}
-        width={this.props.width}
-        height={this.props.height}
-        yRange={[0, this.props.height - 10]}>
-        <YAxis hideTicks hideLine tickValues={this.state.character_tic_values} tickFormat={this.characterTicFormat} />
-        {
-          _.map(this.state.character_positions, (character_position, index)=>{
-            return (
-              <VerticalRectSeries
-                key={index}
-                data={character_position.positions}/>
-            )
-          })
-        }
-      </XYPlot>
+      _.map(this.state.character_positions, (character_position, index)=>{
+        return (
+          <XYPlot
+            colorType="literal"
+            key={index}
+            margin={{ left: 100, top: 0, bottom: 10 }}
+            width={this.props.width}
+            height={this.props.height}
+            xDomain={this.props.xDomain}
+            yRange={[0, this.props.height - 10]}>
+            <YAxis 
+              tickSize={0}
+              tickValues={[0.5]}
+              tickFormat={(tick_value) => { return this.state.character_tic_names[index]}} />
+            <VerticalRectSeries
+              data={[{
+                x0: (this.props.xDomain[0] + this.props.horizontal_white_space),
+                x: (this.props.xDomain[1] - this.props.horizontal_white_space),
+                y: 0,
+                y: 1,
+                color: "#f1f1f1"
+              }]} />
+            <VerticalRectSeries
+              data={character_position.positions}/>
+          </XYPlot>
+        )
+      })
     );
   }
 }
 
 CharacterVis.propTypes  = {
   data: PropTypes.array.isRequired,
+  xDomain: PropTypes.array.isRequired,
   horizontal_white_space: PropTypes.number.isRequired,
   vertical_white_space: PropTypes.number.isRequired,  
   height: PropTypes.number.isRequired,

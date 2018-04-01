@@ -72,10 +72,6 @@ class StoryCurve extends Component {
     const { event_positions, stage_areas, line_data} = this.preprocessRectData(this.props.data);
     const { stage_tic_values, stage_tic_names } = this.generateLawStageTic(stage_areas);
     const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(this.props.data);
-    const top_datum = _.max(event_positions,(datum)=>datum.y);
-    const bottom_datum = _.min(event_positions,(datum)=>datum.y);
-    const y_max = top_datum.y;
-    const y_min = bottom_datum.y0;
     this.setState({
       event_positions: event_positions,
       stage_areas: stage_areas,
@@ -84,9 +80,7 @@ class StoryCurve extends Component {
       date_tic_values: date_tic_values,
       date_tic_names: date_tic_names,
       date_areas: date_areas,
-      line_data: line_data,
-      y_max: y_max,
-      y_min: y_min,
+      line_data: line_data
     });
   }
 
@@ -264,9 +258,11 @@ class StoryCurve extends Component {
   render(){
     return (
       <XYPlot
+        colorType="literal"
         margin={{ left: 100, top: 50, bottom: 10  }}
         width={this.props.width}
         height={this.props.height}
+        xDomain={this.props.xDomain}
         yRange={[0, this.props.height-60]}>
         <YAxis 
           tickSize={0}        
@@ -296,6 +292,7 @@ class StoryCurve extends Component {
 
 StoryCurve.propTypes  = { 
   data: PropTypes.array.isRequired, 
+  xDomain: PropTypes.array.isRequired, 
   horizontal_white_space: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
