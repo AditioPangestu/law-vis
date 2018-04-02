@@ -8,8 +8,17 @@ import CharacterVis from "./character-vis";
 class Vis extends Component {
   constructor(props){
     super(props);
-    this.state = { data : [], highlighted_data : {}};
+    this.state = { 
+      data : [],
+      highlighted_data : {},
+      current_x0_window : 0,
+      current_x_window : 0,
+      default_x0_window : 0,
+      default_x_window : 0,
+    };
     this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.onZoomIn = this.onZoomIn.bind(this);
+    this.onZoomOut = this.onZoomOut.bind(this);
   }
 
   componentWillMount(){
@@ -18,7 +27,9 @@ class Vis extends Component {
         var { data }  = response;
         this.setState({
           ...this.state,
-          data: data.sort((a, b) => { return a.y - b.y })
+          data: data.sort((a, b) => { return a.y - b.y }),
+          current_x_window: data.length,
+          default_x_window: data.length,
         });
       })
   }
@@ -30,14 +41,46 @@ class Vis extends Component {
     });
   }
 
+  onZoomIn() {
+    if ((this.state.current_x_window - this.state.current_x0_window) > (this.state.default_x_window/8)) {
+      this.setState({
+        ...this.state,
+        current_x_window: (this.state.current_x_window - this.state.default_x_window/32),
+        current_x0_window: (this.state.current_x0_window + this.state.default_x_window / 32)
+      });
+    }
+  }
+
+  onZoomOut() {
+    const current_x_window = this.state.current_x_window + this.state.default_x_window / 32;
+    const current_x0_window = this.state.current_x0_window - this.state.default_x_window / 32;
+    if ((this.state.current_x_window - this.state.current_x0_window) < this.state.default_x_window) {
+      this.setState({
+        ...this.state,
+        current_x_window: ((current_x_window > this.state.default_x_window) ? this.state.default_x_window : current_x_window),
+        current_x0_window: ((current_x0_window < this.state.default_x0_window) ? this.state.default_x0_window : current_x0_window)
+      });
+    }
+  }
+
   render(){
     if (this.state.data.length){
       return (
-        <div>
+        <section className="section">
+          <div 
+            onClick={this.onZoomIn}
+            className="button">
+            Zoom In
+          </div>
+          <div
+            onClick={this.onZoomOut}
+            className="button">
+            Zoom Out
+          </div>
           <StoryCurve
             highlighted_data={this.state.highlighted_data}
             handleMouseOver={this.handleMouseOver}
-            xDomain={[0, this.state.data.length]}
+            xDomain={[this.state.current_x0_window, this.state.current_x_window]}
             width={800}
             height={300}
             data={this.state.data}
@@ -45,13 +88,13 @@ class Vis extends Component {
           <CharacterVis
             highlighted_data={this.state.highlighted_data}
             handleMouseOver={this.handleMouseOver}
-            xDomain={[0, this.state.data.length]}
+            xDomain={[this.state.current_x0_window, this.state.current_x_window]}
             width={800}
             height={20}
             data={this.state.data}
             horizontal_white_space={0.1}
             vertical_white_space={0.2}/>
-        </div>
+        </section>
       );
     } else {
       return (

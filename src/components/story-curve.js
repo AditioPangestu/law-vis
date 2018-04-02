@@ -12,6 +12,7 @@ import {
   YAxis,
   Borders
 } from 'react-vis';
+import verticalBarSeries from "react-vis/dist/plot/series/vertical-bar-series";
 
 /*
   data = array of datum
@@ -272,6 +273,9 @@ class StoryCurve extends Component {
           color: "black",
           opacity: .1
         }];
+        highlighted_data = _.filter(this.state.event_positions, (datum)=>{
+          return ((datum.x0 == nextProps.highlighted_data.x0) && (datum.x == nextProps.highlighted_data.x));
+        });
       }
       this.setState({
         ...this.state,
@@ -307,7 +311,7 @@ class StoryCurve extends Component {
           hideTicks/>
         <HorizontalGridLines 
           tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
-        {/* Component for display highlight */}
+        {/* Component for display horizontal highlight */}
         <VerticalRectSeries
           data={this.state.horizontal_highlighted_data}
           stroke="black"/>
@@ -330,6 +334,11 @@ class StoryCurve extends Component {
             }
           })}
           opacity={0}/>
+        {/* Component for display rect highlight */}
+        <VerticalRectSeries
+          data={this.state.highlighted_data}
+          stroke="black"
+          style={{ strokeWidth: 3 }}/>
       </XYPlot>
     );
   }
