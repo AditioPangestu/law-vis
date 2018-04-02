@@ -26,14 +26,16 @@ class Vis extends Component {
       return (
         <div>
           <StoryCurve
+            highlighted_data={{ x0: 0.1, x: 0.9 }}
             xDomain={[0, this.state.data.length]}
-            width={500}
+            width={800}
             height={300}
             data={this.state.data}
             horizontal_white_space={0.1}/>
           <CharacterVis
+            highlighted_data={{x0:0.1,x:0.9}}
             xDomain={[0, this.state.data.length]}
-            width={500}
+            width={800}
             height={20}
             data={this.state.data}
             horizontal_white_space={0.1}

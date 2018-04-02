@@ -151,6 +151,15 @@
       }
     ],
     "published_date": "2018-04-02 17:07:56",
-    "law_stage": "Penuntutan"
+    "law_stage": "Penuntutan",
+    "location": {
+      "color":"#79C7E3",
+      "name": "Mapolda Metro Jaya",
+      "city": "Jakarta Pusat"
+    },
+    "time": {
+      "color":"#FF9833",
+      "name":"Siang"
+    }
   }
 ]

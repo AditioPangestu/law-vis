@@ -141,6 +141,16 @@ class CharacterVis extends Component {
   }
 
   render(){
+    var highlighted_data = [];
+    if (!_.isEmpty(this.props.highlighted_data)) {
+      highlighted_data = [{
+        x0: this.props.highlighted_data.x0,
+        x: this.props.highlighted_data.x,
+        y: 0,
+        y: 1,
+        color: "transparent"
+      }];
+    }
     return (
       _.map(this.state.character_positions, (character_position, index)=>{
         return (
@@ -153,19 +163,41 @@ class CharacterVis extends Component {
             xDomain={this.props.xDomain}
             yRange={[0, this.props.height - 10]}>
             <YAxis 
+              hideLine
               tickSize={0}
               tickValues={[0.5]}
               tickFormat={(tick_value) => { return this.state.character_tic_names[index]}} />
             <VerticalRectSeries
               data={[{
-                x0: (this.props.xDomain[0] + this.props.horizontal_white_space),
-                x: (this.props.xDomain[1] - this.props.horizontal_white_space),
+                x0: (this.props.xDomain[0]),
+                x: (this.props.xDomain[1]),
                 y: 0,
                 y: 1,
                 color: "#f1f1f1"
               }]} />
             <VerticalRectSeries
               data={character_position.positions}/>
+            {(()=>{
+              const index = _.findIndex(character_position.positions, (value) => {
+                return ((value.x == highlighted_data[0].x) && (value.x0 == highlighted_data[0].x0));
+              });
+              if (index != -1){
+                return (
+                  <VerticalRectSeries
+                    data={highlighted_data}
+                    stroke="black"
+                    style={{strokeWidth : 3}}/>
+                );
+              } else {
+                var temp = _.clone(highlighted_data,true);
+                temp[0].color = "black"
+                return (
+                  <VerticalRectSeries
+                    data={temp}
+                    style={{ opacity: .1 }} />
+                )
+              }
+            })()}
           </XYPlot>
         )
       })
@@ -180,6 +212,7 @@ CharacterVis.propTypes  = {
   vertical_white_space: PropTypes.number.isRequired,  
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
+  highlighted_data: PropTypes.object,
 };
 
 export default CharacterVis;

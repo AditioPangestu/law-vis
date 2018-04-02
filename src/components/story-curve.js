@@ -72,6 +72,8 @@ class StoryCurve extends Component {
     const { event_positions, stage_areas, line_data} = this.preprocessRectData(this.props.data);
     const { stage_tic_values, stage_tic_names } = this.generateLawStageTic(stage_areas);
     const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(this.props.data);
+    const y_max = _.max(event_positions, (event_position) => { return event_position.y}).y;
+    const y_min = _.min(event_positions, (event_position) => { return event_position.y0}).y0;
     this.setState({
       event_positions: event_positions,
       stage_areas: stage_areas,
@@ -80,7 +82,9 @@ class StoryCurve extends Component {
       date_tic_values: date_tic_values,
       date_tic_names: date_tic_names,
       date_areas: date_areas,
-      line_data: line_data
+      line_data: line_data,
+      y_max: y_max,
+      y_min: y_min,
     });
   }
 
@@ -256,6 +260,17 @@ class StoryCurve extends Component {
   }
 
   render(){
+    var highlighted_data = [];
+    if(!_.isEmpty(this.props.highlighted_data)){
+      highlighted_data = [{
+        x0 : this.props.highlighted_data.x0,
+        x : this.props.highlighted_data.x,
+        y0 : this.state.y_min,
+        y : this.state.y_max,
+        color: "black",
+        opacity: .1
+      }];
+    }
     return (
       <XYPlot
         colorType="literal"
@@ -279,6 +294,9 @@ class StoryCurve extends Component {
           hideTicks/>
         <HorizontalGridLines 
           tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
+        <VerticalRectSeries
+          data={highlighted_data}
+          stroke="black"/>
         <LineSeries
           curve={'curveStepAfter'}
           data={this.state.line_data} />
@@ -296,6 +314,7 @@ StoryCurve.propTypes  = {
   horizontal_white_space: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
+  highlighted_data: PropTypes.object,
 };
 
 export default StoryCurve;
