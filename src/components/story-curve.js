@@ -259,19 +259,30 @@ class StoryCurve extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!_.isEqual(this.props.highlighted_data, nextProps.highlighted_data)){
+      var horizontal_highlighted_data = [];
+      var highlighted_data = [];
+      if (!_.isEmpty(nextProps.highlighted_data)) {
+        horizontal_highlighted_data = [{
+          x0: nextProps.highlighted_data.x0,
+          x: nextProps.highlighted_data.x,
+          y0: this.state.y_min,
+          y: this.state.y_max,
+          color: "black",
+          opacity: .1
+        }];
+      }
+      this.setState({
+        ...this.state,
+        horizontal_highlighted_data: horizontal_highlighted_data,
+        highlighted_data: highlighted_data
+      });
+    }
+  }
+
   render(){
     const {handleMouseOver} = this.props;
-    var highlighted_data = [];
-    if(!_.isEmpty(this.props.highlighted_data)){
-      highlighted_data = [{
-        x0 : this.props.highlighted_data.x0,
-        x : this.props.highlighted_data.x,
-        y0 : this.state.y_min,
-        y : this.state.y_max,
-        color: "black",
-        opacity: .1
-      }];
-    }
     return (
       <XYPlot
         colorType="literal"
@@ -296,14 +307,18 @@ class StoryCurve extends Component {
           hideTicks/>
         <HorizontalGridLines 
           tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
+        {/* Component for display highlight */}
         <VerticalRectSeries
-          data={highlighted_data}
+          data={this.state.horizontal_highlighted_data}
           stroke="black"/>
+        {/* Component for display plot */}
         <LineSeries
           curve={'curveStepAfter'}
           data={this.state.line_data} />
+        {/* Component for display events */}
         <VerticalRectSeries
           data={this.state.event_positions} />
+        {/* Component for handle mouse over */}
         <VerticalRectSeries
           onValueMouseOver={(datapoint, { index }) => handleMouseOver(datapoint)}
           data={_.map(this.props.data,(datum)=>{
