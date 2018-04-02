@@ -28,6 +28,7 @@ class Vis extends Component {
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
+    this.onWheel = this.onWheel.bind(this);
   }
 
   componentWillMount(){
@@ -146,6 +147,15 @@ class Vis extends Component {
     }
   }
 
+  onWheel(event){
+    event.preventDefault();
+    if(event.deltaY < 0){
+      this.onZoomOut();
+    } else {
+      this.onZoomIn();
+    }
+  }
+
   render(){
     if (this.state.data.length){
       return (
@@ -176,10 +186,13 @@ class Vis extends Component {
             Reset Zoom
           </div>
           <div
+            onWheel={this.onWheel}
             onMouseDown={this.onMouseDown}
             onMouseUp={this.onMouseUp}
             onMouseMove={this.onMouseMove}
-            style={{width:800}}>
+            style={{
+              width:this.state.width,
+            }}>
             <StoryCurve
               highlighted_data={this.state.highlighted_data}
               handleMouseOver={this.handleMouseOver}
