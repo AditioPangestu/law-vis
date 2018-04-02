@@ -260,6 +260,7 @@ class StoryCurve extends Component {
   }
 
   render(){
+    const {handleMouseOver} = this.props;
     var highlighted_data = [];
     if(!_.isEmpty(this.props.highlighted_data)){
       highlighted_data = [{
@@ -278,6 +279,7 @@ class StoryCurve extends Component {
         width={this.props.width}
         height={this.props.height}
         xDomain={this.props.xDomain}
+        onMouseLeave={() => handleMouseOver({})}
         yRange={[0, this.props.height-60]}>
         <YAxis 
           tickSize={0}        
@@ -301,6 +303,7 @@ class StoryCurve extends Component {
           curve={'curveStepAfter'}
           data={this.state.line_data} />
         <VerticalRectSeries
+          onNearestX={(datapoint, { index }) => handleMouseOver(datapoint)}
           data={this.state.event_positions} />
       </XYPlot>
     );
@@ -315,6 +318,7 @@ StoryCurve.propTypes  = {
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   highlighted_data: PropTypes.object,
+  handleMouseOver: PropTypes.func.isRequired,
 };
 
 export default StoryCurve;

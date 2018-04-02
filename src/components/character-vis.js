@@ -141,6 +141,7 @@ class CharacterVis extends Component {
   }
 
   render(){
+    const { handleMouseOver } = this.props;
     var highlighted_data = [];
     if (!_.isEmpty(this.props.highlighted_data)) {
       highlighted_data = [{
@@ -157,10 +158,11 @@ class CharacterVis extends Component {
           <XYPlot
             colorType="literal"
             key={index}
-            margin={{ left: 100, top: 0, bottom: 10 }}
+            margin={{ left: 100, top: 0, bottom: 20 }}
             width={this.props.width}
             height={this.props.height}
             xDomain={this.props.xDomain}
+            onMouseLeave={() => handleMouseOver({})}
             yRange={[0, this.props.height - 10]}>
             <YAxis 
               hideLine
@@ -176,26 +178,29 @@ class CharacterVis extends Component {
                 color: "#f1f1f1"
               }]} />
             <VerticalRectSeries
+              onValueMouseOver={(datapoint, { index }) => handleMouseOver(datapoint)}
               data={character_position.positions}/>
             {(()=>{
-              const index = _.findIndex(character_position.positions, (value) => {
-                return ((value.x == highlighted_data[0].x) && (value.x0 == highlighted_data[0].x0));
-              });
-              if (index != -1){
-                return (
-                  <VerticalRectSeries
-                    data={highlighted_data}
-                    stroke="black"
-                    style={{strokeWidth : 3}}/>
-                );
-              } else {
-                var temp = _.clone(highlighted_data,true);
-                temp[0].color = "black"
-                return (
-                  <VerticalRectSeries
-                    data={temp}
-                    style={{ opacity: .1 }} />
-                )
+              if (highlighted_data.length != 0){
+                const index = _.findIndex(character_position.positions, (value) => {
+                  return ((value.x == highlighted_data[0].x) && (value.x0 == highlighted_data[0].x0));
+                });
+                if (index != -1){
+                  return (
+                    <VerticalRectSeries
+                      data={highlighted_data}
+                      stroke="black"
+                      style={{strokeWidth : 3}}/>
+                  );
+                } else {
+                  var temp = _.clone(highlighted_data,true);
+                  temp[0].color = "black"
+                  return (
+                    <VerticalRectSeries
+                      data={temp}
+                      style={{ opacity: .1 }} />
+                  )
+                }
               }
             })()}
           </XYPlot>
@@ -213,6 +218,7 @@ CharacterVis.propTypes  = {
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   highlighted_data: PropTypes.object,
+  handleMouseOver: PropTypes.func.isRequired,
 };
 
 export default CharacterVis;

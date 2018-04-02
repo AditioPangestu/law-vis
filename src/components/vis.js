@@ -8,7 +8,8 @@ import CharacterVis from "./character-vis";
 class Vis extends Component {
   constructor(props){
     super(props);
-    this.state = { data : []};
+    this.state = { data : [], highlighted_data : {}};
+    this.handleMouseOver = this.handleMouseOver.bind(this);
   }
 
   componentWillMount(){
@@ -16,9 +17,17 @@ class Vis extends Component {
       .then((response)=>{
         var { data }  = response;
         this.setState({
+          ...this.state,
           data: data.sort((a, b) => { return a.y - b.y })
         });
       })
+  }
+
+  handleMouseOver(data) {
+    this.setState({ 
+      ...this.state,
+      highlighted_data : data
+    });
   }
 
   render(){
@@ -26,14 +35,16 @@ class Vis extends Component {
       return (
         <div>
           <StoryCurve
-            highlighted_data={{ x0: 0.1, x: 0.9 }}
+            highlighted_data={this.state.highlighted_data}
+            handleMouseOver={this.handleMouseOver}
             xDomain={[0, this.state.data.length]}
             width={800}
             height={300}
             data={this.state.data}
             horizontal_white_space={0.1}/>
           <CharacterVis
-            highlighted_data={{x0:0.1,x:0.9}}
+            highlighted_data={this.state.highlighted_data}
+            handleMouseOver={this.handleMouseOver}
             xDomain={[0, this.state.data.length]}
             width={800}
             height={20}
