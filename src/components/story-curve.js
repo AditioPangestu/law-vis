@@ -303,8 +303,18 @@ class StoryCurve extends Component {
           curve={'curveStepAfter'}
           data={this.state.line_data} />
         <VerticalRectSeries
-          onNearestX={(datapoint, { index }) => handleMouseOver(datapoint)}
           data={this.state.event_positions} />
+        <VerticalRectSeries
+          onValueMouseOver={(datapoint, { index }) => handleMouseOver(datapoint)}
+          data={_.map(this.props.data,(datum)=>{
+            return {
+              x0: (datum.x + this.props.horizontal_white_space),
+              x: (datum.x + 1 - this.props.horizontal_white_space),
+              y0: this.state.y_min,
+              y: this.state.y_max,
+            }
+          })}
+          opacity={0}/>
       </XYPlot>
     );
   }
