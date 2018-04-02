@@ -296,19 +296,6 @@ class StoryCurve extends Component {
         xDomain={this.props.xDomain}
         onMouseLeave={() => handleMouseOver({})}
         yRange={[0, this.props.height-60]}>
-        <YAxis 
-          tickSize={0}        
-          tickValues={this.state.stage_tic_values}
-          tickFormat={this.stageTicFormat}/>
-        <YAxis
-          tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end })}
-          tickFormat={(value)=>{return ""}} />        
-        <XAxis
-          orientation="top"
-          tickValues={this.state.date_tic_values}
-          tickFormat={this.dateTicFormat}/>
-        <XAxis
-          hideTicks/>
         <HorizontalGridLines 
           tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
         {/* Component for display horizontal highlight */}
@@ -339,6 +326,26 @@ class StoryCurve extends Component {
           data={this.state.highlighted_data}
           stroke="black"
           style={{ strokeWidth: 3 }}/>
+        <XAxis
+          orientation="top"
+          tickValues={this.state.date_tic_values}
+          tickFormat={this.dateTicFormat} />
+        <XAxis
+          hideTicks />
+        <Borders style={{
+          bottom: { fill: 'transparent' },
+          left: { fill: '#fff' },
+          right: { fill: 'transparent' },
+          top: { fill: 'transparent' }
+        }}/>
+        <YAxis
+          tickSize={0}
+          tickValues={this.state.stage_tic_values}
+          tickFormat={this.stageTicFormat}
+          style={{backgroundColor:"white"}}/>
+        <YAxis
+          tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end })}
+          tickFormat={(value) => { return "" }} />
       </XYPlot>
     );
   }

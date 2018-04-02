@@ -8,7 +8,8 @@ import {
   VerticalGridLines,
   HorizontalGridLines,
   XAxis,
-  YAxis
+  YAxis,
+  Borders
 } from 'react-vis';
 
 /*
@@ -164,11 +165,6 @@ class CharacterVis extends Component {
             xDomain={this.props.xDomain}
             onMouseLeave={() => handleMouseOver({})}
             yRange={[0, this.props.height - 10]}>
-            <YAxis 
-              hideLine
-              tickSize={0}
-              tickValues={[0.5]}
-              tickFormat={(tick_value) => { return this.state.character_tic_names[index]}} />
             <VerticalRectSeries
               data={[{
                 x0: (this.props.xDomain[0]),
@@ -203,6 +199,17 @@ class CharacterVis extends Component {
                 }
               }
             })()}
+            <Borders style={{
+              bottom: { fill: 'transparent' },
+              left: { fill: '#fff' },
+              right: { fill: 'transparent' },
+              top: { fill: 'transparent' }
+            }}/>
+            <YAxis
+              hideLine
+              tickSize={0}
+              tickValues={[0.5]}
+              tickFormat={(tick_value) => { return this.state.character_tic_names[index] }} />
           </XYPlot>
         )
       })
