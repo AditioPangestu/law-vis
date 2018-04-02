@@ -290,7 +290,7 @@ class StoryCurve extends Component {
     return (
       <XYPlot
         colorType="literal"
-        margin={{ left: 100, top: 50, bottom: 10  }}
+        margin={{ left: 100, top: 50, bottom: 10, right:0  }}
         width={this.props.width}
         height={this.props.height}
         xDomain={this.props.xDomain}
@@ -326,18 +326,18 @@ class StoryCurve extends Component {
           data={this.state.highlighted_data}
           stroke="black"
           style={{ strokeWidth: 3 }}/>
+        <Borders style={{
+          bottom: { fill: '#fff' },
+          left: { fill: '#fff' },
+          right: { fill: 'transparent' },
+          top: { fill: '#fff' }
+        }}/>
         <XAxis
           orientation="top"
           tickValues={this.state.date_tic_values}
           tickFormat={this.dateTicFormat} />
         <XAxis
           hideTicks />
-        <Borders style={{
-          bottom: { fill: 'transparent' },
-          left: { fill: '#fff' },
-          right: { fill: 'transparent' },
-          top: { fill: 'transparent' }
-        }}/>
         <YAxis
           tickSize={0}
           tickValues={this.state.stage_tic_values}

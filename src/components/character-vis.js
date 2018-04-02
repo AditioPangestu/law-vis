@@ -159,7 +159,7 @@ class CharacterVis extends Component {
           <XYPlot
             colorType="literal"
             key={index}
-            margin={{ left: 100, top: 0, bottom: 20 }}
+            margin={{ left: 100, top: 0, bottom: 20, right: 0 }}
             width={this.props.width}
             height={this.props.height}
             xDomain={this.props.xDomain}
@@ -174,7 +174,6 @@ class CharacterVis extends Component {
                 color: "#f1f1f1"
               }]} />
             <VerticalRectSeries
-              onValueMouseOver={(datapoint, { index }) => handleMouseOver(datapoint)}
               data={character_position.positions}/>
             {(()=>{
               if (highlighted_data.length != 0){
@@ -205,6 +204,10 @@ class CharacterVis extends Component {
               right: { fill: 'transparent' },
               top: { fill: 'transparent' }
             }}/>
+            <VerticalRectSeries
+              opacity={0}
+              onValueMouseOver={(datapoint, { index }) => handleMouseOver(datapoint)}
+              data={character_position.positions} />
             <YAxis
               hideLine
               tickSize={0}
