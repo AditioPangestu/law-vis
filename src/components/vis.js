@@ -15,6 +15,9 @@ class Vis extends Component {
       current_x_window : 0,
       default_x0_window : 0,
       default_x_window : 0,
+      width : 800,
+      prev_absis : 0,
+      is_mouse_down : false,
     };
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.onZoomIn = this.onZoomIn.bind(this);
@@ -22,6 +25,9 @@ class Vis extends Component {
     this.onPanLeft = this.onPanLeft.bind(this);
     this.onPanRight = this.onPanRight.bind(this);
     this.onResetZoom = this.onResetZoom.bind(this);
+    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
   }
 
   componentWillMount(){
@@ -98,6 +104,48 @@ class Vis extends Component {
     });
   }
 
+  onMouseDown(event) {
+    event.preventDefault();
+    this.setState({
+      ...this.state,
+      prev_absis: event.clientX,
+      is_mouse_down: true
+    });
+  }
+  
+  onMouseUp(event) {
+    event.preventDefault();
+    this.setState({
+      ...this.state,
+      prev_absis: 0,
+      is_mouse_down: false
+    });
+  }
+
+  onMouseMove(event) {
+    event.preventDefault();
+    if(this.state.is_mouse_down){
+      const diff = ((event.clientX - this.state.prev_absis) / (this.state.width - 100))*4;
+      const current_x0_window = this.state.current_x0_window - diff;
+      const current_x_window = this.state.current_x_window - diff;
+      if ((diff < 0) && (this.state.current_x_window < this.state.default_x_window)) {
+        this.setState({
+          ...this.state,
+          prev_absis : event.clientX,
+          current_x0_window: current_x0_window,
+          current_x_window: ((current_x_window > this.state.default_x_window) ? this.state.default_x_window : current_x_window),
+        });
+      } else if ((diff > 0) && (this.state.current_x0_window > this.state.default_x0_window)) {
+        this.setState({
+          ...this.state,
+          prev_absis: event.clientX,
+          current_x0_window: ((current_x0_window < this.state.default_x0_window) ? this.state.default_x0_window : current_x0_window),
+          current_x_window: current_x_window,
+        });
+      }
+    }
+  }
+
   render(){
     if (this.state.data.length){
       return (
@@ -127,19 +175,25 @@ class Vis extends Component {
             className="button">
             Reset Zoom
           </div>
-          <StoryCurve
-            highlighted_data={this.state.highlighted_data}
-            handleMouseOver={this.handleMouseOver}
-            xDomain={[this.state.current_x0_window, this.state.current_x_window]}
-            width={800}
-            height={300}
-            data={this.state.data}
-            horizontal_white_space={0.1}/>
+          <div
+            onMouseDown={this.onMouseDown}
+            onMouseUp={this.onMouseUp}
+            onMouseMove={this.onMouseMove}
+            style={{width:800}}>
+            <StoryCurve
+              highlighted_data={this.state.highlighted_data}
+              handleMouseOver={this.handleMouseOver}
+              xDomain={[this.state.current_x0_window, this.state.current_x_window]}
+              width={this.state.width}
+              height={300}
+              data={this.state.data}
+              horizontal_white_space={0.1}/>
+          </div>
           <CharacterVis
             highlighted_data={this.state.highlighted_data}
             handleMouseOver={this.handleMouseOver}
             xDomain={[this.state.current_x0_window, this.state.current_x_window]}
-            width={800}
+            width={this.state.width}
             height={20}
             data={this.state.data}
             horizontal_white_space={0.1}
