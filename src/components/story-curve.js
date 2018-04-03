@@ -355,9 +355,9 @@ class StoryCurve extends Component {
                   vertical: TOP
                 }}
                 value={{ x: this.state.hint_position.x, y: this.state.hint_position.y}}>
-                <div className="tags has-addons">
-                  <span className="tag is-dark">(X, Y)</span>
-                  <span className="tag is-success">{"("+this.state.hint_position.x+", "+this.state.hint_position.y+")"}</span>
+                <div className="tags has-addons story-curve-hint">
+                  <span className="tag is-dark has-text-warning">( X, Y )</span>
+                  <span className="tag is-success">{"( "+this.state.hint_position.x+", "+this.state.hint_position.y+" )"}</span>
                 </div>
               </Hint>
             );

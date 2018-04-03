@@ -1,5 +1,9 @@
-.tags:last-child {
+.story-curve-hint.tags:last-child {
   margin-bottom: -1.2rem;
+}
+
+.character-vis-hint.tags:last-child {
+  margin-bottom: -.65rem;
 }
 
 .tags.has-addons {

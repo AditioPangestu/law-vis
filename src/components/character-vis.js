@@ -9,7 +9,8 @@ import {
   HorizontalGridLines,
   XAxis,
   YAxis,
-  Borders
+  Borders,
+  Hint
 } from 'react-vis';
 
 /*
@@ -73,6 +74,8 @@ class CharacterVis extends Component {
       character_tic_values: [
 
       ],
+      highlighted_data : [],
+      hint_position : {},
     }
     this.preprocessData = this.preprocessData.bind(this);
   }
@@ -134,6 +137,7 @@ class CharacterVis extends Component {
       }
     }
     this.setState({
+      ...this.state,
       character_positions : character_positions,
       character_hints: character_hints,
       character_tic_names: character_tic_names,
@@ -141,18 +145,34 @@ class CharacterVis extends Component {
     });
   }
 
-  render(){
-    const { handleMouseOver } = this.props;
-    var highlighted_data = [];
-    if (!_.isEmpty(this.props.highlighted_data)) {
-      highlighted_data = [{
-        x0: this.props.highlighted_data.x0,
-        x: this.props.highlighted_data.x,
-        y: 0,
-        y: 1,
-        color: "transparent"
-      }];
+  componentWillReceiveProps(nextProps) {
+    if (!_.isEqual(this.props.highlighted_data, nextProps.highlighted_data)) {
+      var highlighted_data = [];
+      var hint_position = {};
+      if (!_.isEmpty(nextProps.highlighted_data)) {
+        highlighted_data = [{
+          x0: nextProps.highlighted_data.x0,
+          x: nextProps.highlighted_data.x,
+          y0: 0,
+          y: 1,
+          color: "transparent"
+        }];
+        hint_position = {
+          x: nextProps.highlighted_data.x + this.props.horizontal_white_space,
+          y: 1,
+        }
+      }
+      this.setState({
+        ...this.state,
+        highlighted_data: highlighted_data,
+        hint_position: hint_position,
+      });
     }
+  }
+
+  render(){
+    const { RIGHT, TOP } = Hint.ALIGN;
+    const { handleMouseOver } = this.props;
     return (
       _.map(this.state.character_positions, (character_position, index)=>{
         return (
@@ -176,19 +196,19 @@ class CharacterVis extends Component {
             <VerticalRectSeries
               data={character_position.positions}/>
             {(()=>{
-              if (highlighted_data.length != 0){
+              if (this.state.highlighted_data.length != 0){
                 const index = _.findIndex(character_position.positions, (value) => {
-                  return ((value.x == highlighted_data[0].x) && (value.x0 == highlighted_data[0].x0));
+                  return ((value.x == this.state.highlighted_data[0].x) && (value.x0 == this.state.highlighted_data[0].x0));
                 });
                 if (index != -1){
                   return (
                     <VerticalRectSeries
-                      data={highlighted_data}
+                      data={this.state.highlighted_data}
                       stroke="black"
                       style={{strokeWidth : 3}}/>
                   );
                 } else {
-                  var temp = _.clone(highlighted_data,true);
+                  var temp = _.clone(this.state.highlighted_data,true);
                   temp[0].color = "black"
                   return (
                     <VerticalRectSeries
@@ -213,6 +233,24 @@ class CharacterVis extends Component {
               tickSize={0}
               tickValues={[0.5]}
               tickFormat={(tick_value) => { return this.state.character_tic_names[index] }} />
+            {/* Component for display hint */}
+            {(() => {
+              if (!_.isEmpty(this.state.hint_position)) {
+                return (
+                  <Hint
+                    align={{
+                      horizontal: RIGHT,
+                      vertical: TOP
+                    }}
+                    value={this.state.hint_position}>
+                    <div className="tags has-addons character-vis-hint">
+                      <span className="tag is-dark has-text-warning">( X, Y )</span>
+                      <span className="tag is-success">{"( " + this.state.hint_position.x + ", " + this.state.hint_position.y + " )"}</span>
+                    </div>
+                  </Hint>
+                );
+              }
+            })()}
           </XYPlot>
         )
       })
