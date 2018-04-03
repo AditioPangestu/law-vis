@@ -4,6 +4,7 @@ import _ from "lodash";
 
 import StoryCurve from "./story-curve";
 import CharacterVis from "./character-vis";
+import StoryDetailContainer from "./story-detail-container";
 
 class Vis extends Component {
   constructor(props){
@@ -37,6 +38,7 @@ class Vis extends Component {
         var { data }  = response;
         this.setState({
           ...this.state,
+          story_detail_data: data,
           data: data.events.sort((a, b) => { return a.y - b.y }),
           current_x_window: data.events.length,
           default_x_window: data.events.length,
@@ -216,7 +218,12 @@ class Vis extends Component {
 
   renderRight(){
     return (
-      <div>Cek</div>
+      <div className="story-detail-container">
+        <StoryDetailContainer
+          handleMouseOver={this.handleMouseOver}
+          data={this.state.story_detail_data}
+          horizontal_white_space={0.1}/>
+      </div>
     );
   }
 

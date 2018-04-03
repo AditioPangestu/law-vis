@@ -7,7 +7,7 @@ class StoryDetail extends Component {
 
   render(){
     return(
-      <div className="card">
+      <div className="card" onMouseOver={this.props.onMouseOver}>
         <header className="card-header">
           <div>
             <p className="card-header-title">
@@ -75,6 +75,7 @@ StoryDetail.propTypes = {
   url: PropTypes.string.isRequired,
   close: PropTypes.bool.isRequired,
   event_components: PropTypes.array.isRequired,
+  onMouseOver: PropTypes.func.isRequired
 };
 
 export default StoryDetail;
