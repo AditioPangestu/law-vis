@@ -158,7 +158,7 @@ class CharacterVis extends Component {
           color: "transparent"
         }];
         hint_position = {
-          x: nextProps.highlighted_data.x + this.props.horizontal_white_space,
+          x: nextProps.highlighted_data.x,
           y: 1,
         }
       }
@@ -204,12 +204,12 @@ class CharacterVis extends Component {
                   return (
                     <VerticalRectSeries
                       data={this.state.highlighted_data}
-                      stroke="black"
+                      stroke="#363636"
                       style={{strokeWidth : 3}}/>
                   );
                 } else {
                   var temp = _.clone(this.state.highlighted_data,true);
-                  temp[0].color = "black"
+                  temp[0].color = "#363636"
                   return (
                     <VerticalRectSeries
                       data={temp}
@@ -249,6 +249,7 @@ class CharacterVis extends Component {
                       }}
                       value={this.state.hint_position}>
                       <div className="tags has-addons character-vis-hint">
+                        <span className="arrow-left"></span>
                         <span className="tag is-dark has-text-warning">{hint_text.role}</span>
                         <span className="tag is-success">{hint_text.name}</span>
                       </div>

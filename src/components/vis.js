@@ -159,7 +159,7 @@ class Vis extends Component {
   render(){
     if (this.state.data.length){
       return (
-        <section className="section">
+        <div className="vis">
           <div 
             onClick={this.onPanLeft}
             className="button">
@@ -207,11 +207,11 @@ class Vis extends Component {
             handleMouseOver={this.handleMouseOver}
             xDomain={[this.state.current_x0_window, this.state.current_x_window]}
             width={this.state.width}
-            height={30}
+            height={20}
             data={this.state.data}
             horizontal_white_space={0.1}
             vertical_white_space={0.2}/>
-        </section>
+        </div>
       );
     } else {
       return (

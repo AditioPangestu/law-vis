@@ -274,7 +274,7 @@ class StoryCurve extends Component {
           x: nextProps.highlighted_data.x,
           y0: this.state.y_min,
           y: this.state.y_max,
-          color: "black",
+          color: "#363636",
           opacity: .1
         }];
         highlighted_data = _.filter(this.state.event_positions, (datum)=>{
@@ -313,14 +313,14 @@ class StoryCurve extends Component {
         width={this.props.width}
         height={this.props.height}
         xDomain={this.props.xDomain}
-        onMouseLeave={() => handleMouseOver({})}
+        //onMouseLeave={() => handleMouseOver({})}
         yRange={[0, this.props.height-60]}>
         <HorizontalGridLines 
           tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
         {/* Component for display horizontal highlight */}
         <VerticalRectSeries
           data={this.state.horizontal_highlighted_data}
-          stroke="black"/>
+          stroke="#363636"/>
         {/* Component for display plot */}
         <LineSeries
           curve={'curveStepAfter'}
@@ -343,7 +343,7 @@ class StoryCurve extends Component {
         {/* Component for display rect highlight */}
         <VerticalRectSeries
           data={this.state.highlighted_data}
-          stroke="black"
+          stroke="#363636"
           style={{ strokeWidth: 3 }}/>
         {/* Component for display hint */}
         {(()=>{
@@ -354,8 +354,9 @@ class StoryCurve extends Component {
                   horizontal: RIGHT,
                   vertical: TOP
                 }}
-                value={{ x: this.state.hint_position.x, y: this.state.hint_position.y}}>
+                value={{ x: (this.state.hint_position.x - this.props.horizontal_white_space), y: this.state.hint_position.y}}>
                 <div className="tags has-addons story-curve-hint">
+                  <span className="arrow-left"></span>
                   <span className="tag is-dark has-text-warning">( X, Y )</span>
                   <span className="tag is-success">{"( "+this.state.hint_position.x+", "+this.state.hint_position.y+" )"}</span>
                 </div>
