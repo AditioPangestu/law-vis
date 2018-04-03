@@ -13,6 +13,7 @@ class StoryDetailContainer extends Component {
     this.state = {
       closed_details : [true,true],
     }
+    this.onChangeClose = this.onChangeClose.bind(this);
   }
 
   componentWillMount(){
@@ -27,6 +28,16 @@ class StoryDetailContainer extends Component {
     });
   }
 
+  onChangeClose(index){
+    var temp = _.clone(this.state.closed_details,true);
+    console.log("test");
+    temp[index] = !temp[index];
+    this.setState({
+      ...this.state,
+      closed_details : temp
+    });
+  }
+
   render(){
     return (
       <div>
@@ -38,6 +49,7 @@ class StoryDetailContainer extends Component {
             return (
             <StoryDetail
               key={index}
+              onChangeClose={()=>this.onChangeClose(index)}
               onMouseOver={() => this.props.handleMouseOver({
                 x0: (datum.x + this.props.horizontal_white_space),
                 x: (datum.x + 1 - this.props.horizontal_white_space),

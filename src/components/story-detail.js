@@ -7,16 +7,14 @@ class StoryDetail extends Component {
 
   render(){
     return(
-      <div className="card" onMouseOver={this.props.onMouseOver}>
+      <div
+        className="card"
+        onMouseOver={this.props.onMouseOver}
+        onClick={this.props.onChangeClose}>
         <header className="card-header">
-          <div>
-            <p className="card-header-title">
-              {this.props.event_name}
-            </p>
-            <p>
-              {moment(this.props.published_date, "YYYY-MM-DD").format("DD MMM YY")}
-            </p>
-          </div>
+          <p className="card-header-title">
+            {this.props.event_name}
+          </p>
           {(()=>{
             if(this.props.close){
               return (
@@ -53,8 +51,8 @@ class StoryDetail extends Component {
                     })}
                   </div>
                 </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item has-text-right">
+                <footer className="card-footer">
+                  <p className="card-footer-item has-text-right">
                     <span>
                       Lihat detail <a href={this.props.url}>di sini</a>.
                     </span>
@@ -75,7 +73,8 @@ StoryDetail.propTypes = {
   url: PropTypes.string.isRequired,
   close: PropTypes.bool.isRequired,
   event_components: PropTypes.array.isRequired,
-  onMouseOver: PropTypes.func.isRequired
+  onMouseOver: PropTypes.func.isRequired,
+  onChangeClose: PropTypes.func.isRequired,
 };
 
 export default StoryDetail;
