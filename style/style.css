@@ -1,0 +1,7 @@
+.tags:last-child {
+  margin-bottom: -1.2rem;
+}
+
+.tags.has-addons {
+  width: 300px;
+}

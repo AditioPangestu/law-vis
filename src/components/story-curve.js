@@ -10,7 +10,8 @@ import {
   HorizontalGridLines,
   XAxis,
   YAxis,
-  Borders
+  Borders,
+  Hint
 } from 'react-vis';
 import verticalBarSeries from "react-vis/dist/plot/series/vertical-bar-series";
 
@@ -59,7 +60,8 @@ class StoryCurve extends Component {
       ],
       date_areas : [],
       y_max : 0,
-      y_min : 0
+      y_min : 0,
+      hint_position : {}
     }
     this.preprocessRectData = this.preprocessRectData.bind(this);
     this.preprocessLineData = this.preprocessLineData.bind(this);
@@ -76,6 +78,7 @@ class StoryCurve extends Component {
     const y_max = _.max(event_positions, (event_position) => { return event_position.y}).y;
     const y_min = _.min(event_positions, (event_position) => { return event_position.y0}).y0;
     this.setState({
+      ...this.state,
       event_positions: event_positions,
       stage_areas: stage_areas,
       stage_tic_values: stage_tic_values,
@@ -264,6 +267,7 @@ class StoryCurve extends Component {
     if (!_.isEqual(this.props.highlighted_data, nextProps.highlighted_data)){
       var horizontal_highlighted_data = [];
       var highlighted_data = [];
+      var hint_position = {};
       if (!_.isEmpty(nextProps.highlighted_data)) {
         horizontal_highlighted_data = [{
           x0: nextProps.highlighted_data.x0,
@@ -276,16 +280,31 @@ class StoryCurve extends Component {
         highlighted_data = _.filter(this.state.event_positions, (datum)=>{
           return ((datum.x0 == nextProps.highlighted_data.x0) && (datum.x == nextProps.highlighted_data.x));
         });
+        if(highlighted_data.length % 2 == 0){
+          const mid_index = highlighted_data.length/2;
+          hint_position = {
+            y: highlighted_data[mid_index].y0,
+            x: (highlighted_data[mid_index].x + this.props.horizontal_white_space)
+          }
+        } else {
+          const mid_index = (highlighted_data.length-1) / 2;
+          hint_position = {
+            y: (highlighted_data[mid_index].y0 + highlighted_data[mid_index].y)/2,
+            x: (highlighted_data[mid_index].x + this.props.horizontal_white_space)
+          }
+        }
       }
       this.setState({
         ...this.state,
         horizontal_highlighted_data: horizontal_highlighted_data,
-        highlighted_data: highlighted_data
+        highlighted_data: highlighted_data,
+        hint_position: hint_position
       });
     }
   }
 
   render(){
+    const { RIGHT, TOP } = Hint.ALIGN;
     const {handleMouseOver} = this.props;
     return (
       <XYPlot
@@ -326,18 +345,36 @@ class StoryCurve extends Component {
           data={this.state.highlighted_data}
           stroke="black"
           style={{ strokeWidth: 3 }}/>
-        <Borders style={{
-          bottom: { fill: '#fff' },
-          left: { fill: '#fff' },
-          right: { fill: 'transparent' },
-          top: { fill: '#fff' }
-        }}/>
+        {/* Component for display hint */}
+        {(()=>{
+          if (!_.isEmpty(this.state.hint_position)){
+            return (
+              <Hint 
+                align={{
+                  horizontal: RIGHT,
+                  vertical: TOP
+                }}
+                value={{ x: this.state.hint_position.x, y: this.state.hint_position.y}}>
+                <div className="tags has-addons">
+                  <span className="tag is-dark">(X, Y)</span>
+                  <span className="tag is-success">{"("+this.state.hint_position.x+", "+this.state.hint_position.y+")"}</span>
+                </div>
+              </Hint>
+            );
+          }
+        })()}
         <XAxis
           orientation="top"
           tickValues={this.state.date_tic_values}
           tickFormat={this.dateTicFormat} />
         <XAxis
           hideTicks />
+        <Borders style={{
+          bottom: { fill: '#fff' },
+          left: { fill: '#fff' },
+          right: { fill: 'transparent' },
+          top: { fill: 'transparent' }
+        }}/>
         <YAxis
           tickSize={0}
           tickValues={this.state.stage_tic_values}
