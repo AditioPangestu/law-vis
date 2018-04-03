@@ -197,10 +197,10 @@ class CharacterVis extends Component {
               data={character_position.positions}/>
             {(()=>{
               if (this.state.highlighted_data.length != 0){
-                const index = _.findIndex(character_position.positions, (value) => {
+                const hightlight_index = _.findIndex(character_position.positions, (value) => {
                   return ((value.x == this.state.highlighted_data[0].x) && (value.x0 == this.state.highlighted_data[0].x0));
                 });
-                if (index != -1){
+                if (hightlight_index != -1){
                   return (
                     <VerticalRectSeries
                       data={this.state.highlighted_data}
@@ -236,19 +236,25 @@ class CharacterVis extends Component {
             {/* Component for display hint */}
             {(() => {
               if (!_.isEmpty(this.state.hint_position)) {
-                return (
-                  <Hint
-                    align={{
-                      horizontal: RIGHT,
-                      vertical: TOP
-                    }}
-                    value={this.state.hint_position}>
-                    <div className="tags has-addons character-vis-hint">
-                      <span className="tag is-dark has-text-warning">( X, Y )</span>
-                      <span className="tag is-success">{"( " + this.state.hint_position.x + ", " + this.state.hint_position.y + " )"}</span>
-                    </div>
-                  </Hint>
-                );
+                const hint_index = _.findIndex(character_position.positions, (value) => {
+                  return ((value.x == this.state.highlighted_data[0].x) && (value.x0 == this.state.highlighted_data[0].x0));
+                });
+                if (hint_index!=-1){
+                  const hint_text=this.state.character_hints[index][hint_index];
+                  return (
+                    <Hint
+                      align={{
+                        horizontal: RIGHT,
+                        vertical: TOP
+                      }}
+                      value={this.state.hint_position}>
+                      <div className="tags has-addons character-vis-hint">
+                        <span className="tag is-dark has-text-warning">{hint_text.role}</span>
+                        <span className="tag is-success">{hint_text.name}</span>
+                      </div>
+                    </Hint>
+                  );
+                }
               }
             })()}
           </XYPlot>
