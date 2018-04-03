@@ -9,16 +9,7 @@ export default class App extends Component {
   
   render() {
     return (
-      <section className="section">
-        <div className="columns">
-          <div className="column is-9">
-            <Vis/>
-          </div>
-          <div className="column is-3">
-            Test
-          </div>
-        </div>
-      </section>
+      <Vis/>  
     );
   }
 }

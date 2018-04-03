@@ -37,9 +37,9 @@ class Vis extends Component {
         var { data }  = response;
         this.setState({
           ...this.state,
-          data: data.sort((a, b) => { return a.y - b.y }),
-          current_x_window: data.length,
-          default_x_window: data.length,
+          data: data.events.sort((a, b) => { return a.y - b.y }),
+          current_x_window: data.events.length,
+          default_x_window: data.events.length,
         });
       })
   }
@@ -156,62 +156,83 @@ class Vis extends Component {
     }
   }
 
-  render(){
-    if (this.state.data.length){
-      return (
-        <div className="vis">
-          <div 
-            onClick={this.onPanLeft}
-            className="button">
-            Pan left
+  renderLeftVis(){
+    return (
+      <div className="vis">
+        <div
+          onClick={this.onPanLeft}
+          className="button">
+          Pan left
           </div>
-          <div
-            onClick={this.onPanRight}
-            className="button">
-            Pan right
+        <div
+          onClick={this.onPanRight}
+          className="button">
+          Pan right
           </div>
-          <div 
-            onClick={this.onZoomIn}
-            className="button">
-            Zoom in
+        <div
+          onClick={this.onZoomIn}
+          className="button">
+          Zoom in
           </div>
-          <div
-            onClick={this.onZoomOut}
-            className="button">
-            Zoom out
+        <div
+          onClick={this.onZoomOut}
+          className="button">
+          Zoom out
           </div>
-          <div
-            onClick={this.onResetZoom}
-            className="button">
-            Reset Zoom
+        <div
+          onClick={this.onResetZoom}
+          className="button">
+          Reset Zoom
           </div>
-          <div
-            onWheel={this.onWheel}
-            onMouseDown={this.onMouseDown}
-            onMouseUp={this.onMouseUp}
-            onMouseMove={this.onMouseMove}
-            style={{
-              width:this.state.width,
-            }}>
-            <StoryCurve
-              highlighted_data={this.state.highlighted_data}
-              handleMouseOver={this.handleMouseOver}
-              xDomain={[this.state.current_x0_window, this.state.current_x_window]}
-              width={this.state.width}
-              height={300}
-              data={this.state.data}
-              horizontal_white_space={0.1}/>
-          </div>
-          <CharacterVis
+        <div
+          onWheel={this.onWheel}
+          onMouseDown={this.onMouseDown}
+          onMouseUp={this.onMouseUp}
+          onMouseMove={this.onMouseMove}
+          style={{
+            width: this.state.width,
+          }}>
+          <StoryCurve
             highlighted_data={this.state.highlighted_data}
             handleMouseOver={this.handleMouseOver}
             xDomain={[this.state.current_x0_window, this.state.current_x_window]}
             width={this.state.width}
-            height={20}
+            height={300}
             data={this.state.data}
-            horizontal_white_space={0.1}
-            vertical_white_space={0.2}/>
+            horizontal_white_space={0.1} />
         </div>
+        <CharacterVis
+          highlighted_data={this.state.highlighted_data}
+          handleMouseOver={this.handleMouseOver}
+          xDomain={[this.state.current_x0_window, this.state.current_x_window]}
+          width={this.state.width}
+          height={20}
+          data={this.state.data}
+          horizontal_white_space={0.1}
+          vertical_white_space={0.2} />
+      </div>
+    );
+  }
+
+  renderRight(){
+    return (
+      <div>Cek</div>
+    );
+  }
+
+  render(){
+    if (this.state.data.length){
+      return (
+        <section className="section">
+          <div className="columns">
+            <div className="column is-9">
+              {this.renderLeftVis()}
+            </div>
+            <div className="column is-3">
+              {this.renderRight()}
+          </div>
+          </div>
+        </section>
       );
     } else {
       return (
