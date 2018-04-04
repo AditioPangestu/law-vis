@@ -184,7 +184,7 @@ class Vis extends Component {
   onResetViewedCharacter(){
     this.setState({
       ...this.state,
-      adjust_viewed_character: []
+      adjust_viewed_character: ["all"]
     });
   }
 

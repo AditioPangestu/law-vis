@@ -302,19 +302,24 @@ class StoryCurve extends Component {
       });
     }
     if (!_.isEqual(this.props.adjust_viewed_character, nextProps.adjust_viewed_character)) {
-      const new_event_positions = _.map(this.state.event_positions,(position)=>{
-        if (_.findIndex(nextProps.adjust_viewed_character, (color) => { return (color == position.color) }) != -1) {
-          return {
-            ...position,
-            opacity: 1,
-          };
-        } else {
-          return {
-            ...position,
-            opacity: .1,
-          };
-        }
-      });
+      var new_event_positions = []
+      if ((nextProps.adjust_viewed_character.length == 1) && (nextProps.adjust_viewed_character[0] == "all")){
+        new_event_positions = this.preprocessRectData(this.props.data).event_positions;
+      } else {
+        new_event_positions = _.map(this.state.event_positions,(position)=>{
+          if (_.findIndex(nextProps.adjust_viewed_character, (color) => { return (color == position.color) }) != -1) {
+            return {
+              ...position,
+              opacity: 1,
+            };
+          } else {
+            return {
+              ...position,
+              opacity: .1,
+            };
+          }
+        });
+      }
       this.setState({
         ...this.state,
         event_positions: new_event_positions,

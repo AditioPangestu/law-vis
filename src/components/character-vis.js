@@ -76,6 +76,7 @@ class CharacterVis extends Component {
       ],
       highlighted_data : [],
       hint_position : {},
+      checked : true,
     }
     this.preprocessData = this.preprocessData.bind(this);
   }
@@ -170,6 +171,23 @@ class CharacterVis extends Component {
     }
   }
 
+  onCheckboxButton(){
+    if (this.state.checked){
+      this.setState({
+        ...this.state,
+        checked : false
+      });
+      this.props.onAddViewedCharacter("#fff");
+      this.props.onAddViewedCharacter("#fff");
+    } else {
+      this.setState({
+        ...this.state,
+        checked: true
+      });
+      this.props.onResetViewedCharacter();
+    }
+  }
+
   render(){
     const { RIGHT, TOP } = Hint.ALIGN;
     const { handleMouseOver } = this.props;
@@ -179,10 +197,15 @@ class CharacterVis extends Component {
           style={{
             width:"100px",
             marginBottom:"0",
-            marginLeft:"1.25rem"}}>
-          <div className="control">
+            marginLeft:"1.25rem",
+            height:"1.5rem"}}>
+          <div 
+            className="control">
             <label className="checkbox">
-              <input type="checkbox"/>
+              <input
+                onChange={this.onCheckboxButton.bind(this)}
+                type="checkbox"
+                checked={this.state.checked}/>
               <b className="is-size-7">Tokoh</b>
             </label>
           </div>
@@ -191,15 +214,18 @@ class CharacterVis extends Component {
           return (
             <div key={index}
               className="level">
-              <div className="level-left"
-                onClick={()=>{this.props.onAddViewedCharacter(character_position.positions[0].color)}}>
+              <a className="level-left"
+                onClick={()=>{this.props.onAddViewedCharacter(character_position.positions[0].color)}}
+                style={{
+                  color: "black"
+                }}>
                 <div className="level-item">
                   <p className="is-size-7 elipsis"
                     style={{width:"100px"}}>
                     {this.state.character_tic_names[index]}
                   </p>
                 </div>
-              </div>
+              </a>
               <div className="level-right">
                 <div className="level-item">
                   <XYPlot
