@@ -30,7 +30,6 @@ class StoryDetailContainer extends Component {
 
   onChangeClose(index){
     var temp = _.clone(this.state.closed_details,true);
-    console.log("test");
     temp[index] = !temp[index];
     this.setState({
       ...this.state,
@@ -54,6 +53,7 @@ class StoryDetailContainer extends Component {
                 x0: (datum.x + this.props.horizontal_white_space),
                 x: (datum.x + 1 - this.props.horizontal_white_space),
               })}
+              onMouseLeave={()=>this.props.handleMouseOver(null)}
               close={this.state.closed_details[index]}
               event_components={datum.event_components}
               url={datum.url}

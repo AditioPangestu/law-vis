@@ -31,3 +31,38 @@
 .tag:not(body) {
   height: 1.5em;
 }
+
+.card-header {
+  padding: 0px;
+  background-color: white;
+}
+
+.card {
+  margin: .3rem 0;
+}
+
+.card-content {
+  padding: .5rem;
+}
+
+.card-header {
+  height: 2.5rem;
+  cursor: pointer;
+}
+
+.card-footer {
+  height: 2.5rem;
+}
+
+.card-header-title {
+  padding: 0rem .6rem;
+}
+
+.card-footer {
+  padding: 0px;
+  background-color: white;
+}
+
+.rv-hint  {
+  z-index: 100;
+}

@@ -8,11 +8,12 @@ class StoryDetail extends Component {
   render(){
     return(
       <div
-        className="card"
+        className="card is-shadowless is-radiusless"
         onMouseOver={this.props.onMouseOver}
+        onMouseLeave={this.props.onMouseLeave}
         onClick={this.props.onChangeClose}>
-        <header className="card-header">
-          <p className="card-header-title">
+        <header className="card-header is-shadowless">
+          <p className="card-header-title is-size-7">
             {this.props.event_name}
           </p>
           {(()=>{
@@ -39,20 +40,30 @@ class StoryDetail extends Component {
           if (!this.props.close) {
             return (
               <div>
-                <div className="card-content">
+                <div className="card-content is-shadowless">
                   <div className="content">
                     {_.map(this.props.event_components, (event_component, index) => {
                       return (
-                        <div key={index}>
-                          <p><b>{event_component.term}</b></p>
-                          <p>{event_component.definition}</p>
+                        <div
+                          style={{
+                            marginBottom :".5rem"
+                          }}
+                          key={index}>
+                          <p
+                            className="is-marginless is-size-7">
+                            <b>{event_component.term}</b>
+                          </p>
+                          <p
+                            className="is-size-7">
+                            {event_component.definition}
+                          </p>
                         </div>
                       )
                     })}
                   </div>
                 </div>
-                <footer className="card-footer">
-                  <p className="card-footer-item has-text-right">
+                <footer className="card-footer is-shadowless">
+                  <p className="card-footer-item has-text-right is-size-7">
                     <span>
                       Lihat detail <a href={this.props.url}>di sini</a>.
                     </span>
@@ -74,6 +85,7 @@ StoryDetail.propTypes = {
   close: PropTypes.bool.isRequired,
   event_components: PropTypes.array.isRequired,
   onMouseOver: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
   onChangeClose: PropTypes.func.isRequired,
 };
 
