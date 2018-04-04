@@ -3,7 +3,7 @@
 }
 
 .character-vis-hint.tags:last-child {
-  margin-bottom: -.75rem;
+  margin-bottom: -1.37rem;
 }
 
 .tags.has-addons {
@@ -65,4 +65,18 @@
 
 .rv-hint  {
   z-index: 100;
+}
+
+.button {
+  margin-right: .3rem;
+}
+
+.inline-label-vis .level:not(:last-child){
+  margin-bottom: .3rem;
+}
+
+.elipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

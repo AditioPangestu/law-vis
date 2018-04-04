@@ -301,11 +301,30 @@ class StoryCurve extends Component {
         hint_position: hint_position
       });
     }
+    if (!_.isEqual(this.props.adjust_viewed_character, nextProps.adjust_viewed_character)) {
+      const new_event_positions = _.map(this.state.event_positions,(position)=>{
+        if (_.findIndex(nextProps.adjust_viewed_character, (color) => { return (color == position.color) }) != -1) {
+          return {
+            ...position,
+            opacity: 1,
+          };
+        } else {
+          return {
+            ...position,
+            opacity: .1,
+          };
+        }
+      });
+      this.setState({
+        ...this.state,
+        event_positions: new_event_positions,
+      });
+    }
   }
 
   render(){
     const { RIGHT, TOP } = Hint.ALIGN;
-    const {handleMouseOver} = this.props;
+    const { handleMouseOver, adjust_viewed_character } = this.props;
     return (
       <XYPlot
         colorType="literal"
@@ -393,6 +412,7 @@ class StoryCurve extends Component {
 StoryCurve.propTypes  = { 
   data: PropTypes.array.isRequired, 
   xDomain: PropTypes.array.isRequired, 
+  adjust_viewed_character: PropTypes.array.isRequired, 
   horizontal_white_space: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,

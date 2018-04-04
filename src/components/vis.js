@@ -19,6 +19,7 @@ class Vis extends Component {
       width : 800,
       prev_absis : 0,
       is_mouse_down : false,
+      adjust_viewed_character: [], //By color
     };
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.onZoomIn = this.onZoomIn.bind(this);
@@ -30,6 +31,8 @@ class Vis extends Component {
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onWheel = this.onWheel.bind(this);
+    this.onResetViewedCharacter = this.onResetViewedCharacter.bind(this);
+    this.onAddViewedCharacter = this.onAddViewedCharacter.bind(this);
   }
 
   componentWillMount(){
@@ -158,33 +161,71 @@ class Vis extends Component {
     }
   }
 
+  onAddViewedCharacter(character_color){
+    var find = false;
+    var new_adjust = [];
+    for (var i = 0; i < this.state.adjust_viewed_character.length;i++){
+      const color = this.state.adjust_viewed_character[i];
+      if (color != character_color) {
+        new_adjust.push(color);
+      } else {
+        find = true;
+      }
+    }
+    if(!find){
+      new_adjust.push(character_color);
+    }
+    this.setState({
+      ...this.state,
+      adjust_viewed_character: new_adjust
+    });
+  }
+
+  onResetViewedCharacter(){
+    this.setState({
+      ...this.state,
+      adjust_viewed_character: []
+    });
+  }
+
   renderLeftVis(){
     return (
       <div className="vis">
+        <p className="title">{this.state.story_detail_data.title}</p>
         <div
           onClick={this.onPanLeft}
           className="button">
-          Pan left
+          <span className="icon">
+            <i className="fas fa-arrow-left"></i>
+          </span>
           </div>
         <div
           onClick={this.onPanRight}
           className="button">
-          Pan right
+          <span className="icon">
+            <i className="fas fa-arrow-right"></i>
+          </span>
           </div>
         <div
           onClick={this.onZoomIn}
           className="button">
-          Zoom in
+          <span className="icon">
+            <i className="fas fa-search-plus"></i>
+          </span>
           </div>
         <div
           onClick={this.onZoomOut}
           className="button">
-          Zoom out
+          <span className="icon">
+            <i className="fas fa-search-minus"></i>
+          </span>
           </div>
         <div
           onClick={this.onResetZoom}
           className="button">
-          Reset Zoom
+          <span className="icon">
+            <i className="fas fa-compress"></i>
+          </span>
           </div>
         <div
           onWheel={this.onWheel}
@@ -195,20 +236,23 @@ class Vis extends Component {
             width: this.state.width,
           }}>
           <StoryCurve
+            adjust_viewed_character={this.state.adjust_viewed_character}
             highlighted_data={this.state.highlighted_data}
             handleMouseOver={this.handleMouseOver}
             xDomain={[this.state.current_x0_window, this.state.current_x_window]}
             width={this.state.width}
-            height={300}
+            height={400}
             data={this.state.data}
             horizontal_white_space={0.1} />
         </div>
         <CharacterVis
+          onAddViewedCharacter={this.onAddViewedCharacter}
+          onResetViewedCharacter={this.onResetViewedCharacter}
           highlighted_data={this.state.highlighted_data}
           handleMouseOver={this.handleMouseOver}
           xDomain={[this.state.current_x0_window, this.state.current_x_window]}
           width={this.state.width}
-          height={20}
+          height={10}
           data={this.state.data}
           horizontal_white_space={0.1}
           vertical_white_space={0.2} />

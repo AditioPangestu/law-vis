@@ -174,93 +174,116 @@ class CharacterVis extends Component {
     const { RIGHT, TOP } = Hint.ALIGN;
     const { handleMouseOver } = this.props;
     return (
-      _.map(this.state.character_positions, (character_position, index)=>{
-        return (
-          <XYPlot
-            colorType="literal"
-            key={index}
-            margin={{ left: 100, top: 0, bottom: 20, right: 0 }}
-            width={this.props.width}
-            height={this.props.height}
-            xDomain={this.props.xDomain}
-            onMouseLeave={() => handleMouseOver({})}
-            yRange={[0, this.props.height - 10]}>
-            <VerticalRectSeries
-              data={[{
-                x0: (this.props.xDomain[0]),
-                x: (this.props.xDomain[1]),
-                y: 0,
-                y: 1,
-                color: "#f1f1f1"
-              }]} />
-            <VerticalRectSeries
-              data={character_position.positions}/>
-            {(()=>{
-              if (this.state.highlighted_data.length != 0){
-                const hightlight_index = _.findIndex(character_position.positions, (value) => {
-                  return ((value.x == this.state.highlighted_data[0].x) && (value.x0 == this.state.highlighted_data[0].x0));
-                });
-                if (hightlight_index != -1){
-                  return (
+      <div className="inline-label-vis">
+        <div className="field"
+          style={{
+            width:"100px",
+            marginBottom:"0",
+            marginLeft:"1.25rem"}}>
+          <div className="control">
+            <label className="checkbox">
+              <input type="checkbox"/>
+              <b className="is-size-7">Tokoh</b>
+            </label>
+          </div>
+        </div>
+        {_.map(this.state.character_positions, (character_position, index)=>{
+          return (
+            <div key={index}
+              className="level">
+              <div className="level-left"
+                onClick={()=>{this.props.onAddViewedCharacter(character_position.positions[0].color)}}>
+                <div className="level-item">
+                  <p className="is-size-7 elipsis"
+                    style={{width:"100px"}}>
+                    {this.state.character_tic_names[index]}
+                  </p>
+                </div>
+              </div>
+              <div className="level-right">
+                <div className="level-item">
+                  <XYPlot
+                    colorType="literal"
+                    margin={{ left: 0, top: 0, bottom: 0, right: 0 }}
+                    width={this.props.width-100}
+                    height={this.props.height}
+                    xDomain={this.props.xDomain}
+                    onMouseLeave={() => handleMouseOver({})}>
                     <VerticalRectSeries
-                      data={this.state.highlighted_data}
-                      stroke="#363636"
-                      style={{strokeWidth : 3}}/>
-                  );
-                } else {
-                  var temp = _.clone(this.state.highlighted_data,true);
-                  temp[0].color = "#363636"
-                  return (
+                      data={[{
+                        x0: (this.props.xDomain[0]),
+                        x: (this.props.xDomain[1]),
+                        y: 0,
+                        y: 1,
+                        color: "#f1f1f1"
+                      }]} />
                     <VerticalRectSeries
-                      data={temp}
-                      style={{ opacity: .1 }} />
-                  )
-                }
-              }
-            })()}
-            <Borders style={{
-              bottom: { fill: 'transparent' },
-              left: { fill: '#fff' },
-              right: { fill: 'transparent' },
-              top: { fill: 'transparent' }
-            }}/>
-            <VerticalRectSeries
-              opacity={0}
-              onValueMouseOver={(datapoint, { index }) => handleMouseOver(datapoint)}
-              data={character_position.positions} />
-            <YAxis
-              hideLine
-              tickSize={0}
-              tickValues={[0.5]}
-              tickFormat={(tick_value) => { return this.state.character_tic_names[index] }} />
-            {/* Component for display hint */}
-            {(() => {
-              if (!_.isEmpty(this.state.hint_position)) {
-                const hint_index = _.findIndex(character_position.positions, (value) => {
-                  return ((value.x == this.state.highlighted_data[0].x) && (value.x0 == this.state.highlighted_data[0].x0));
-                });
-                if (hint_index!=-1){
-                  const hint_text=this.state.character_hints[index][hint_index];
-                  return (
-                    <Hint
-                      align={{
-                        horizontal: RIGHT,
-                        vertical: TOP
-                      }}
-                      value={this.state.hint_position}>
-                      <div className="tags has-addons character-vis-hint">
-                        <span className="arrow-left"></span>
-                        <span className="tag is-dark has-text-warning">{hint_text.role}</span>
-                        <span className="tag is-success">{hint_text.name}</span>
-                      </div>
-                    </Hint>
-                  );
-                }
-              }
-            })()}
-          </XYPlot>
-        )
-      })
+                      data={character_position.positions}/>
+                    {(()=>{
+                      if (this.state.highlighted_data.length != 0){
+                        const hightlight_index = _.findIndex(character_position.positions, (value) => {
+                          return ((value.x == this.state.highlighted_data[0].x) && (value.x0 == this.state.highlighted_data[0].x0));
+                        });
+                        if (hightlight_index != -1){
+                          return (
+                            <VerticalRectSeries
+                              data={this.state.highlighted_data}
+                              stroke="#363636"
+                              style={{strokeWidth : 3}}/>
+                          );
+                        } else {
+                          var temp = _.clone(this.state.highlighted_data,true);
+                          temp[0].color = "#363636"
+                          return (
+                            <VerticalRectSeries
+                              data={temp}
+                              style={{ opacity: .1 }} />
+                          )
+                        }
+                      }
+                    })()}
+                    <Borders style={{
+                      bottom: { fill: 'transparent' },
+                      left: { fill: '#fff' },
+                      right: { fill: 'transparent' },
+                      top: { fill: 'transparent' }
+                    }}/>
+                    <VerticalRectSeries
+                      opacity={0}
+                      onValueMouseOver={(datapoint, { index }) => handleMouseOver(datapoint)}
+                      data={character_position.positions} />
+                    {/* Component for display hint */}
+                    {(() => {
+                      if (!_.isEmpty(this.state.hint_position)) {
+                        const hint_index = _.findIndex(character_position.positions, (value) => {
+                          return ((value.x == this.state.highlighted_data[0].x) && (value.x0 == this.state.highlighted_data[0].x0));
+                        });
+                        if (hint_index!=-1){
+                          const hint_text=this.state.character_hints[index][hint_index];
+                          return (
+                            <Hint
+                              align={{
+                                horizontal: RIGHT,
+                                vertical: TOP
+                              }}
+                              value={this.state.hint_position}>
+                              <div className="tags has-addons character-vis-hint">
+                                <span className="arrow-left"></span>
+                                <span className="tag is-dark has-text-warning">{hint_text.role}</span>
+                                <span className="tag is-success">{hint_text.name}</span>
+                              </div>
+                            </Hint>
+                          );
+                        }
+                      }
+                    })()}
+                  </XYPlot>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
     );
   }
 }
@@ -274,6 +297,8 @@ CharacterVis.propTypes  = {
   width: PropTypes.number.isRequired,
   highlighted_data: PropTypes.object,
   handleMouseOver: PropTypes.func.isRequired,
+  onAddViewedCharacter: PropTypes.func.isRequired,
+  onResetViewedCharacter: PropTypes.func.isRequired,
 };
 
 export default CharacterVis;
