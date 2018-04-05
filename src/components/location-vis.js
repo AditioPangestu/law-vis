@@ -76,6 +76,7 @@ class LocationVis extends Component {
       checked: true,
     }
     this.preprocessData = this.preprocessData.bind(this);
+    this.onClickLabel = this.onClickLabel.bind(this);
   }
 
   componentWillMount() {
@@ -157,6 +158,19 @@ class LocationVis extends Component {
         hint_position: hint_position,
       });
     }
+    if (!_.isEqual(this.props.adjust_viewed_location, nextProps.adjust_viewed_location)) {
+      if (nextProps.adjust_viewed_location.length == this.state.location_positions.length){
+        this.setState({
+          ...this.state,
+          checked: true,
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          checked: false,
+        });
+      }
+    }
   }
 
   onCheckboxButton() {
@@ -174,6 +188,11 @@ class LocationVis extends Component {
       });
       this.props.onResetViewedLocation();
     }
+  }
+
+  onClickLabel(event, color){
+    event.preventDefault();
+    this.props.onAddViewedLocation(color);
   }
 
   render() {
@@ -204,7 +223,7 @@ class LocationVis extends Component {
             <div key={index}
               className="level">
               <a className="level-left"
-                onClick={() => { this.props.onAddViewedLocation(location_position.positions[0].color) }}
+                onClick={(event) => { this.onClickLabel(event, location_position.positions[0].color)} }
                 style={{
                   color: "black"
                 }}>

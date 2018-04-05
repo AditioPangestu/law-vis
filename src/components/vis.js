@@ -20,8 +20,8 @@ class Vis extends Component {
       width : 800,
       prev_absis : 0,
       is_mouse_down : false,
-      adjust_viewed_character: [], //By color
-      adjust_viewed_location: [], //By color
+      adjust_viewed_character: ["all"], //By color
+      adjust_viewed_location: ["all"], //By color
     };
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.onZoomIn = this.onZoomIn.bind(this);
@@ -35,6 +35,7 @@ class Vis extends Component {
     this.onWheel = this.onWheel.bind(this);
     this.onResetViewedCharacter = this.onResetViewedCharacter.bind(this);
     this.onAddViewedCharacter = this.onAddViewedCharacter.bind(this);
+    this.onHideAllCharacter = this.onHideAllCharacter.bind(this);
     this.onResetViewedLocation = this.onResetViewedLocation.bind(this);
     this.onAddViewedLocation = this.onAddViewedLocation.bind(this);
   }
@@ -170,10 +171,12 @@ class Vis extends Component {
     var new_adjust = [];
     for (var i = 0; i < this.state.adjust_viewed_character.length;i++){
       const color = this.state.adjust_viewed_character[i];
-      if (color != character_color) {
-        new_adjust.push(color);
-      } else {
-        find = true;
+      if (color != "all") {
+        if (color != character_color) {
+          new_adjust.push(color);
+        } else {
+          find = true;
+        }
       }
     }
     if(!find){
@@ -192,15 +195,24 @@ class Vis extends Component {
     });
   }
 
+  onHideAllCharacter() {
+    this.setState({
+      ...this.state,
+      adjust_viewed_character: []
+    });
+  }
+
   onAddViewedLocation(location_color) {
     var find = false;
     var new_adjust = [];
     for (var i = 0; i < this.state.adjust_viewed_location.length; i++) {
       const color = this.state.adjust_viewed_location[i];
-      if (color != location_color) {
-        new_adjust.push(color);
-      } else {
-        find = true;
+      if(color != "all"){
+        if (color != location_color) {
+          new_adjust.push(color);
+        } else {
+          find = true;
+        }
       }
     }
     if (!find) {
@@ -278,6 +290,8 @@ class Vis extends Component {
             horizontal_white_space={0.1} />
         </div>
         <CharacterVis
+          onHideAllCharacter={this.onHideAllCharacter}
+          adjust_viewed_character={this.state.adjust_viewed_character}
           onAddViewedCharacter={this.onAddViewedCharacter}
           onResetViewedCharacter={this.onResetViewedCharacter}
           highlighted_data={this.state.highlighted_data}
@@ -289,6 +303,7 @@ class Vis extends Component {
           horizontal_white_space={0.1}
           vertical_white_space={0.2} />
         <LocationVis
+          adjust_viewed_location={this.state.adjust_viewed_location}
           onAddViewedLocation={this.onAddViewedLocation}
           onResetViewedLocation={this.onResetViewedLocation}
           highlighted_data={this.state.highlighted_data}

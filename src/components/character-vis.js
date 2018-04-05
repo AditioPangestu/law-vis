@@ -80,6 +80,7 @@ class CharacterVis extends Component {
       checked : true,
     }
     this.preprocessData = this.preprocessData.bind(this);
+    this.onClickLabel = this.onClickLabel.bind(this);
   }
 
   componentWillMount(){
@@ -162,6 +163,19 @@ class CharacterVis extends Component {
         hint_position: hint_position,
       });
     }
+    if (!_.isEqual(this.props.adjust_viewed_character, nextProps.adjust_viewed_character)) {
+      if ((nextProps.adjust_viewed_character[0] == "all") || (nextProps.adjust_viewed_character.length == this.state.character_positions.length)) {
+        this.setState({
+          ...this.state,
+          checked: true,
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          checked: false,
+        });
+      }
+    }
   }
 
   onCheckboxButton(){
@@ -170,8 +184,7 @@ class CharacterVis extends Component {
         ...this.state,
         checked : false
       });
-      this.props.onAddViewedCharacter("#fff");
-      this.props.onAddViewedCharacter("#fff");
+      this.props.onHideAllCharacter();
     } else {
       this.setState({
         ...this.state,
@@ -179,6 +192,11 @@ class CharacterVis extends Component {
       });
       this.props.onResetViewedCharacter();
     }
+  }
+
+  onClickLabel(event, color) {
+    event.preventDefault();
+    this.props.onAddViewedCharacter(color);
   }
 
   render(){
@@ -208,7 +226,7 @@ class CharacterVis extends Component {
             <div key={index}
               className="level">
               <a className="level-left"
-                onClick={()=>{this.props.onAddViewedCharacter(character_position.positions[0].color)}}
+                onClick={(event) => { this.onClickLabel(event,character_position.positions[0].color)}}
                 style={{
                   color: "black"
                 }}>
