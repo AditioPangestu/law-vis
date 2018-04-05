@@ -379,6 +379,30 @@ class StoryCurve extends Component {
         event_positions: new_event_positions,
       });
     }
+    if (!_.isEqual(this.props.adjust_viewed_location, nextProps.adjust_viewed_location)) {
+      var new_location_positions = []
+      if ((nextProps.adjust_viewed_location.length == 1) && (nextProps.adjust_viewed_location[0] == "all")){
+        new_location_positions = this.preprocessRectData(this.props.data).location_positions;
+      } else {
+        new_location_positions = _.map(this.state.location_positions,(position)=>{
+          if (_.findIndex(nextProps.adjust_viewed_location, (color) => { return (color == position.color) }) != -1) {
+            return {
+              ...position,
+              opacity: .2,
+            };
+          } else {
+            return {
+              ...position,
+              opacity: 0,
+            };
+          }
+        });
+      }
+      this.setState({
+        ...this.state,
+        location_positions: new_location_positions,
+      });
+    }
   }
 
   render(){

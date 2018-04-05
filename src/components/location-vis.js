@@ -204,7 +204,7 @@ class LocationVis extends Component {
             <div key={index}
               className="level">
               <a className="level-left"
-                onClick={() => { this.props.onAddViewedCharacter(location_position.positions[0].color) }}
+                onClick={() => { this.props.onAddViewedLocation(location_position.positions[0].color) }}
                 style={{
                   color: "black"
                 }}>

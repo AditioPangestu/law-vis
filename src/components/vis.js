@@ -21,6 +21,7 @@ class Vis extends Component {
       prev_absis : 0,
       is_mouse_down : false,
       adjust_viewed_character: [], //By color
+      adjust_viewed_location: [], //By color
     };
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.onZoomIn = this.onZoomIn.bind(this);
@@ -34,6 +35,8 @@ class Vis extends Component {
     this.onWheel = this.onWheel.bind(this);
     this.onResetViewedCharacter = this.onResetViewedCharacter.bind(this);
     this.onAddViewedCharacter = this.onAddViewedCharacter.bind(this);
+    this.onResetViewedLocation = this.onResetViewedLocation.bind(this);
+    this.onAddViewedLocation = this.onAddViewedLocation.bind(this);
   }
 
   componentWillMount(){
@@ -189,6 +192,33 @@ class Vis extends Component {
     });
   }
 
+  onAddViewedLocation(location_color) {
+    var find = false;
+    var new_adjust = [];
+    for (var i = 0; i < this.state.adjust_viewed_location.length; i++) {
+      const color = this.state.adjust_viewed_location[i];
+      if (color != location_color) {
+        new_adjust.push(color);
+      } else {
+        find = true;
+      }
+    }
+    if (!find) {
+      new_adjust.push(location_color);
+    }
+    this.setState({
+      ...this.state,
+      adjust_viewed_location: new_adjust
+    });
+  }
+
+  onResetViewedLocation() {
+    this.setState({
+      ...this.state,
+      adjust_viewed_location: ["all"]
+    });
+  }
+
   renderLeftVis(){
     return (
       <div className="vis">
@@ -238,6 +268,7 @@ class Vis extends Component {
           }}>
           <StoryCurve
             adjust_viewed_character={this.state.adjust_viewed_character}
+            adjust_viewed_location={this.state.adjust_viewed_location}
             highlighted_data={this.state.highlighted_data}
             handleMouseOver={this.handleMouseOver}
             xDomain={[this.state.current_x0_window, this.state.current_x_window]}
@@ -258,8 +289,8 @@ class Vis extends Component {
           horizontal_white_space={0.1}
           vertical_white_space={0.2} />
         <LocationVis
-          onAddViewedLocation={this.onAddViewedCharacter}
-          onResetViewedLocation={this.onResetViewedCharacter}
+          onAddViewedLocation={this.onAddViewedLocation}
+          onResetViewedLocation={this.onResetViewedLocation}
           highlighted_data={this.state.highlighted_data}
           handleMouseOver={this.handleMouseOver}
           xDomain={[this.state.current_x0_window, this.state.current_x_window]}
