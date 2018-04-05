@@ -5,6 +5,7 @@ import _ from "lodash";
 import StoryCurve from "./story-curve";
 import CharacterVis from "./character-vis";
 import LocationVis from "./location-vis";
+import TimeVis from "./time-vis";
 import StoryDetailContainer from "./story-detail-container";
 
 class Vis extends Component {
@@ -22,6 +23,7 @@ class Vis extends Component {
       is_mouse_down : false,
       adjust_viewed_character: ["all"], //By color
       adjust_viewed_location: ["all"], //By color
+      adjust_viewed_time: ["all"], //By color
     };
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.onZoomIn = this.onZoomIn.bind(this);
@@ -39,6 +41,9 @@ class Vis extends Component {
     this.onResetViewedLocation = this.onResetViewedLocation.bind(this);
     this.onAddViewedLocation = this.onAddViewedLocation.bind(this);
     this.onHideAllLocation = this.onHideAllLocation.bind(this);
+    this.onResetViewedTime = this.onResetViewedTime.bind(this);
+    this.onAddViewedTime = this.onAddViewedTime.bind(this);
+    this.onHideAllTime = this.onHideAllTime.bind(this);
   }
 
   componentWillMount(){
@@ -239,6 +244,42 @@ class Vis extends Component {
     });
   }
 
+  onAddViewedTime(time_color) {
+    var find = false;
+    var new_adjust = [];
+    for (var i = 0; i < this.state.adjust_viewed_time.length; i++) {
+      const color = this.state.adjust_viewed_time[i];
+      if(color != "all"){
+        if (color != time_color) {
+          new_adjust.push(color);
+        } else {
+          find = true;
+        }
+      }
+    }
+    if (!find) {
+      new_adjust.push(time_color);
+    }
+    this.setState({
+      ...this.state,
+      adjust_viewed_time: new_adjust
+    });
+  }
+
+  onResetViewedTime() {
+    this.setState({
+      ...this.state,
+      adjust_viewed_time: ["all"]
+    });
+  }
+
+  onHideAllTime() {
+    this.setState({
+      ...this.state,
+      adjust_viewed_time: []
+    });
+  }
+
   renderLeftVis(){
     return (
       <div className="vis">
@@ -298,8 +339,8 @@ class Vis extends Component {
             horizontal_white_space={0.1} />
         </div>
         <CharacterVis
-          onHideAllCharacter={this.onHideAllCharacter}
           adjust_viewed_character={this.state.adjust_viewed_character}
+          onHideAllCharacter={this.onHideAllCharacter}
           onAddViewedCharacter={this.onAddViewedCharacter}
           onResetViewedCharacter={this.onResetViewedCharacter}
           highlighted_data={this.state.highlighted_data}
@@ -315,6 +356,18 @@ class Vis extends Component {
           onHideAllLocation={this.onHideAllLocation}
           onAddViewedLocation={this.onAddViewedLocation}
           onResetViewedLocation={this.onResetViewedLocation}
+          highlighted_data={this.state.highlighted_data}
+          handleMouseOver={this.handleMouseOver}
+          xDomain={[this.state.current_x0_window, this.state.current_x_window]}
+          width={this.state.width}
+          height={10}
+          data={this.state.data}
+          horizontal_white_space={0.1}/>
+        <TimeVis
+          adjust_viewed_time={this.state.adjust_viewed_time}
+          onHideAllTime={this.onHideAllTime}
+          onAddViewedTime={this.onAddViewedTime}
+          onResetViewedTime={this.onResetViewedTime}
           highlighted_data={this.state.highlighted_data}
           handleMouseOver={this.handleMouseOver}
           xDomain={[this.state.current_x0_window, this.state.current_x_window]}

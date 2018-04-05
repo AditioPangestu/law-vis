@@ -86,7 +86,6 @@ class LocationVis extends Component {
   preprocessData(data) {
     var location_positions = [];
     var location_hints = [];
-    var location_index = 0;
     for (var i = 0; i < data.length; i++) {
       const datum = data[i];
       const location = data[i].location;
@@ -159,7 +158,7 @@ class LocationVis extends Component {
       });
     }
     if (!_.isEqual(this.props.adjust_viewed_location, nextProps.adjust_viewed_location)) {
-      if (nextProps.adjust_viewed_location.length == this.state.location_positions.length){
+      if ((nextProps.adjust_viewed_location[0] == "all")||(nextProps.adjust_viewed_location.length == this.state.location_positions.length)){
         this.setState({
           ...this.state,
           checked: true,
