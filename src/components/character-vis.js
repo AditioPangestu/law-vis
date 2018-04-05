@@ -30,7 +30,16 @@ import {
 
         ]
       }
-    ]
+    ],
+    "location": {
+      "color": "#79C7E3",
+      "name": "Mapolda Metro Jaya",
+      "city": "Jakarta Pusat"
+    },
+    "time": {
+      "color": "#FF9833",
+      "name": "Siang"
+    },
   }
 */
 
@@ -41,15 +50,13 @@ class CharacterVis extends Component {
     this.state = {
       character_hints : [
       /*
-        [
-          {
-            name : name,
-            role : saksi, tersangka, terdakwa, penasihat hukum , penyelidik, penyidik, penuntut umum, hakim
-            social_status : [
+        {
+          name : name,
+          role : saksi, tersangka, terdakwa, penasihat hukum , penyelidik, penyidik, penuntut umum, hakim
+          social_status : [
 
-            ]
-          },
-        ],
+          ]
+        },
       */
       ],
       character_positions: [
@@ -68,12 +75,6 @@ class CharacterVis extends Component {
           },
         */
       ],
-      character_tic_names: [
-
-      ],
-      character_tic_values: [
-
-      ],
       highlighted_data : [],
       hint_position : {},
       checked : true,
@@ -88,9 +89,6 @@ class CharacterVis extends Component {
   preprocessData(data){
     var character_positions = [];
     var character_hints = [];
-    var character_tic_names = [];
-    var character_tic_values = [];
-    var character_index = 0;
     for(var i = 0; i < data.length; i++){
       const datum = data[i];
       for(var j=0; j<datum.n;j++){
@@ -99,9 +97,6 @@ class CharacterVis extends Component {
           return (value.role == character_datum.role);
         });
         if(index == -1){
-          character_tic_names.push(character_datum.role);
-          character_tic_values.push(character_index);
-          character_index++;
           character_positions.push({
             role: character_datum.role,
             positions : [
@@ -141,8 +136,6 @@ class CharacterVis extends Component {
       ...this.state,
       character_positions : character_positions,
       character_hints: character_hints,
-      character_tic_names: character_tic_names,
-      character_tic_values: character_tic_values,
     });
   }
 
@@ -222,7 +215,7 @@ class CharacterVis extends Component {
                 <div className="level-item">
                   <p className="is-size-7 elipsis"
                     style={{width:"100px"}}>
-                    {this.state.character_tic_names[index]}
+                    {character_position.role}
                   </p>
                 </div>
               </a>
@@ -318,7 +311,6 @@ CharacterVis.propTypes  = {
   data: PropTypes.array.isRequired,
   xDomain: PropTypes.array.isRequired,
   horizontal_white_space: PropTypes.number.isRequired,
-  vertical_white_space: PropTypes.number.isRequired,  
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   highlighted_data: PropTypes.object,

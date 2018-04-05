@@ -4,6 +4,7 @@ import _ from "lodash";
 
 import StoryCurve from "./story-curve";
 import CharacterVis from "./character-vis";
+import LocationVis from "./location-vis";
 import StoryDetailContainer from "./story-detail-container";
 
 class Vis extends Component {
@@ -256,6 +257,16 @@ class Vis extends Component {
           data={this.state.data}
           horizontal_white_space={0.1}
           vertical_white_space={0.2} />
+        <LocationVis
+          onAddViewedLocation={this.onAddViewedCharacter}
+          onResetViewedLocation={this.onResetViewedCharacter}
+          highlighted_data={this.state.highlighted_data}
+          handleMouseOver={this.handleMouseOver}
+          xDomain={[this.state.current_x0_window, this.state.current_x_window]}
+          width={this.state.width}
+          height={10}
+          data={this.state.data}
+          horizontal_white_space={0.1}/>
       </div>
     );
   }
