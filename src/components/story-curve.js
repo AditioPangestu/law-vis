@@ -44,6 +44,7 @@ class StoryCurve extends Component {
     this.rect_height = 1;
     this.state = {
       event_positions : [],
+      location_positions : [],
       line_data : [],
       date_tic_values : [],
       date_tic_names : [], 
@@ -72,7 +73,7 @@ class StoryCurve extends Component {
   }
 
   componentWillMount(){
-    const { event_positions, stage_areas, line_data} = this.preprocessRectData(this.props.data);
+    const { event_positions, stage_areas, line_data, location_positions} = this.preprocessRectData(this.props.data);
     const { stage_tic_values, stage_tic_names } = this.generateLawStageTic(stage_areas);
     const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(this.props.data);
     const y_max = _.max(event_positions, (event_position) => { return event_position.y}).y;
@@ -80,6 +81,7 @@ class StoryCurve extends Component {
     this.setState({
       ...this.state,
       event_positions: event_positions,
+      location_positions: location_positions,
       stage_areas: stage_areas,
       stage_tic_values: stage_tic_values,
       stage_tic_names: stage_tic_names,
@@ -95,10 +97,13 @@ class StoryCurve extends Component {
   preprocessRectData(data){
     var line_data = [];
     var event_positions = [];
+    var location_positions = [];
     var stage_areas = [];
     var stage_area = {};
     var prev_datum = {};
     for(var i=0;i<data.length;i++){
+      var y_min = null;
+      var y_max = null;
       const datum = data[i];
       if(i == 0){
         var y_base = datum.y - this.rect_height*datum.n/2;
@@ -109,6 +114,12 @@ class StoryCurve extends Component {
         stage_area.start = y_base;
         stage_area.law_stage = datum.law_stage;
         for (var j = 0; j < datum.n; j++) {
+          if(j==0){
+            y_min = y_base;
+          }
+          if (j==(datum.n-1)){
+            y_max = y_base + this.rect_height;
+          }
           event_positions.push({
             x0: (datum.x + this.props.horizontal_white_space),
             x: (datum.x + 1 - this.props.horizontal_white_space),
@@ -118,6 +129,16 @@ class StoryCurve extends Component {
           });
           y_base += this.rect_height;
         }
+        if (!_.isEmpty(datum.location)) {
+          location_positions.push({
+            x0: (datum.x + this.props.horizontal_white_space),
+            x: (datum.x + 1 - this.props.horizontal_white_space),
+            y0: (y_min - this.rect_height),
+            y: (y_max + this.rect_height),
+            color: datum.location.color,
+            opacity: .2
+          });
+        }
       } else {
         if (prev_datum.law_stage == datum.law_stage){
           var y_base = event_positions[event_positions.length - 1].y - (this.rect_height * prev_datum.n / 2) + this.rect_height - (this.rect_height*datum.n / 2);
@@ -126,14 +147,30 @@ class StoryCurve extends Component {
             y: (y_base + this.rect_height * datum.n / 2),
           });
           for (var j = 0; j < datum.n; j++) {
+            if (j == 0) {
+              y_min = y_base;
+            }
+            if (j == (datum.n - 1)) {
+              y_max = y_base + this.rect_height;
+            }
             event_positions.push({
               x0: (datum.x + this.props.horizontal_white_space),
               x: (datum.x + 1 - this.props.horizontal_white_space),
               y0: (y_base),
-              y: (y_base + this.rect_height),
+              y: (i != (data.length-1)?(y_base + this.rect_height):y_base),
               color: datum.characters[j].color
             });
             y_base+=this.rect_height;
+          }
+          if (!_.isEmpty(datum.location)) {
+            location_positions.push({
+              x0: (datum.x + this.props.horizontal_white_space),
+              x: (datum.x + 1 - this.props.horizontal_white_space),
+              y0: (y_min - this.rect_height),
+              y: (y_max + this.rect_height),
+              color: datum.location.color,
+              opacity: .2
+            });
           }
         } else {
           stage_area.end = event_positions[event_positions.length - 1].y;
@@ -146,6 +183,12 @@ class StoryCurve extends Component {
             y: (y_base + this.rect_height * datum.n / 2),
           });
           for (var j = 0; j < datum.n; j++) {
+            if (j == 0) {
+              y_min = y_base;
+            }
+            if (j == (datum.n - 1)) {
+              y_max = y_base + this.rect_height;
+            }
             event_positions.push({
               x0: (datum.x + this.props.horizontal_white_space),
               x: (datum.x + 1 - this.props.horizontal_white_space),
@@ -154,6 +197,16 @@ class StoryCurve extends Component {
               color: datum.characters[j].color
             });
             y_base += this.rect_height;
+          }
+          if(!_.isEmpty(datum.location)){
+            location_positions.push({
+              x0: (datum.x + this.props.horizontal_white_space),
+              x: (datum.x + 1 - this.props.horizontal_white_space),
+              y0: (y_min - this.rect_height),
+              y: (i != (data.length-1)?(y_base + this.rect_height):y_base),
+              color: datum.location.color,
+              opacity: .2
+            });
           }
         }
       }
@@ -169,6 +222,7 @@ class StoryCurve extends Component {
     })
     return {
       event_positions,
+      location_positions,
       stage_areas,
       line_data
     };
@@ -349,6 +403,30 @@ class StoryCurve extends Component {
         <LineSeries
           curve={'curveStepAfter'}
           data={this.state.line_data} />
+        <VerticalRectSeries
+          data={_.map(this.props.data, (datum) => {
+            if (!_.isEmpty(datum.time)) {
+              return {
+                x0: (datum.x + this.props.horizontal_white_space),
+                x: (datum.x + 1 - this.props.horizontal_white_space),
+                y0: this.state.y_min,
+                y: this.state.y_max,
+                color: datum.time.color,
+                opacity: .2
+              }
+            } else {
+              return {
+                x0: 0,
+                x: 0,
+                y0: 0,
+                y: 0,
+                opacity: 0
+              }
+            }
+          })}/>
+        {/* Component for display location */}
+        <VerticalRectSeries
+          data={this.state.location_positions} />
         {/* Component for display events */}
         <VerticalRectSeries
           data={this.state.event_positions} />
