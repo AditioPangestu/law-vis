@@ -38,6 +38,7 @@ class Vis extends Component {
     this.onHideAllCharacter = this.onHideAllCharacter.bind(this);
     this.onResetViewedLocation = this.onResetViewedLocation.bind(this);
     this.onAddViewedLocation = this.onAddViewedLocation.bind(this);
+    this.onHideAllLocation = this.onHideAllLocation.bind(this);
   }
 
   componentWillMount(){
@@ -231,6 +232,13 @@ class Vis extends Component {
     });
   }
 
+  onHideAllLocation() {
+    this.setState({
+      ...this.state,
+      adjust_viewed_location: []
+    });
+  }
+
   renderLeftVis(){
     return (
       <div className="vis">
@@ -304,6 +312,7 @@ class Vis extends Component {
           vertical_white_space={0.2} />
         <LocationVis
           adjust_viewed_location={this.state.adjust_viewed_location}
+          onHideAllLocation={this.onHideAllLocation}
           onAddViewedLocation={this.onAddViewedLocation}
           onResetViewedLocation={this.onResetViewedLocation}
           highlighted_data={this.state.highlighted_data}

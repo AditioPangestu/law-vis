@@ -179,8 +179,7 @@ class LocationVis extends Component {
         ...this.state,
         checked: false
       });
-      this.props.onAddViewedLocation("#fff");
-      this.props.onAddViewedLocation("#fff");
+      this.props.onHideAllLocation();
     } else {
       this.setState({
         ...this.state,
