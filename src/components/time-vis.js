@@ -214,6 +214,9 @@ class TimeVis extends Component {
             </label>
           </div>
         </div>
+        <hr style={{
+          margin: ".2rem 0"
+        }} />
         {_.map(this.state.time_positions, (time_position, index) => {
           return (
             <div key={index}

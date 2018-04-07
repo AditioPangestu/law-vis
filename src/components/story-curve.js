@@ -70,6 +70,7 @@ class StoryCurve extends Component {
     this.generateDateTic = this.generateDateTic.bind(this);
     this.stageTicFormat = this.stageTicFormat.bind(this);
     this.dateTicFormat = this.dateTicFormat.bind(this);
+    this.generateTimeRect = this.generateTimeRect.bind(this);
   }
 
   componentWillMount(){
@@ -78,10 +79,12 @@ class StoryCurve extends Component {
     const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(this.props.data);
     const y_max = _.max(event_positions, (event_position) => { return event_position.y}).y;
     const y_min = _.min(event_positions, (event_position) => { return event_position.y0}).y0;
+    const time_positions = this.generateTimeRect(this.props.data,y_min,y_max);
     this.setState({
       ...this.state,
       event_positions: event_positions,
       location_positions: location_positions,
+      time_positions: time_positions,
       stage_areas: stage_areas,
       stage_tic_values: stage_tic_values,
       stage_tic_names: stage_tic_names,
@@ -299,6 +302,24 @@ class StoryCurve extends Component {
     };
   }
   
+  generateTimeRect(data, y_min, y_max){
+    var time_positions = [];
+    for(var i=0; i < data.length; i++){
+      const datum = data[i];
+      if(!_.isEmpty(datum.time)){
+        time_positions.push({
+          x0: (datum.x + this.props.horizontal_white_space),
+          x: (datum.x + 1 - this.props.horizontal_white_space),
+          y0: y_min,
+          y: y_max,
+          color: datum.time.color,
+          opacity: .2
+        });
+      }
+    }
+    return time_positions;
+  }
+
   stageTicFormat(value){
     const index = _.findIndex(this.state.stage_tic_values, (stage_tic_value) => {
       return (stage_tic_value == value);
@@ -403,6 +424,30 @@ class StoryCurve extends Component {
         location_positions: new_location_positions,
       });
     }
+    if (!_.isEqual(this.props.adjust_viewed_time, nextProps.adjust_viewed_time)) {
+      var new_time_positions = []
+      if ((nextProps.adjust_viewed_time.length == 1) && (nextProps.adjust_viewed_time[0] == "all")){
+        new_time_positions = this.generateTimeRect(this.props.data, this.state.y_min, this.state.y_max);
+      } else {
+        new_time_positions = _.map(this.state.time_positions,(position)=>{
+          if (_.findIndex(nextProps.adjust_viewed_time, (color) => { return (color == position.color) }) != -1) {
+            return {
+              ...position,
+              opacity: .2,
+            };
+          } else {
+            return {
+              ...position,
+              opacity: 0,
+            };
+          }
+        });
+      }
+      this.setState({
+        ...this.state,
+        time_positions: new_time_positions,
+      });
+    }
   }
 
   render(){
@@ -415,7 +460,7 @@ class StoryCurve extends Component {
         width={this.props.width}
         height={this.props.height}
         xDomain={this.props.xDomain}
-        onMouseLeave={() => handleMouseOver({})}
+        //onMouseLeave={() => handleMouseOver({})}
         yRange={[0, this.props.height-60]}>
         <HorizontalGridLines 
           tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
@@ -428,26 +473,7 @@ class StoryCurve extends Component {
           curve={'curveStepAfter'}
           data={this.state.line_data} />
         <VerticalRectSeries
-          data={_.map(this.props.data, (datum) => {
-            if (!_.isEmpty(datum.time)) {
-              return {
-                x0: (datum.x + this.props.horizontal_white_space),
-                x: (datum.x + 1 - this.props.horizontal_white_space),
-                y0: this.state.y_min,
-                y: this.state.y_max,
-                color: datum.time.color,
-                opacity: .2
-              }
-            } else {
-              return {
-                x0: 0,
-                x: 0,
-                y0: 0,
-                y: 0,
-                opacity: 0
-              }
-            }
-          })}/>
+          data={this.state.time_positions}/>
         {/* Component for display location */}
         <VerticalRectSeries
           data={this.state.location_positions} />
@@ -472,22 +498,29 @@ class StoryCurve extends Component {
           stroke="#363636"
           style={{ strokeWidth: 3 }}/>
         {/* Component for display hint */}
-        {(()=>{
-          if (!_.isEmpty(this.state.hint_position)){
-            return (
-              <Hint 
-                align={{
-                  horizontal: RIGHT,
-                  vertical: TOP
-                }}
-                value={{ x: (this.state.hint_position.x - this.props.horizontal_white_space), y: this.state.hint_position.y}}>
-                <div className="tags has-addons story-curve-hint">
-                  <span className="arrow-left"></span>
-                  <span className="tag is-dark has-text-warning">( X, Y )</span>
-                  <span className="tag is-success">{"( "+this.state.hint_position.x+", "+this.state.hint_position.y+" )"}</span>
-                </div>
-              </Hint>
-            );
+        {/* Component for display hint */}
+        {(() => {
+          if (!_.isEmpty(this.state.hint_position)) {
+            const hint_index = _.findIndex(this.props.data, (value) => {
+              return (((value.x + 1 - this.props.horizontal_white_space) == this.state.highlighted_data[0].x) && ((value.x+this.props.horizontal_white_space) == this.state.highlighted_data[0].x0));
+            });
+            if (hint_index != -1) {
+              const event_name = this.props.data[hint_index].event_name;
+              return (
+                <Hint
+                  align={{
+                    horizontal: RIGHT,
+                    vertical: TOP
+                  }}
+                  value={this.state.hint_position}>
+                  <div className="tags has-addons character-vis-hint">
+                    <span className="arrow-left"></span>
+                    <span className="tag is-dark has-text-warning">{"( " + this.state.hint_position.x + ", " + this.state.hint_position.y + " )"}</span>
+                    <span className="tag is-success">{event_name}</span>
+                  </div>
+                </Hint>
+              );
+            }
           }
         })()}
         <XAxis

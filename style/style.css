@@ -1,9 +1,9 @@
 .story-curve-hint.tags:last-child {
-  margin-bottom: -1rem;
+  margin-bottom: -.9rem;
 }
 
 .character-vis-hint.tags:last-child {
-  margin-bottom: -1.37rem;
+  margin-bottom: -1.2rem;
 }
 
 .tags.has-addons {
@@ -14,22 +14,25 @@
     margin-bottom: .55rem;
     width: 0;
     height: 0;
-    border-top: .5em solid transparent;
-    border-bottom: .5em solid transparent;
-    border-right: .5em solid #363636;
+    border-top: .3em solid transparent;
+    border-bottom: .3em solid transparent;
+    border-right: .3em solid #363636;
 }
 
 .story-curve-hint .arrow-left {
     margin-bottom: .5rem;
     width: 0;
     height: 0;
-    border-top: .5em solid transparent;
-    border-bottom: .5em solid transparent;
-    border-right: .5em solid #363636;
+    border-top: .3em solid transparent;
+    border-bottom: .3em solid transparent;
+    border-right: .3em solid #363636;
 }
 
 .tag:not(body) {
-  height: 1.5em;
+  text-transform: capitalize;
+  height: .8rem;
+  font-size: .6rem;
+  padding: .4rem .3rem;
 }
 
 .card-header {
@@ -72,7 +75,7 @@
 }
 
 .inline-label-vis .level:not(:last-child){
-  margin-bottom: .3rem;
+  margin-bottom: 0rem;
 }
 
 .elipsis {

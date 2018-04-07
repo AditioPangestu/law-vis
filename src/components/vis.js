@@ -328,6 +328,7 @@ class Vis extends Component {
             width: this.state.width,
           }}>
           <StoryCurve
+            adjust_viewed_time={this.state.adjust_viewed_time}
             adjust_viewed_character={this.state.adjust_viewed_character}
             adjust_viewed_location={this.state.adjust_viewed_location}
             highlighted_data={this.state.highlighted_data}

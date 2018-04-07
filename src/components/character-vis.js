@@ -221,6 +221,9 @@ class CharacterVis extends Component {
             </label>
           </div>
         </div>
+        <hr style={{
+          margin : ".2rem 0"
+        }}/>
         {_.map(this.state.character_positions, (character_position, index)=>{
           return (
             <div key={index}
