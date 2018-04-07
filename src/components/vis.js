@@ -335,7 +335,7 @@ class Vis extends Component {
             handleMouseOver={this.handleMouseOver}
             xDomain={[this.state.current_x0_window, this.state.current_x_window]}
             width={this.state.width}
-            height={400}
+            height={300}
             data={this.state.data}
             horizontal_white_space={0.1} />
         </div>

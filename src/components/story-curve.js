@@ -460,7 +460,7 @@ class StoryCurve extends Component {
         width={this.props.width}
         height={this.props.height}
         xDomain={this.props.xDomain}
-        //onMouseLeave={() => handleMouseOver({})}
+        onMouseLeave={() => handleMouseOver({})}
         yRange={[0, this.props.height-60]}>
         <HorizontalGridLines 
           tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
@@ -512,8 +512,8 @@ class StoryCurve extends Component {
                     horizontal: RIGHT,
                     vertical: TOP
                   }}
-                  value={this.state.hint_position}>
-                  <div className="tags has-addons character-vis-hint">
+                  value={{ x: (this.state.hint_position.x - this.props.horizontal_white_space), y: this.state.hint_position.y }}>
+                  <div className="tags has-addons story-curve-hint">
                     <span className="arrow-left"></span>
                     <span className="tag is-dark has-text-warning">{"( " + this.state.hint_position.x + ", " + this.state.hint_position.y + " )"}</span>
                     <span className="tag is-success">{event_name}</span>
