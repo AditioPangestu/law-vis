@@ -385,6 +385,7 @@ class Vis extends Component {
       <div className="story-detail-container">
         <StoryDetailContainer
           handleMouseOver={this.handleMouseOver}
+          highlighted_data={this.state.highlighted_data}
           data={this.state.story_detail_data}
           horizontal_white_space={0.1}/>
       </div>

@@ -82,3 +82,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.story-detail {
+  margin-right: .3rem;
+}

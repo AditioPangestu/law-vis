@@ -325,7 +325,22 @@ class StoryCurve extends Component {
       return (stage_tic_value == value);
     });
     if (index != -1) {
-      return this.state.stage_tic_names[index];
+      var name = this.state.stage_tic_names[index];
+      var words_of_name = name.split(" ");
+      if(words_of_name.length == 2){
+        return (
+          <tspan>
+            <tspan x="0" dy="-.5em">{words_of_name[0]}</tspan>
+            <tspan x="0" dy="1em">{words_of_name[1]}</tspan>
+          </tspan>
+        )
+      } else {
+        return (
+          <tspan>
+            <tspan x="0" dy="1em">{words_of_name[0]}</tspan>
+          </tspan>
+        )
+      }
     }
   }
 
@@ -471,7 +486,7 @@ class StoryCurve extends Component {
         {/* Component for display plot */}
         <LineSeries
           curve={'curveStepAfter'}
-          data={this.state.line_data} />
+          data={this.state.line_data} /> 
         <VerticalRectSeries
           data={this.state.time_positions}/>
         {/* Component for display location */}

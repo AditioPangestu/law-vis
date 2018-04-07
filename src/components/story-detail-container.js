@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import _ from "lodash";
 
+import { ScrollToHOC, ScrollArea } from "react-scroll-to";
+
 import StoryDetail from "./story-detail";
 
 class StoryDetailContainer extends Component {
@@ -12,6 +14,7 @@ class StoryDetailContainer extends Component {
 
     this.state = {
       closed_details : [true,true],
+      default_closed_details : [true,true],
     }
     this.onChangeClose = this.onChangeClose.bind(this);
   }
@@ -24,7 +27,8 @@ class StoryDetailContainer extends Component {
     }
     this.setState({
       ...this.state,
-      closed_details: closed_details
+      closed_details: closed_details,
+      default_closed_details: closed_details
     });
   }
 
@@ -37,13 +41,34 @@ class StoryDetailContainer extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!_.isEqual(this.props.highlighted_data, nextProps.highlighted_data)) {
+      if (!_.isEmpty(nextProps.highlighted_data)){
+        this.setState({
+          ...this.state,
+          closed_details: this.state.default_closed_details,
+        });
+        const index = _.findIndex(this.props.data.events, (datum)=>{
+          return (datum.x == (nextProps.highlighted_data.x0 - this.props.horizontal_white_space));
+        })
+        if (index != -1) {
+          this.props.scroll(0, index * (43 + index));
+        }
+      }
+    }
+  }
+
   render(){
     return (
       <div>
         <figure className="image is-16by9">
           <img src={this.props.data.image_url}/>
         </figure>
-        <div>
+        <ScrollArea 
+          style={{
+            height:"600px",
+            overflowY:"scroll"
+          }}>
           {_.map(this.props.data.events,(datum,index)=>{
             return (
             <StoryDetail
@@ -61,7 +86,7 @@ class StoryDetailContainer extends Component {
               published_date={datum.published_date}/>
             );
           })}
-        </div>
+        </ScrollArea>
       </div>
     );
   }
@@ -73,4 +98,4 @@ StoryDetailContainer.propTypes = {
   horizontal_white_space: PropTypes.number.isRequired,
 };
 
-export default StoryDetailContainer;
+export default ScrollToHOC(StoryDetailContainer);
