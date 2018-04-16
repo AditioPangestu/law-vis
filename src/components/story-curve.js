@@ -136,7 +136,7 @@ class StoryCurve extends Component {
           location_positions.push({
             x0: (datum.x + this.props.horizontal_white_space),
             x: (datum.x + 1 - this.props.horizontal_white_space),
-            y0: (y_min - this.rect_height),
+            y0: (y_min),
             y: (y_max + this.rect_height),
             color: datum.location.color,
             opacity: .2

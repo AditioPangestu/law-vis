@@ -11,7 +11,7 @@
         {
           "color": "#cd3b54",
           "name": "Buni Yani",
-          "role": "Saksi terlapor",
+          "role": "Saksi",
           "social_status": [
             "Dosen"
           ]
@@ -19,7 +19,7 @@
         {
           "color": "#ba4fb9",
           "name": "Aldwin",
-          "role": "Kuasa hukum buni yani",
+          "role": "Penasihat Hukum",
           "social_status": []
         }
       ],
@@ -39,7 +39,10 @@
           "definition": "Buni Yanto"
         }
       ],
-      "location": {},
+      "location": {
+        "name": "Istana Presiden",
+        "city": "Jakarta"
+      },
       "time": {},
       "url": "url"
     },
@@ -52,7 +55,7 @@
         {
           "color": "#cd3b54",
           "name": "Buni Yani",
-          "role": "Saksi terlapor",
+          "role": "Saksi",
           "social_status": [
             "Dosen"
           ]
@@ -60,7 +63,7 @@
         {
           "color": "#ba4fb9",
           "name": "Aldwin",
-          "role": "Kuasa hukum buni yani",
+          "role": "Penasihat Hukum",
           "social_status": []
         }
       ],
@@ -76,7 +79,10 @@
           "definition": "Buni Yani"
         }
       ],
-      "location": {},
+      "location": {
+        "name": "Rumah Buni Yani",
+        "city": "Jakarta"
+      },
       "time": {},
       "url": "url"
     },
@@ -89,7 +95,7 @@
         {
           "color": "#cd3b54",
           "name": "Buni Yani",
-          "role": "Saksi terlapor",
+          "role": "Saksi",
           "social_status": [
             "Dosen"
           ]
@@ -97,7 +103,7 @@
         {
           "color": "#ba4fb9",
           "name": "Aldwin",
-          "role": "Kuasa hukum buni yani",
+          "role": "Penasihat Hukum",
           "social_status": []
         }
       ],
@@ -126,7 +132,7 @@
         {
           "color": "#cd3b54",
           "name": "Buni Yani",
-          "role": "Saksi terlapor",
+          "role": "Saksi",
           "social_status": [
             "Dosen"
           ]
@@ -164,7 +170,7 @@
         {
           "color": "#cd3b54",
           "name": "Buni Yani",
-          "role": "Saksi terlapor",
+          "role": "Tersangka",
           "social_status": [
             "Dosen"
           ]
@@ -172,13 +178,13 @@
         {
           "color": "#ba4fb9",
           "name": "Aldwin",
-          "role": "Kuasa hukum buni yani",
+          "role": "Penasihat Hukum",
           "social_status": []
         },
         {
           "color": "#5ea0d8",
           "name": "Joko Susilo",
-          "role": "Kerabat buni yani",
+          "role": "Tidak Ada",
           "social_status": [
             "Dosen"
           ]
@@ -212,7 +218,7 @@
         {
           "color": "#cd3b54",
           "name": "Buni Yani",
-          "role": "Saksi terlapor",
+          "role": "Saksi",
           "social_status": [
             "Dosen"
           ]
@@ -220,20 +226,20 @@
         {
           "color": "#ba4fb9",
           "name": "Aldwin",
-          "role": "Kuasa hukum buni yani",
+          "role": "Penasihat Hukum",
           "social_status": []
         },
         {
           "color": "#5ea0d8",
           "name": "Joko Susilo",
-          "role": "Kerabat buni yani",
+          "role": "Tidak Ada",
           "social_status": [
             "Dosen"
           ]
         }
       ],
       "published_date": "2018-04-02 17:07:56",
-      "law_stage": "Penuntutan Praperadilan",
+      "law_stage": "Praperadilan untuk Penuntutan",
       "event_components": [],
       "location": {
         "color":"#79C7E3",

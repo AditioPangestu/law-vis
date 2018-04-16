@@ -7,6 +7,7 @@ import CharacterVis from "./character-vis";
 import LocationVis from "./location-vis";
 import TimeVis from "./time-vis";
 import StoryDetailContainer from "./story-detail-container";
+import index from "react-vis/dist/radar-chart";
 
 class Vis extends Component {
   constructor(props){
@@ -47,17 +48,62 @@ class Vis extends Component {
   }
 
   componentWillMount(){
-    axios.get("./src/data/simple.json")
+    axios.get("./src/data/color-template.json")
       .then((response)=>{
-        var { data }  = response;
-        this.setState({
-          ...this.state,
-          story_detail_data: data,
-          data: data.events.sort((a, b) => { return a.y - b.y }),
-          current_x_window: data.events.length,
-          default_x_window: data.events.length,
-        });
+        const color_template = response.data;
+        axios.get("./src/data/simple.json")
+          .then((response)=>{
+            var { data }  = response;
+            data.events = this.addColorAttribute(data.events,color_template);
+            this.setState({
+              ...this.state,
+              story_detail_data: data,
+              data: data.events.sort((a, b) => { return a.y - b.y }),
+              current_x_window: data.events.length,
+              default_x_window: data.events.length,
+            });
+          })
       })
+  }
+
+  addColorAttribute(events,color_template){
+    var location_added = [];
+    const result = _.map(events, (datum)=>{
+      var temp = {...datum};
+      temp.characters = _.map(datum.characters, (character)=>{
+        const char_index = _.findIndex(color_template.character, 
+          (value) => {return (value.role==character.role)}
+        );
+        if (char_index!=-1){
+          character.color = color_template.character[char_index].color;
+        }
+        return character;
+      });
+      if (!_.isEmpty(temp.time)) {
+        const time_index = _.findIndex(color_template.time,
+          (value) => { return (value.name == datum.time.name) }
+        );
+        if (time_index != -1) {
+          temp.time.color = color_template.time[time_index].color;
+        }
+      }
+      if (!_.isEmpty(temp.location)) {
+        const loc_index = _.findIndex(location_added,
+          (value) => { return (value.name == datum.location.name) }
+        );
+        if (loc_index == -1){
+          temp.location.color = color_template.location[location_added.length];
+          location_added.push({
+            name: temp.location.name,
+            color: temp.location.color
+          });
+        } else {
+          temp.location.color = location_added[loc_index].color;
+        }
+      }
+      return temp;
+    });
+    return result;
   }
 
   handleMouseOver(data) {
