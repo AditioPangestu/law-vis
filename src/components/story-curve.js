@@ -44,6 +44,7 @@ class StoryCurve extends Component {
     this.rect_height = 1;
     this.state = {
       event_positions : [],
+      origin_event_positions : [],
       location_positions : [],
       line_data : [],
       date_tic_values : [],
@@ -74,7 +75,7 @@ class StoryCurve extends Component {
   }
 
   componentWillMount(){
-    const { event_positions, stage_areas, line_data, location_positions} = this.preprocessRectData(this.props.data);
+    const { event_positions, stage_areas, line_data, location_positions, origin_event_positions} = this.preprocessRectData(this.props.data);
     const { stage_tic_values, stage_tic_names } = this.generateLawStageTic(stage_areas);
     const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(this.props.data);
     const y_max = _.max(event_positions, (event_position) => { return event_position.y}).y;
@@ -85,6 +86,7 @@ class StoryCurve extends Component {
       event_positions: event_positions,
       location_positions: location_positions,
       time_positions: time_positions,
+      origin_event_positions: origin_event_positions,
       stage_areas: stage_areas,
       stage_tic_values: stage_tic_values,
       stage_tic_names: stage_tic_names,
@@ -101,6 +103,7 @@ class StoryCurve extends Component {
     var line_data = [];
     var event_positions = [];
     var location_positions = [];
+    var origin_event_positions = [];
     var stage_areas = [];
     var stage_area = {};
     var prev_datum = {};
@@ -128,7 +131,11 @@ class StoryCurve extends Component {
             x: (datum.x + 1 - this.props.horizontal_white_space),
             y0: (y_base),
             y: (y_base + this.rect_height),
-            color: datum.characters[j].color
+            color: datum.characters[j].color,
+          });
+          origin_event_positions.push({
+            x : datum.x,
+            y : datum.y,
           });
           y_base += this.rect_height;
         }
@@ -162,6 +169,10 @@ class StoryCurve extends Component {
               y0: (y_base),
               y: (i != (data.length-1)?(y_base + this.rect_height):y_base),
               color: datum.characters[j].color
+            });
+            origin_event_positions.push({
+              x: datum.x,
+              y: datum.y,
             });
             y_base+=this.rect_height;
           }
@@ -199,6 +210,10 @@ class StoryCurve extends Component {
               y: (y_base + this.rect_height),
               color: datum.characters[j].color
             });
+            origin_event_positions.push({
+              x: datum.x,
+              y: datum.y,
+            });
             y_base += this.rect_height;
           }
           if(!_.isEmpty(datum.location)){
@@ -225,6 +240,7 @@ class StoryCurve extends Component {
     })
     return {
       event_positions,
+      origin_event_positions,
       location_positions,
       stage_areas,
       line_data
@@ -370,17 +386,24 @@ class StoryCurve extends Component {
         highlighted_data = _.filter(this.state.event_positions, (datum)=>{
           return ((datum.x0 == nextProps.highlighted_data.x0) && (datum.x == nextProps.highlighted_data.x));
         });
+        var highlighted_data_index = _.findIndex(this.state.event_positions, (datum)=>{
+          return ((datum.x0 == nextProps.highlighted_data.x0) && (datum.x == nextProps.highlighted_data.x));
+        });
         if(highlighted_data.length % 2 == 0){
           const mid_index = highlighted_data.length/2;
           hint_position = {
             y: highlighted_data[mid_index].y0,
-            x: (highlighted_data[mid_index].x + this.props.horizontal_white_space)
+            x: (highlighted_data[mid_index].x + this.props.horizontal_white_space),
+            x_origin: this.state.origin_event_positions[highlighted_data_index].x,
+            y_origin: this.state.origin_event_positions[highlighted_data_index].y
           }
         } else {
           const mid_index = (highlighted_data.length-1) / 2;
           hint_position = {
             y: (highlighted_data[mid_index].y0 + highlighted_data[mid_index].y)/2,
-            x: (highlighted_data[mid_index].x + this.props.horizontal_white_space)
+            x: (highlighted_data[mid_index].x + this.props.horizontal_white_space),
+            x_origin: this.state.origin_event_positions[highlighted_data_index].x,
+            y_origin: this.state.origin_event_positions[highlighted_data_index].y
           }
         }
       }
@@ -513,7 +536,6 @@ class StoryCurve extends Component {
           stroke="#363636"
           style={{ strokeWidth: 3 }}/>
         {/* Component for display hint */}
-        {/* Component for display hint */}
         {(() => {
           if (!_.isEmpty(this.state.hint_position)) {
             const hint_index = _.findIndex(this.props.data, (value) => {
@@ -530,7 +552,7 @@ class StoryCurve extends Component {
                   value={{ x: (this.state.hint_position.x - this.props.horizontal_white_space), y: this.state.hint_position.y }}>
                   <div className="tags has-addons story-curve-hint">
                     <span className="arrow-left"></span>
-                    <span className="tag is-dark has-text-warning">{"( " + this.state.hint_position.x + ", " + this.state.hint_position.y + " )"}</span>
+                    <span className="tag is-dark has-text-warning">{"( " + (this.state.hint_position.x_origin+1) + ", " + (this.state.hint_position.y_origin+1) + " )"}</span>
                     <span className="tag is-success">{event_name}</span>
                   </div>
                 </Hint>
