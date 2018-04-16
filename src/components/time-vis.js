@@ -102,7 +102,8 @@ class TimeVis extends Component {
                 x: (datum.x + 1 - this.props.horizontal_white_space),
                 y0: 0,
                 y: 1,
-                color: time.color
+                color: time.color,
+                opacity: .3,
               }
             ]
           });
@@ -117,7 +118,8 @@ class TimeVis extends Component {
             x: (datum.x + 1 - this.props.horizontal_white_space),
             y0: 0,
             y: 1,
-            color: time.color
+            color: time.color,
+            opacity: .3
           });
           time_hints[index].push({
             name: time.name
@@ -250,6 +252,13 @@ class TimeVis extends Component {
                         y: 1,
                         color: "#f1f1f1"
                       }]} />
+                    <VerticalRectSeries
+                      data={_.map(time_position.positions, (position)=>{
+                        var temp = {...position};
+                        temp.color = "#fff";
+                        temp.opacity = 1;
+                        return temp;
+                      })} />
                     <VerticalRectSeries
                       data={time_position.positions} />
                     {(() => {

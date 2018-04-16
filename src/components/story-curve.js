@@ -144,9 +144,9 @@ class StoryCurve extends Component {
             x0: (datum.x + this.props.horizontal_white_space),
             x: (datum.x + 1 - this.props.horizontal_white_space),
             y0: (y_min),
-            y: (y_max + this.rect_height),
+            y: (y_max + 2*this.rect_height),
             color: datum.location.color,
-            opacity: .2
+            opacity: .3
           });
         }
       } else {
@@ -180,10 +180,10 @@ class StoryCurve extends Component {
             location_positions.push({
               x0: (datum.x + this.props.horizontal_white_space),
               x: (datum.x + 1 - this.props.horizontal_white_space),
-              y0: (y_min - this.rect_height),
-              y: (y_max + this.rect_height),
+              y0: ((i == 1) ? (y_min - this.rect_height) : (y_min - 2*this.rect_height)),
+              y: ((i == data.length - 2) ? (y_max + this.rect_height) : ((y_max + 2*this.rect_height))),
               color: datum.location.color,
-              opacity: .2
+              opacity: .3
             });
           }
         } else {
@@ -216,14 +216,14 @@ class StoryCurve extends Component {
             });
             y_base += this.rect_height;
           }
-          if(!_.isEmpty(datum.location)){
+          if (!_.isEmpty(datum.location)) {
             location_positions.push({
               x0: (datum.x + this.props.horizontal_white_space),
               x: (datum.x + 1 - this.props.horizontal_white_space),
-              y0: (y_min - this.rect_height),
-              y: (i != (data.length-1)?(y_base + this.rect_height):y_base),
+              y0: ((i == 1) ? (y_min - this.rect_height) : (y_min - 2 * this.rect_height)),
+              y: ((i == data.length - 2) ? (y_max + this.rect_height) : ((i == data.length - 1) ? y_base : (y_max + 2 * this.rect_height))),
               color: datum.location.color,
-              opacity: .2
+              opacity: .3
             });
           }
         }
@@ -329,7 +329,7 @@ class StoryCurve extends Component {
           y0: y_min,
           y: y_max,
           color: datum.time.color,
-          opacity: .2
+          opacity: .3
         });
       }
     }
@@ -428,7 +428,7 @@ class StoryCurve extends Component {
           } else {
             return {
               ...position,
-              opacity: .1,
+              opacity: .3,
             };
           }
         });
@@ -447,7 +447,7 @@ class StoryCurve extends Component {
           if (_.findIndex(nextProps.adjust_viewed_location, (color) => { return (color == position.color) }) != -1) {
             return {
               ...position,
-              opacity: .2,
+              opacity: .3,
             };
           } else {
             return {
@@ -471,7 +471,7 @@ class StoryCurve extends Component {
           if (_.findIndex(nextProps.adjust_viewed_time, (color) => { return (color == position.color) }) != -1) {
             return {
               ...position,
-              opacity: .2,
+              opacity: .3,
             };
           } else {
             return {
@@ -513,6 +513,13 @@ class StoryCurve extends Component {
         <VerticalRectSeries
           data={this.state.time_positions}/>
         {/* Component for display location */}
+        <VerticalRectSeries
+          data={_.map(this.state.location_positions, (location_position)=>{
+            var temp = {...location_position};
+            temp.opacity = ((temp.opacity==0)?0:1);
+            temp.color = "#fff";
+            return temp;
+          })}/>
         <VerticalRectSeries
           data={this.state.location_positions} />
         {/* Component for display events */}

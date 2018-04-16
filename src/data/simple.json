@@ -120,7 +120,10 @@
         }
       ],
       "location": {},
-      "time": {},
+      "time": {
+        "color": "#FF9833",
+        "name": "Malam"
+      },
       "url": "url"
     },
     {

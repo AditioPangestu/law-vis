@@ -102,7 +102,8 @@ class LocationVis extends Component {
                 x: (datum.x + 1 - this.props.horizontal_white_space),
                 y0: 0,
                 y: 1,
-                color: location.color
+                color: location.color,
+                opacity: .3
               }
             ]
           });
@@ -118,7 +119,8 @@ class LocationVis extends Component {
             x: (datum.x + 1 - this.props.horizontal_white_space),
             y0: 0,
             y: 1,
-            color: location.color
+            color: location.color,
+            opacity: .3
           });
           location_hints[index].push({
             name: location.name,
@@ -252,6 +254,13 @@ class LocationVis extends Component {
                         y: 1,
                         color: "#f1f1f1"
                       }]} />
+                    <VerticalRectSeries
+                      data={_.map(location_position.positions, (position)=>{
+                        var temp = {...position};
+                        temp.color = "#fff";
+                        temp.opacity = 1;
+                        return temp;
+                      })} />
                     <VerticalRectSeries
                       data={location_position.positions} />
                     {(() => {
