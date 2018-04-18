@@ -332,39 +332,49 @@ class Vis extends Component {
         <p className="title">{this.state.story_detail_data.title}</p>
         <div
           onClick={this.onPanLeft}
-          className="button">
+          style={{ width: "102px" }}
+          className="button is-small">
           <span className="icon">
             <i className="fas fa-arrow-left"></i>
           </span>
-          </div>
+          <span>Geser Kiri</span>
+        </div>
         <div
           onClick={this.onPanRight}
-          className="button">
+          style={{ width: "102px" }}
+          className="button is-small">
           <span className="icon">
             <i className="fas fa-arrow-right"></i>
           </span>
-          </div>
+          <span>Geser Kanan</span>
+        </div>
         <div
           onClick={this.onZoomIn}
-          className="button">
+          style={{ width: "102px" }}
+          className="button is-small">
           <span className="icon">
             <i className="fas fa-search-plus"></i>
           </span>
-          </div>
+          <span>Perbesar</span>
+        </div>
         <div
           onClick={this.onZoomOut}
-          className="button">
+          style={{ width: "102px" }}
+          className="button is-small">
           <span className="icon">
             <i className="fas fa-search-minus"></i>
           </span>
-          </div>
+          <span>Perkecil</span>
+        </div>
         <div
           onClick={this.onResetZoom}
-          className="button">
+          style={{width:"102px"}}
+          className="button is-small">
           <span className="icon">
             <i className="fas fa-compress"></i>
           </span>
-          </div>
+          <span>Ukuran Awal</span>
+        </div>
         <div
           onWheel={this.onWheel}
           onMouseDown={this.onMouseDown}

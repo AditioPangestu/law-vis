@@ -68,13 +68,13 @@ class StoryDetailContainer extends Component {
 
   render(){
     return (
-      <div>
+      <div className="story-detail-container">
         <figure className="image is-16by9">
           <img src={this.props.data.image_url}/>
         </figure>
         <ScrollArea 
           style={{
-            height:"600px",
+            flex : 2,            
             overflowY:"scroll"
           }}>
           {_.map(this.props.data.events,(datum,index)=>{

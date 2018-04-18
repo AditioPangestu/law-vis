@@ -494,7 +494,7 @@ class StoryCurve extends Component {
     return (
       <XYPlot
         colorType="literal"
-        margin={{ left: 100, top: 50, bottom: 10, right:0  }}
+        margin={{ left: 100, top: 40, bottom: 10, right:0  }}
         width={this.props.width}
         height={this.props.height}
         xDomain={this.props.xDomain}

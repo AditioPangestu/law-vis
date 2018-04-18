@@ -86,3 +86,13 @@
 .story-detail {
   margin-right: .3rem;
 }
+
+.column {
+  display: table-cell;
+}
+
+.story-detail-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
