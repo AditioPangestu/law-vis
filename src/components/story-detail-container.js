@@ -44,16 +44,24 @@ class StoryDetailContainer extends Component {
   componentWillReceiveProps(nextProps) {
     if (!_.isEqual(this.props.highlighted_data, nextProps.highlighted_data)) {
       if (!_.isEmpty(nextProps.highlighted_data)){
+        
+        const index = _.findIndex(this.props.data.events, (datum)=>{
+          return (datum.x == (Math.ceil(nextProps.highlighted_data.x0 - this.props.horizontal_white_space)));
+        })
+        if (index != -1) {
+          const closed_details = _.clone(this.state.default_closed_details,true);
+          closed_details[index] = false;
+          this.props.scroll(0, index * (43 + index));
+          this.setState({
+            ...this.state,
+            closed_details: closed_details,
+          });
+        }
+      } else {
         this.setState({
           ...this.state,
           closed_details: this.state.default_closed_details,
         });
-        const index = _.findIndex(this.props.data.events, (datum)=>{
-          return (datum.x == (nextProps.highlighted_data.x0 - this.props.horizontal_white_space));
-        })
-        if (index != -1) {
-          this.props.scroll(0, index * (43 + index));
-        }
       }
     }
   }
