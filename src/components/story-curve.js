@@ -280,7 +280,8 @@ class StoryCurve extends Component {
     var date_tic_values = [];
     var date_areas = [];
     var date_area = {};
-    var sorted_data = data.sort((a, b) => { return a.x - b.x })
+    var sorted_data = _.clone(data,true);
+    sorted_data.sort((a, b) => { return a.x - b.x })
     if (sorted_data.length >= 2) {
       var prev_date = moment(sorted_data[0].published_date, "DD/MM/YYYY HH:mm");
       var curr_date = "";
