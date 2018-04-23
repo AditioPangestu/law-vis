@@ -501,7 +501,7 @@ class StoryCurve extends Component {
         height={this.props.height}
         xDomain={this.props.xDomain}
         onMouseLeave={() => handleMouseOver({})}
-        yRange={[0, this.props.height-60]}>
+        yRange={[0, this.props.height-50]}>
         <HorizontalGridLines 
           tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
         {/* Component for display horizontal highlight */}

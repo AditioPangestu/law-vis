@@ -75,7 +75,8 @@ class StoryDetailContainer extends Component {
         <ScrollArea 
           style={{
             flex : 2,            
-            overflowY:"scroll"
+            overflowY:"scroll",
+            height:"484px"
           }}>
           {_.map(this.props.data.events,(datum,index)=>{
             return (

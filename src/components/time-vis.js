@@ -109,7 +109,8 @@ class TimeVis extends Component {
           });
           time_hints.push([
             {
-              name: time.name
+              name: time.name,
+              date: time.date,
             }
           ])
         } else {
@@ -122,7 +123,8 @@ class TimeVis extends Component {
             opacity: .3
           });
           time_hints[index].push({
-            name: time.name
+            name: time.name,
+            date: time.date,
           })
         }
       }
