@@ -280,17 +280,18 @@ class StoryCurve extends Component {
     var date_tic_values = [];
     var date_areas = [];
     var date_area = {};
-    if (data.length >= 2) {
-      var prev_date = data[0].published_date;
+    var sorted_data = data.sort((a, b) => { return a.x - b.x })
+    if (sorted_data.length >= 2) {
+      var prev_date = moment(sorted_data[0].published_date, "DD/MM/YYYY HH:mm");
       var curr_date = "";
       var prev_idx = 0;
       date_tic_names.push(moment(prev_date, "DD/MM/YYYY HH:mm").format("DD MMM YY"));
       date_area.start = 0;
       var i = 1
-      for (i = 1; i < data.length; i++) {
-        const datum = data[i];
+      for (i = 1; i < sorted_data.length; i++) {
+        const datum = sorted_data[i];
         curr_date = moment(datum.published_date, "DD/MM/YYYY HH:mm");
-        if (!moment(prev_date, "DD/MM/YYYY HH:mm").isSame(curr_date,'day')) {
+        if (!moment(prev_date).isSame(curr_date,'day')) {
           date_tic_values.push((prev_idx + i) / 2);
           date_area.end = i;
           date_areas.push({...date_area});
@@ -298,14 +299,14 @@ class StoryCurve extends Component {
           prev_idx = i;
           date_tic_names.push(curr_date.format("DD MMM YY"));
         }
-        prev_date = curr_date;
+        prev_date = _.clone(curr_date,true);
       }
       date_tic_values.push((prev_idx + i) / 2);
       date_area.end = i;
       date_areas.push({...date_area});
-    } else if (data.length == 1) {
+    } else if (sorted_data.length == 1) {
       date_tic_values = [0];
-      date_tic_names = [data[0].published_date];
+      date_tic_names = [sorted_data[0].published_date];
       date_areas.push({
         start : 0,
         end : 1
