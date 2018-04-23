@@ -1,0 +1,286 @@
+{
+  "title": "Buni Yani",
+  "image_url": "https://statik.tempo.co/data/2017/11/02/id_659821/659821_720.jpg",
+  "events": [
+    {
+      "x": 0,
+      "y": 0,
+      "event_name": "Diketahuinya tindak pidana dari laporan",
+      "n": 2,
+      "characters": [
+        {
+          "color": "",
+          "name": "Andi Windo Kotak Adja",
+          "role": "Saksi",
+          "social_status": []
+        },
+        {
+          "color": "",
+          "name": "Polda Metro Jaya",
+          "role": "Penyelidik",
+          "social_status": []
+        }
+      ],
+      "published_date": "23/11/2016 10:58",
+      "law_stage": "Penyelidikan",
+      "event_components": [
+        {
+          "term": "Tindak pidana yang dilaporkan",
+          "definition": "Diduga memprovokasi masyarakat dengan mem-posting potongan dari video asli pidato Ahok di Kepulauan Seribu."
+        },
+        {
+          "term": "Orang yang melakukan tindak pidana",
+          "definition": "Buni Yani, Saksi sebagai Terlapor"
+        },
+        {
+          "term": "Waktu kejadian tindak pidana",
+          "definition": "07/10/2016"
+        },
+        {
+          "term": "Peraturan-peraturan yang mungkin dilanggar",
+          "definition": "Buni terancam dijerat Pasal 28 UU 11 Tahun 2008 tentang Informasi Teknologi dan Transaksi Elektronik tentang penyebaran informasi yang ditujukan untuk menimbulkan rasa kebencian atau permusuhan berdasarkan SARA."
+        },
+        {
+          "term": "Orang yang melaporkan tindak pidana",
+          "definition": "Andi Windo Kotak Adja (Komunitas Muda Ahok Djarot), Saksi sebagai Pelapor"
+        },
+        {
+          "term": "Orang yang menerima laporan tindak pidana",
+          "definition": "Polda Metro Jaya, Penyelidik"
+        },
+        {
+          "term": "Waktu delik dilaporkan",
+          "definition": "07/10/2016"
+        },
+        {
+          "term": "Tempat delik dilaporkan",
+          "definition": "Mapolda Metro Jaya"
+        }
+      ],
+      "location": {
+        "name": "Mapolda Metro Jaya",
+        "city": "Jakarta"
+      },
+      "time": {},
+      "url": "https://megapolitan.kompas.com/read/2016/11/23/10580061/penuhi.panggilan.polisi.buni.yani.bawa.bukti.bahwa.dia.tak.bersalah"
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "event_name": "Pemeriksaan saksi",
+      "n": 3,
+      "characters": [
+        {
+          "color": "#cd3b54",
+          "name": "Buni Yani",
+          "role": "Saksi",
+          "social_status": []
+        },
+        {
+          "color": "#ba4fb9",
+          "name": "Aldwin Rahardian",
+          "role": "Penasihat Hukum",
+          "social_status": []
+        },
+        {
+          "color": "#ba4fb9",
+          "name": "Polda Metro Jaya",
+          "role": "Penyelidik",
+          "social_status": []
+        }
+      ],
+      "published_date": "23/11/2016 10:58",
+      "law_stage": "Penyelidikan",
+      "event_components": [
+        {
+          "term": "Orang yang memeriksa",
+          "definition": "Polda Metro Jaya, Penyelidik"
+        },
+        {
+          "term": "Orang yang diperiksa",
+          "definition": "Buni Yani, Saksi terlapor"
+        },
+        {
+          "term": "Orang yang menemani saksi",
+          "definition": "Aldwin Rahardian, Kuasa hukum Buni Yani"
+        },
+        {
+          "term": "Waktu saksi diperiksa",
+          "definition": "23/11/2016"
+        },
+        {
+          "term": "Peran saksi",
+          "definition": "Terlapor"
+        },
+        {
+          "term": "Tempat saksi diperiksa",
+          "definition": "Mapolda Metro Jaya"
+        }
+      ],
+      "location": {
+        "name": "Mapolda Metro Jaya",
+        "city": "Jakarta"
+      },
+      "time": {
+        "date": "23/11/2016",
+        "name": "Siang"
+      },
+      "url": "https://megapolitan.kompas.com/read/2016/11/23/10580061/penuhi.panggilan.polisi.buni.yani.bawa.bukti.bahwa.dia.tak.bersalah"
+    },
+    {
+      "x": 2,
+      "y": 3,
+      "event_name": "Tanggapan atas kejadian acara hukum pidana",
+      "n": 1,
+      "characters": [
+        {
+          "color": "#ba4fb9",
+          "name": "Aldwin Rahardian",
+          "role": "Penasihat Hukum",
+          "social_status": []
+        }
+      ],
+      "published_date": "23/11/2016 10:58",
+      "law_stage": "Penyelidikan",
+      "event_components": [
+        {
+          "term": "Orang yang menyampaikan tanggapan",
+          "definition": "Aldwin Rahardian, Kuasa hukum Buni Yani"
+        },
+        {
+          "term": "Waktu penyampaian tanggapan",
+          "definition": "23/11/2016"
+        },
+        {
+          "term": "Tempat penyampaian tanggapan",
+          "definition": "Mapolda Metro Jaya"
+        },
+        {
+          "term": "Kejadian yang ditanggapi",
+          "definition": "Pemanggilan Buni Yani"
+        },
+        {
+          "term": "Tanggapan berupa tindakan yang telah dilakukan",
+          "definition": "Pihaknya (Buni Yani) telah membawa bukti-bukti yang membuktikan bahwa kliennya tidak bersalah."
+        },
+        {
+          "term": "Tanggapan berupa opini",
+          "definition": "Aldwin menyayangkan panggilan pemeriksaan terhadap kliennya ini. Menurut Aldwin, seharusnya laporan dari Kotak Adja ini tidak perlu ditindaklanjuti oleh polisi."
+        }
+      ],
+      "location": {
+        "name": "Mapolda Metro Jaya"
+      },
+      "time": {
+        "color": "#FF9833",
+        "date": "23/11/2016",
+        "name": "Siang"
+      },
+      "url": "https://megapolitan.kompas.com/read/2016/11/23/10580061/penuhi.panggilan.polisi.buni.yani.bawa.bukti.bahwa.dia.tak.bersalah"
+    },
+    {
+      "x": 3,
+      "y": 4,
+      "event_name": "Penetapan tersangka",
+      "n": 2,
+      "characters": [
+        {
+          "color": "#cd3b54",
+          "name": "Buni Yani",
+          "role": "Tersangka",
+          "social_status": []
+        },
+        {
+          "color": "#cd3b54",
+          "name": "Polda Metro Jaya",
+          "role": "Penyidik",
+          "social_status": []
+        }
+      ],
+      "published_date": "23/11/2016 21:07",
+      "law_stage": "Penyelidikan",
+      "event_components": [
+        {
+          "term": "Orang yang menetapkan",
+          "definition": "Kabid Humas Polda Metro Jaya Kombes Awi Setiyono, Polda Metro Jaya, Penyidik"
+        },
+        {
+          "term": "Tempat penetapan",
+          "definition": "Mapolda Metro Jaya"
+        },
+        {
+          "term": "Orang yang ditetapkan",
+          "definition": "Buni Yani, Tersangka"
+        },
+        {
+          "term": "Waktu penetapan",
+          "definition": "23/11/2016"
+        },
+        {
+          "term": "Fakta, keadaan dan alat bukti yang menjadi dasar penetapan",
+          "definition": "Pada 6 Oktober 2016, Buni mengunggah penggalan video pidato Gubernur DKI Jakarta, yang kini non-aktif karena harus mengikuti kampanye Pilkada DKI, Basuki Tjahaja Purnama atau Ahok saat berkunjung ke Kepulauan Seribu. Dalam video berdurasi 30 detik itu, Buni membubuhkan keterangan yang kini dianggap telah memprovokasi dan mencemarkan nama baik. Keterangan video yang ditulis Buni dinilai polisi mengandung hasutan terkait suku, agama, ras, dan antargolongan (SARA)."
+        },
+        {
+          "term": "Peraturan-peraturan yang mungkin dilanggar",
+          "definition": "Buni terancam dijerat Pasal 28 ayat (2) juncto Pasal 45 ayat (2) UU 11 Tahun 2008 tentang Informasi Teknologi dan Transaksi Elektronik tentang penyebaran informasi yang ditujukan untuk menimbulkan rasa kebencian atau permusuhan berdasarkan SARA."
+        }
+      ],
+      "location": {
+        "color": "#79C7E3",
+        "name": "Mapolda Metro Jaya",
+        "city": "Jakarta"
+      },
+      "time": {
+        "color": "#FF9833",
+        "date": "23/11/2016",
+        "name": "Malam"
+      },
+      "url": "https://megapolitan.kompas.com/read/2016/11/23/21070851/polisi.tetapkan.buni.yani.sebagai.tersangka."
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "event_name": "Pemeriksaan saksi",
+      "n": 1,
+      "characters": [
+        {
+          "color": "#cd3b54",
+          "name": "Andi Windo",
+          "role": "Saksi",
+          "social_status": []
+        }
+      ],
+      "published_date": "24/11/2016 18:22",
+      "law_stage": "Penyelidikan",
+      "event_components": [
+        {
+          "term": "Orang yang memeriksa",
+          "definition": "Polda Metro Jaya, Penyelidik"
+        },
+        {
+          "term": "Orang yang diperiksa",
+          "definition": "Andi Windo, Saksi pelapor"
+        },
+        {
+          "term": "Waktu saksi diperiksa",
+          "definition": "12/11/2016"
+        },
+        {
+          "term": "Peran saksi",
+          "definition": "Pelapor"
+        },
+        {
+          "term": "Tempat saksi diperiksa",
+          "definition": "Mapolda Metro Jaya"
+        }
+      ],
+      "location": {
+        "color": "#79C7E3",
+        "name": "Mapolda Metro Jaya",
+        "city": "Jakarta Pusat"
+      },
+      "time": {},
+      "url": "https://megapolitan.kompas.com/read/2016/11/24/18225661/.timeline.kasus.buni.yani.dari.pembuatan.laporan.hingga.jadi.tersangka"
+    }
+  ]
+}

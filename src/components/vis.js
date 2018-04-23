@@ -51,9 +51,10 @@ class Vis extends Component {
     axios.get("./src/data/color-template.json")
       .then((response)=>{
         const color_template = response.data;
-        axios.get("./src/data/simple.json")
+        axios.get("./src/data/real-data.json")
           .then((response)=>{
             var { data }  = response;
+            console.log("cuk",data);
             data.events = this.addColorAttribute(data.events,color_template);
             this.setState({
               ...this.state,
@@ -62,6 +63,7 @@ class Vis extends Component {
               current_x_window: data.events.length,
               default_x_window: data.events.length,
             });
+            console.log("terurut",this.state.data);
           })
       })
   }

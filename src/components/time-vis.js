@@ -312,6 +312,7 @@ class TimeVis extends Component {
                               <div className="tags has-addons character-vis-hint">
                                 <span className="arrow-left"></span>
                                 <span className="tag is-dark has-text-warning">{hint_text.name}</span>
+                                <span className="tag is-success">{hint_text.date}</span>
                               </div>
                             </Hint>
                           );

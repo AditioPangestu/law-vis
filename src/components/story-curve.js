@@ -144,7 +144,7 @@ class StoryCurve extends Component {
             x0: (datum.x + this.props.horizontal_white_space),
             x: (datum.x + 1 - this.props.horizontal_white_space),
             y0: (y_min),
-            y: (y_max + 2*this.rect_height),
+            y: (y_max + .5*this.rect_height),
             color: datum.location.color,
             opacity: .3
           });
@@ -167,7 +167,7 @@ class StoryCurve extends Component {
               x0: (datum.x + this.props.horizontal_white_space),
               x: (datum.x + 1 - this.props.horizontal_white_space),
               y0: (y_base),
-              y: (i != (data.length-1)?(y_base + this.rect_height):y_base),
+              y: (y_base + this.rect_height),
               color: datum.characters[j].color
             });
             origin_event_positions.push({
@@ -180,8 +180,8 @@ class StoryCurve extends Component {
             location_positions.push({
               x0: (datum.x + this.props.horizontal_white_space),
               x: (datum.x + 1 - this.props.horizontal_white_space),
-              y0: ((i == 1) ? (y_min - this.rect_height) : (y_min - 2*this.rect_height)),
-              y: ((i == data.length - 2) ? (y_max + this.rect_height) : ((y_max + 2*this.rect_height))),
+              y0: (y_min - .5*this.rect_height),
+              y: ((i == data.length - 1) ? y_max : ((y_max + .5*this.rect_height))),
               color: datum.location.color,
               opacity: .3
             });
@@ -284,19 +284,19 @@ class StoryCurve extends Component {
       var prev_date = data[0].published_date;
       var curr_date = "";
       var prev_idx = 0;
-      date_tic_names.push(moment(prev_date, "YYYY-MM-DD").format("DD MMM YY"));
+      date_tic_names.push(moment(prev_date, "DD/MM/YYYY HH:mm").format("DD MMM YY"));
       date_area.start = 0;
       var i = 1
       for (i = 1; i < data.length; i++) {
         const datum = data[i];
-        curr_date = datum.published_date;
-        if (!moment(prev_date, "YYYY-MM-DD").isSame(curr_date,'day')) {
+        curr_date = moment(datum.published_date, "DD/MM/YYYY HH:mm");
+        if (!moment(prev_date, "DD/MM/YYYY HH:mm").isSame(curr_date,'day')) {
           date_tic_values.push((prev_idx + i) / 2);
           date_area.end = i;
           date_areas.push({...date_area});
           date_area.start = prev_idx + i;
           prev_idx = i;
-          date_tic_names.push(moment(curr_date, "YYYY-MM-DD").format("DD MMM YY"));
+          date_tic_names.push(curr_date.format("DD MMM YY"));
         }
         prev_date = curr_date;
       }
