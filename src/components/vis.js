@@ -54,7 +54,7 @@ class Vis extends Component {
     axios.get("./src/data/color-template.json")
       .then((response)=>{
         const color_template = response.data;
-        axios.get("./src/data/real-data.json")
+        axios.get("./src/data/real-data-2.json")
           .then((response)=>{
             var { data }  = response;
             data.events = this.addColorAttribute(data.events,color_template);
