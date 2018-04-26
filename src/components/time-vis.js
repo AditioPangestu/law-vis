@@ -130,10 +130,11 @@ class TimeVis extends Component {
       }
     }
     this.setState({
-      ...this.state,
+      
       time_positions: time_positions,
       time_hints: time_hints,
     });
+    this.props.setTimeLength(time_positions.length);        
   }
 
   componentWillReceiveProps(nextProps) {
@@ -154,7 +155,7 @@ class TimeVis extends Component {
         }
       }
       this.setState({
-        ...this.state,
+        
         highlighted_data: highlighted_data,
         hint_position: hint_position,
       });
@@ -162,12 +163,12 @@ class TimeVis extends Component {
     if (!_.isEqual(this.props.adjust_viewed_time, nextProps.adjust_viewed_time)) {
       if ((nextProps.adjust_viewed_time[0] == "all")||(nextProps.adjust_viewed_time.length == this.state.time_positions.length)) {
         this.setState({
-          ...this.state,
+          
           checked: true,
         });
       } else {
         this.setState({
-          ...this.state,
+          
           checked: false,
         });
       }
@@ -177,13 +178,13 @@ class TimeVis extends Component {
   onCheckboxButton() {
     if (this.state.checked) {
       this.setState({
-        ...this.state,
+        
         checked: false
       });
       this.props.onHideAllTime();
     } else {
       this.setState({
-        ...this.state,
+        
         checked: true
       });
       this.props.onResetViewedTime();

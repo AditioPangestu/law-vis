@@ -25,6 +25,9 @@ class Vis extends Component {
       adjust_viewed_character: ["all"], //By color
       adjust_viewed_location: ["all"], //By color
       adjust_viewed_time: ["all"], //By color
+      location_length : 0,
+      character_length : 0,
+      time_length : 0,
     };
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.onZoomIn = this.onZoomIn.bind(this);
@@ -56,7 +59,7 @@ class Vis extends Component {
             var { data }  = response;
             data.events = this.addColorAttribute(data.events,color_template);
             this.setState({
-              ...this.state,
+              
               story_detail_data: data,
               data: data.events.sort((a, b) => { return a.y - b.y }),
               current_x_window: data.events.length,
@@ -108,7 +111,7 @@ class Vis extends Component {
 
   handleMouseOver(data) {
     this.setState({ 
-      ...this.state,
+      
       highlighted_data : data
     });
   }
@@ -116,7 +119,7 @@ class Vis extends Component {
   onZoomIn() {
     if ((this.state.current_x_window - this.state.current_x0_window) > (this.state.default_x_window/8)) {
       this.setState({
-        ...this.state,
+        
         current_x_window: (this.state.current_x_window - this.state.default_x_window/32),
         current_x0_window: (this.state.current_x0_window + this.state.default_x_window / 32)
       });
@@ -128,7 +131,7 @@ class Vis extends Component {
     const current_x0_window = this.state.current_x0_window - this.state.default_x_window / 32;
     if ((this.state.current_x_window - this.state.current_x0_window) < this.state.default_x_window) {
       this.setState({
-        ...this.state,
+        
         current_x_window: ((current_x_window > this.state.default_x_window) ? this.state.default_x_window : current_x_window),
         current_x0_window: ((current_x0_window < this.state.default_x0_window) ? this.state.default_x0_window : current_x0_window)
       });
@@ -140,7 +143,7 @@ class Vis extends Component {
     const current_x_window = this.state.current_x_window - this.state.default_x_window / 128;
     if (this.state.current_x0_window > this.state.default_x0_window) {
       this.setState({
-        ...this.state,
+        
         current_x0_window: ((current_x0_window < this.state.default_x0_window) ? this.state.default_x0_window : current_x0_window),
         current_x_window: current_x_window,
       });
@@ -152,7 +155,7 @@ class Vis extends Component {
     const current_x_window = this.state.current_x_window + this.state.default_x_window / 128;
     if (this.state.current_x_window < this.state.default_x_window) {
       this.setState({
-        ...this.state,
+        
         current_x0_window: current_x0_window,
         current_x_window: ((current_x_window > this.state.default_x_window) ? this.state.default_x_window : current_x_window),
       });
@@ -161,7 +164,7 @@ class Vis extends Component {
 
   onResetZoom() {
     this.setState({
-      ...this.state,
+      
       current_x0_window: this.state.default_x0_window,
       current_x_window: this.state.default_x_window,
     });
@@ -170,7 +173,7 @@ class Vis extends Component {
   onMouseDown(event) {
     event.preventDefault();
     this.setState({
-      ...this.state,
+      
       prev_absis: event.clientX,
       is_mouse_down: true
     });
@@ -179,7 +182,7 @@ class Vis extends Component {
   onMouseUp(event) {
     event.preventDefault();
     this.setState({
-      ...this.state,
+      
       prev_absis: 0,
       is_mouse_down: false
     });
@@ -193,14 +196,14 @@ class Vis extends Component {
       const current_x_window = this.state.current_x_window - diff;
       if ((diff < 0) && (this.state.current_x_window < this.state.default_x_window)) {
         this.setState({
-          ...this.state,
+          
           prev_absis : event.clientX,
           current_x0_window: current_x0_window,
           current_x_window: ((current_x_window > this.state.default_x_window) ? this.state.default_x_window : current_x_window),
         });
       } else if ((diff > 0) && (this.state.current_x0_window > this.state.default_x0_window)) {
         this.setState({
-          ...this.state,
+          
           prev_absis: event.clientX,
           current_x0_window: ((current_x0_window < this.state.default_x0_window) ? this.state.default_x0_window : current_x0_window),
           current_x_window: current_x_window,
@@ -235,21 +238,21 @@ class Vis extends Component {
       new_adjust.push(character_color);
     }
     this.setState({
-      ...this.state,
+      
       adjust_viewed_character: new_adjust
     });
   }
 
   onResetViewedCharacter(){
     this.setState({
-      ...this.state,
+      
       adjust_viewed_character: ["all"]
     });
   }
 
   onHideAllCharacter() {
     this.setState({
-      ...this.state,
+      
       adjust_viewed_character: []
     });
   }
@@ -271,21 +274,21 @@ class Vis extends Component {
       new_adjust.push(location_color);
     }
     this.setState({
-      ...this.state,
+      
       adjust_viewed_location: new_adjust
     });
   }
 
   onResetViewedLocation() {
     this.setState({
-      ...this.state,
+      
       adjust_viewed_location: ["all"]
     });
   }
 
   onHideAllLocation() {
     this.setState({
-      ...this.state,
+      
       adjust_viewed_location: []
     });
   }
@@ -307,21 +310,21 @@ class Vis extends Component {
       new_adjust.push(time_color);
     }
     this.setState({
-      ...this.state,
+      
       adjust_viewed_time: new_adjust
     });
   }
 
   onResetViewedTime() {
     this.setState({
-      ...this.state,
+      
       adjust_viewed_time: ["all"]
     });
   }
 
   onHideAllTime() {
     this.setState({
-      ...this.state,
+      
       adjust_viewed_time: []
     });
   }
@@ -396,6 +399,7 @@ class Vis extends Component {
             horizontal_white_space={0.1} />
         </div>
         <CharacterVis
+          setCharacterLength={function(value){this.setState({character_length:value});console.log(value)}.bind(this)}
           adjust_viewed_character={this.state.adjust_viewed_character}
           onHideAllCharacter={this.onHideAllCharacter}
           onAddViewedCharacter={this.onAddViewedCharacter}
@@ -409,6 +413,7 @@ class Vis extends Component {
           horizontal_white_space={0.1}
           vertical_white_space={0.2} />
         <LocationVis
+          setLocationLength={function (value) { this.setState({ location_length: value })}.bind(this)}
           adjust_viewed_location={this.state.adjust_viewed_location}
           onHideAllLocation={this.onHideAllLocation}
           onAddViewedLocation={this.onAddViewedLocation}
@@ -421,6 +426,7 @@ class Vis extends Component {
           data={this.state.data}
           horizontal_white_space={0.1}/>
         <TimeVis
+          setTimeLength={function (value) { this.setState({ time_length: value }) }.bind(this)}        
           adjust_viewed_time={this.state.adjust_viewed_time}
           onHideAllTime={this.onHideAllTime}
           onAddViewedTime={this.onAddViewedTime}

@@ -82,7 +82,7 @@ class StoryCurve extends Component {
     const y_min = _.min(event_positions, (event_position) => { return event_position.y0}).y0;
     const time_positions = this.generateTimeRect(this.props.data,y_min,y_max);
     this.setState({
-      ...this.state,
+      
       event_positions: event_positions,
       location_positions: location_positions,
       time_positions: time_positions,
@@ -410,7 +410,7 @@ class StoryCurve extends Component {
         }
       }
       this.setState({
-        ...this.state,
+        
         horizontal_highlighted_data: horizontal_highlighted_data,
         highlighted_data: highlighted_data,
         hint_position: hint_position
@@ -436,7 +436,7 @@ class StoryCurve extends Component {
         });
       }
       this.setState({
-        ...this.state,
+        
         event_positions: new_event_positions,
       });
     }
@@ -460,7 +460,7 @@ class StoryCurve extends Component {
         });
       }
       this.setState({
-        ...this.state,
+        
         location_positions: new_location_positions,
       });
     }
@@ -484,7 +484,7 @@ class StoryCurve extends Component {
         });
       }
       this.setState({
-        ...this.state,
+        
         time_positions: new_time_positions,
       });
     }

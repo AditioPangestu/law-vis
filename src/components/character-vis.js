@@ -133,10 +133,12 @@ class CharacterVis extends Component {
       }
     }
     this.setState({
-      ...this.state,
+      
       character_positions : character_positions,
       character_hints: character_hints,
     });
+    console.log("character_positions", character_positions.length);    
+    this.props.setCharacterLength(character_positions.length);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -157,7 +159,7 @@ class CharacterVis extends Component {
         }
       }
       this.setState({
-        ...this.state,
+        
         highlighted_data: highlighted_data,
         hint_position: hint_position,
       });
@@ -165,12 +167,12 @@ class CharacterVis extends Component {
     if (!_.isEqual(this.props.adjust_viewed_character, nextProps.adjust_viewed_character)) {
       if ((nextProps.adjust_viewed_character[0] == "all") || (nextProps.adjust_viewed_character.length == this.state.character_positions.length)) {
         this.setState({
-          ...this.state,
+          
           checked: true,
         });
       } else {
         this.setState({
-          ...this.state,
+          
           checked: false,
         });
       }
@@ -180,13 +182,13 @@ class CharacterVis extends Component {
   onCheckboxButton(){
     if (this.state.checked){
       this.setState({
-        ...this.state,
+        
         checked : false
       });
       this.props.onHideAllCharacter();
     } else {
       this.setState({
-        ...this.state,
+        
         checked: true
       });
       this.props.onResetViewedCharacter();

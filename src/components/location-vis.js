@@ -130,10 +130,12 @@ class LocationVis extends Component {
       }
     }
     this.setState({
-      ...this.state,
+      
       location_positions: location_positions,
       location_hints: location_hints,
     });
+    console.log("location_positions",location_positions.length);
+    this.props.setLocationLength(location_positions.length);    
   }
 
   componentWillReceiveProps(nextProps) {
@@ -154,7 +156,7 @@ class LocationVis extends Component {
         }
       }
       this.setState({
-        ...this.state,
+        
         highlighted_data: highlighted_data,
         hint_position: hint_position,
       });
@@ -162,12 +164,12 @@ class LocationVis extends Component {
     if (!_.isEqual(this.props.adjust_viewed_location, nextProps.adjust_viewed_location)) {
       if ((nextProps.adjust_viewed_location[0] == "all")||(nextProps.adjust_viewed_location.length == this.state.location_positions.length)){
         this.setState({
-          ...this.state,
+          
           checked: true,
         });
       } else {
         this.setState({
-          ...this.state,
+          
           checked: false,
         });
       }
@@ -177,13 +179,13 @@ class LocationVis extends Component {
   onCheckboxButton() {
     if (this.state.checked) {
       this.setState({
-        ...this.state,
+        
         checked: false
       });
       this.props.onHideAllLocation();
     } else {
       this.setState({
-        ...this.state,
+        
         checked: true
       });
       this.props.onResetViewedLocation();
