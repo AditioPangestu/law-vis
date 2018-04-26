@@ -12,6 +12,7 @@ import {
   Borders,
   Hint
 } from 'react-vis';
+import hint from "react-vis/dist/plot/hint";
 
 /*
   data = array of datum
@@ -112,9 +113,8 @@ class CharacterVis extends Component {
           });
           character_hints.push([
             {
-              name: character_datum.name,
               role: character_datum.role,
-              social_status: character_datum.social_status,
+              value: character_datum.value,
             }
           ]);
         } else {
@@ -126,9 +126,8 @@ class CharacterVis extends Component {
             color: character_datum.color
           });
           character_hints[index].push({
-            name: character_datum.name,
             role: character_datum.role,
-            social_status: character_datum.social_status,
+            value: character_datum.value,
           })
         }
       }
@@ -310,7 +309,29 @@ class CharacterVis extends Component {
                               <div className="tags has-addons character-vis-hint">
                                 <span className="arrow-left"></span>
                                 <span className="tag is-dark has-text-warning">{hint_text.role}</span>
-                                <span className="tag is-success">{hint_text.name}</span>
+                                <span className="tag is-success">
+                                  {(()=>{
+                                    var text = "";
+                                    for (var i=0;i<hint_text.value.length;i++){
+                                      if (hint_text.value[i].social_status.length != 0){
+                                        text += hint_text.value[i].name+" (";
+                                        for (var j = 0; j < hint_text.value[i].social_status.length; j++){
+                                          text += hint_text.value[i].social_status[j];
+                                          if (j != (hint_text.value[i].social_status.length-1)){
+                                            text += ", "
+                                          }
+                                          text += ")";
+                                        }
+                                      } else {
+                                        text += hint_text.value[i].name
+                                      }
+                                      if (i != (hint_text.value.length - 1)) {
+                                        text += ", "
+                                      }
+                                    }
+                                    return text;
+                                  })()}
+                                </span>
                               </div>
                             </Hint>
                           );

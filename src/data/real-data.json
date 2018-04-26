@@ -10,15 +10,27 @@
       "characters": [
         {
           "color": "",
-          "name": "Andi Windo Kotak Adja",
           "role": "Saksi",
-          "social_status": []
+          "value": [
+            {
+              "name": "Andi Windo Kotak Adja",
+              "social_status": []
+            },
+            {
+              "name": "Buni Yani",
+              "social_status": []
+            }
+          ]
         },
         {
           "color": "",
-          "name": "Polda Metro Jaya",
           "role": "Penyelidik",
-          "social_status": []
+          "value": [
+            {
+              "name": "Polda Metro Jaya",
+              "social_status": []
+            }
+          ]
         }
       ],
       "published_date": "23/11/2016 10:58",
@@ -71,22 +83,34 @@
       "n": 3,
       "characters": [
         {
-          "color": "#cd3b54",
-          "name": "Buni Yani",
+          "color": "",
           "role": "Saksi",
-          "social_status": []
+          "value": [
+            {
+              "name": "Buni Yani",
+              "social_status": []
+            }
+          ]
         },
         {
-          "color": "#ba4fb9",
-          "name": "Aldwin Rahardian",
+          "color": "",
           "role": "Penasihat Hukum",
-          "social_status": []
+          "value": [
+            {
+              "name": "Aldwin Rahardian",
+              "social_status": []
+            }
+          ]
         },
         {
-          "color": "#ba4fb9",
-          "name": "Polda Metro Jaya",
+          "color": "",
           "role": "Penyelidik",
-          "social_status": []
+          "value": [
+            {
+              "name": "Polda Metro Jaya",
+              "social_status": []
+            }
+          ]
         }
       ],
       "published_date": "23/11/2016 10:58",
@@ -134,10 +158,14 @@
       "n": 1,
       "characters": [
         {
-          "color": "#ba4fb9",
-          "name": "Aldwin Rahardian",
+          "color": "",
           "role": "Penasihat Hukum",
-          "social_status": []
+          "value": [
+            {
+              "name": "Aldwin Rahardian",
+              "social_status": []
+            }
+          ]
         }
       ],
       "published_date": "23/11/2016 10:58",
@@ -186,15 +214,23 @@
       "characters": [
         {
           "color": "#cd3b54",
-          "name": "Buni Yani",
           "role": "Tersangka",
-          "social_status": []
+          "value": [
+            {
+              "name": "Buni Yani",
+              "social_status": []
+            }
+          ]
         },
         {
-          "color": "#cd3b54",
-          "name": "Polda Metro Jaya",
+          "color": "",
           "role": "Penyidik",
-          "social_status": []
+          "value": [
+            {
+              "name": "Polda Metro Jaya",
+              "social_status": []
+            }
+          ]
         }
       ],
       "published_date": "23/11/2016 21:07",
@@ -244,10 +280,14 @@
       "n": 1,
       "characters": [
         {
-          "color": "#cd3b54",
-          "name": "Andi Windo",
+          "color": "",
           "role": "Saksi",
-          "social_status": []
+          "value": [
+            {
+              "name": "Andi Windo",
+              "social_status": []
+            }
+          ]
         }
       ],
       "published_date": "24/11/2016 18:22",

@@ -66,7 +66,7 @@ class StoryDetail extends Component {
                 <footer className="card-footer is-shadowless">
                   <p className="card-footer-item has-text-right is-size-7">
                     <span>
-                      Lihat detail <a href={this.props.url}>di sini</a>.
+                      Lihat detail <a href={this.props.url} target="_blank">di sini</a>.
                     </span>
                   </p>
                 </footer>

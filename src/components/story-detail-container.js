@@ -55,10 +55,11 @@ class StoryDetailContainer extends Component {
         if (index != -1) {
           const closed_details = _.clone(this.state.default_closed_details,true);
           closed_details[index] = false;
-          this.props.scroll(0, index * (43 + index));
           this.setState({
             ...this.state,
             closed_details: closed_details,
+          },()=>{
+            this.props.scroll(0, index * (43 + index));
           });
         }
       } else if ((nextProps.highlighted_data==null) || !nextProps.highlighted_data.stay_open){
