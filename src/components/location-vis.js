@@ -316,7 +316,11 @@ class LocationVis extends Component {
                               <div className="tags has-addons character-vis-hint">
                                 <span className="arrow-left"></span>
                                 <span className="tag is-dark has-text-warning">{hint_text.name}</span>
-                                <span className="tag is-success">{hint_text.city}</span>
+                                {(()=>{
+                                  if (hint_text.city){
+                                    return <span className="tag is-success">{hint_text.city}</span>
+                                  }
+                                })()}
                               </div>
                             </Hint>
                           );
