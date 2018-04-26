@@ -59,7 +59,7 @@ class StoryDetailContainer extends Component {
             
             closed_details: closed_details,
           },()=>{
-            this.props.scroll(0, index * (43 + index));
+            this.props.scroll(0, index * 45);
           });
         }
       } else if ((nextProps.highlighted_data==null) || !nextProps.highlighted_data.stay_open){
