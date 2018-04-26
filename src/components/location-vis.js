@@ -140,7 +140,7 @@ class LocationVis extends Component {
     if (!_.isEqual(this.props.highlighted_data, nextProps.highlighted_data)) {
       var highlighted_data = [];
       var hint_position = {};
-      if (!_.isEmpty(nextProps.highlighted_data)) {
+      if (!_.isEmpty(nextProps.highlighted_data) && nextProps.highlighted_data.x0 && nextProps.highlighted_data.x) {
         highlighted_data = [{
           x0: nextProps.highlighted_data.x0,
           x: nextProps.highlighted_data.x,

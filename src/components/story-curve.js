@@ -376,7 +376,7 @@ class StoryCurve extends Component {
       var horizontal_highlighted_data = [];
       var highlighted_data = [];
       var hint_position = {};
-      if (!_.isEmpty(nextProps.highlighted_data)) {
+      if (!_.isEmpty(nextProps.highlighted_data) && nextProps.highlighted_data.x0 && nextProps.highlighted_data.x)  {
         horizontal_highlighted_data = [{
           x0: nextProps.highlighted_data.x0,
           x: nextProps.highlighted_data.x,
@@ -510,6 +510,7 @@ class StoryCurve extends Component {
           stroke="#363636"/>
         {/* Component for display plot */}
         <LineSeries
+          color="black"
           curve={'curveStepAfter'}
           data={this.state.line_data} /> 
         <VerticalRectSeries

@@ -33,18 +33,22 @@ class StoryDetailContainer extends Component {
   }
 
   onChangeClose(index){
+    const datum = this.props.data.events[index];
     var temp = _.clone(this.state.closed_details,true);
     temp[index] = !temp[index];
-    this.setState({
-      ...this.state,
-      closed_details : temp
-    });
+    if(!temp[index]){
+      this.props.handleMouseOver({
+        x0: (datum.x + this.props.horizontal_white_space),
+        x: (datum.x + 1 - this.props.horizontal_white_space),
+      })
+    } else {
+      this.props.handleMouseOver(null);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (!_.isEqual(this.props.highlighted_data, nextProps.highlighted_data)) {
-      if (!_.isEmpty(nextProps.highlighted_data)){
-        
+      if (!_.isEmpty(nextProps.highlighted_data) && (!nextProps.highlighted_data.stay_close)){
         const index = _.findIndex(this.props.data.events, (datum)=>{
           return (datum.x == (Math.ceil(nextProps.highlighted_data.x0 - this.props.horizontal_white_space)));
         })
@@ -57,7 +61,7 @@ class StoryDetailContainer extends Component {
             closed_details: closed_details,
           });
         }
-      } else {
+      } else if(!nextProps.stay_open){
         this.setState({
           ...this.state,
           closed_details: this.state.default_closed_details,
@@ -83,11 +87,14 @@ class StoryDetailContainer extends Component {
             <StoryDetail
               key={index}
               onChangeClose={()=>this.onChangeClose(index)}
-              onMouseOver={() => this.props.handleMouseOver({
-                x0: (datum.x + this.props.horizontal_white_space),
-                x: (datum.x + 1 - this.props.horizontal_white_space),
-              })}
-              onMouseLeave={()=>this.props.handleMouseOver(null)}
+              onMouseOver={() => {
+                this.props.handleMouseOver({
+                  x0: (datum.x + this.props.horizontal_white_space),
+                  x: (datum.x + 1 - this.props.horizontal_white_space),
+                  stay_close : true,
+                })
+              }}
+              onMouseLeave={()=>this.props.handleMouseOver({stay_open:true})}
               close={this.state.closed_details[index]}
               event_components={datum.event_components}
               url={datum.url}
