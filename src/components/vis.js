@@ -446,6 +446,9 @@ class Vis extends Component {
     return (
       <div className="story-detail-container">
         <StoryDetailContainer
+          location_length={this.state.location_length}
+          character_length={this.state.character_length}
+          time_length={this.state.time_length}
           handleMouseOver={this.handleMouseOver}
           highlighted_data={this.state.highlighted_data}
           data={this.state.story_detail_data}

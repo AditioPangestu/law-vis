@@ -81,7 +81,7 @@ class StoryDetailContainer extends Component {
           style={{
             flex : 2,            
             overflowY:"scroll",
-            height:"484px"
+            height: ((222 + 25*3 + 18*(this.props.location_length + this.props.time_length + this.props.character_length))+"px")
           }}>
           {_.map(this.props.data.events,(datum,index)=>{
             return (
