@@ -48,7 +48,7 @@ class StoryDetailContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!_.isEqual(this.props.highlighted_data, nextProps.highlighted_data)) {
-      if (!_.isEmpty(nextProps.highlighted_data) && (!nextProps.highlighted_data.stay_close)){
+      if (!_.isEmpty(nextProps.highlighted_data) && (!nextProps.highlighted_data.stay_close) && nextProps.highlighted_data.x0 && nextProps.highlighted_data.x){
         const index = _.findIndex(this.props.data.events, (datum)=>{
           return (datum.x == (Math.ceil(nextProps.highlighted_data.x0 - this.props.horizontal_white_space)));
         })
@@ -61,7 +61,7 @@ class StoryDetailContainer extends Component {
             closed_details: closed_details,
           });
         }
-      } else if(!nextProps.stay_open){
+      } else if ((nextProps.highlighted_data==null) || !nextProps.highlighted_data.stay_open){
         this.setState({
           ...this.state,
           closed_details: this.state.default_closed_details,
@@ -88,11 +88,23 @@ class StoryDetailContainer extends Component {
               key={index}
               onChangeClose={()=>this.onChangeClose(index)}
               onMouseOver={() => {
-                this.props.handleMouseOver({
-                  x0: (datum.x + this.props.horizontal_white_space),
-                  x: (datum.x + 1 - this.props.horizontal_white_space),
-                  stay_close : true,
+                const opened_index = _.findIndex(this.state.closed_details, (closed_detail) => {
+                  return !closed_detail;
                 })
+                if (opened_index == -1){
+                  this.props.handleMouseOver({
+                    x0: (datum.x + this.props.horizontal_white_space),
+                    x: (datum.x + 1 - this.props.horizontal_white_space),
+                    stay_close : true,
+                  });
+                } else {
+                    this.props.handleMouseOver({
+                      x0: (datum.x + this.props.horizontal_white_space),
+                      x: (datum.x + 1 - this.props.horizontal_white_space),
+                      stay_close : true,
+                      stay_open : true,
+                    });
+                }
               }}
               onMouseLeave={()=>this.props.handleMouseOver({stay_open:true})}
               close={this.state.closed_details[index]}

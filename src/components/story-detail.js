@@ -9,10 +9,10 @@ class StoryDetail extends Component {
     return(
       <div
         className="story-detail card is-shadowless is-radiusless"
+        onMouseOver={this.props.onMouseOver}
         onMouseLeave={()=>{this.props.close ? this.props.onMouseLeave():""}}
         onClick={this.props.onChangeClose}>
         <header 
-          onMouseOver={() => { this.props.close ? this.props.onMouseOver() : ""}}
           className="card-header is-shadowless">
           <p className="card-header-title is-size-7">
             {this.props.event_name}
