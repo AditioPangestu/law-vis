@@ -503,106 +503,136 @@ class StoryCurve extends Component {
     const { RIGHT, TOP } = Hint.ALIGN;
     const { handleMouseOver, adjust_viewed_character } = this.props;
     return (
-      <XYPlot
-        colorType="literal"
-        margin={{ left: 100, top: 40, bottom: 10, right:0  }}
-        width={this.props.width}
-        height={this.props.height}
-        xDomain={this.props.xDomain}
-        onMouseLeave={() => handleMouseOver({})}
-        yRange={[0, this.props.height-50]}>
-        <HorizontalGridLines 
-          tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
-        {/* Component for display horizontal highlight */}
-        <VerticalRectSeries
-          data={this.state.horizontal_highlighted_data}
-          stroke="#363636"/>
-        <VerticalRectSeries
-          data={this.state.vertical_highlighted_data}
-          stroke="#363636"/>
-        {/* Component for display plot */}
-        <LineSeries
-          color="black"
-          curve={'curveStepAfter'}
-          data={this.state.line_data} /> 
-        <VerticalRectSeries
-          data={this.state.time_positions}/>
-        {/* Component for display location */}
-        <VerticalRectSeries
-          data={_.map(this.state.location_positions, (location_position)=>{
-            var temp = {...location_position};
-            temp.opacity = ((temp.opacity==0)?0:1);
-            temp.color = "#fff";
-            return temp;
-          })}/>
-        <VerticalRectSeries
-          data={this.state.location_positions} />
-        {/* Component for display events */}
-        <VerticalRectSeries
-          data={this.state.event_positions} />
-        {/* Component for handle mouse over */}
-        <VerticalRectSeries
-          onValueMouseOver={(datapoint, { index }) => handleMouseOver(datapoint)}
-          data={_.map(this.props.data,(datum)=>{
-            return {
-              x0: (datum.x + this.props.horizontal_white_space),
-              x: (datum.x + 1 - this.props.horizontal_white_space),
-              y0: this.state.y_min,
-              y: this.state.y_max,
+      <div 
+        style={{position: "relative"}}>
+        <div
+          style={{ 
+            position: "absolute",
+            right:0
+          }}>
+          <p className="is-size-7">
+            <b>Tanggal Diketahui Kejadian Pertama Kali</b>
+            <span class="icon">
+              <i class="fas fa-lg fa-long-arrow-alt-right"></i>
+            </span>
+          </p>
+        </div>
+        <div
+          style={{ 
+            position: "absolute",
+            zIndex:999999,
+            left: -35,
+            bottom:35,
+            transform: "rotate(-90deg)"
+          }}>
+          <p className="is-size-7">
+            <span class="icon">
+              <i class="fas fa-lg fa-long-arrow-alt-left"></i>
+            </span>
+            <b>Alur Cerita</b>
+          </p>
+        </div>
+        <XYPlot
+          colorType="literal"
+          margin={{ left: 100, top: 50, bottom: 10, right:0  }}
+          width={this.props.width}
+          height={this.props.height}
+          xDomain={this.props.xDomain}
+          onMouseLeave={() => handleMouseOver({})}
+          yRange={[0, this.props.height-60]}>
+          <HorizontalGridLines 
+            tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
+          {/* Component for display horizontal highlight */}
+          <VerticalRectSeries
+            data={this.state.horizontal_highlighted_data}
+            stroke="#363636"/>
+          <VerticalRectSeries
+            data={this.state.vertical_highlighted_data}
+            stroke="#363636"/>
+          {/* Component for display plot */}
+          <LineSeries
+            color="black"
+            curve={'curveStepAfter'}
+            data={this.state.line_data} /> 
+          <VerticalRectSeries
+            data={this.state.time_positions}/>
+          {/* Component for display location */}
+          <VerticalRectSeries
+            data={_.map(this.state.location_positions, (location_position)=>{
+              var temp = {...location_position};
+              temp.opacity = ((temp.opacity==0)?0:1);
+              temp.color = "#fff";
+              return temp;
+            })}/>
+          <VerticalRectSeries
+            data={this.state.location_positions} />
+          {/* Component for display events */}
+          <VerticalRectSeries
+            data={this.state.event_positions} />
+          {/* Component for handle mouse over */}
+          <VerticalRectSeries
+            onValueMouseOver={(datapoint, { index }) => handleMouseOver(datapoint)}
+            data={_.map(this.props.data,(datum)=>{
+              return {
+                x0: (datum.x + this.props.horizontal_white_space),
+                x: (datum.x + 1 - this.props.horizontal_white_space),
+                y0: this.state.y_min,
+                y: this.state.y_max,
+              }
+            })}
+            opacity={0}/>
+          {/* Component for display rect highlight */}
+          <VerticalRectSeries
+            data={this.state.highlighted_data}
+            stroke="#363636"
+            style={{ strokeWidth: 3 }}/>
+          {/* Component for display hint */}
+          {(() => {
+            if (!_.isEmpty(this.state.hint_position)) {
+              const hint_index = _.findIndex(this.props.data, (value) => {
+                return (((value.x + 1 - this.props.horizontal_white_space) == this.state.highlighted_data[0].x) && ((value.x+this.props.horizontal_white_space) == this.state.highlighted_data[0].x0));
+              });
+              if (hint_index != -1) {
+                const event_name = this.props.data[hint_index].event_name;
+                return (
+                  <Hint
+                    align={{
+                      horizontal: RIGHT,
+                      vertical: TOP
+                    }}
+                    value={{ x: (this.state.hint_position.x - this.props.horizontal_white_space), y: this.state.hint_position.y }}>
+                    <div className="tags has-addons story-curve-hint">
+                      <span className="arrow-left"></span>
+                      <span className="tag is-dark has-text-warning">{"( " + (this.state.hint_position.x_origin+1) + ", " + (this.state.hint_position.y_origin+1) + " )"}</span>
+                      <span className="tag is-success">{event_name}</span>
+                    </div>
+                  </Hint>
+                );
+              }
             }
-          })}
-          opacity={0}/>
-        {/* Component for display rect highlight */}
-        <VerticalRectSeries
-          data={this.state.highlighted_data}
-          stroke="#363636"
-          style={{ strokeWidth: 3 }}/>
-        {/* Component for display hint */}
-        {(() => {
-          if (!_.isEmpty(this.state.hint_position)) {
-            const hint_index = _.findIndex(this.props.data, (value) => {
-              return (((value.x + 1 - this.props.horizontal_white_space) == this.state.highlighted_data[0].x) && ((value.x+this.props.horizontal_white_space) == this.state.highlighted_data[0].x0));
-            });
-            if (hint_index != -1) {
-              const event_name = this.props.data[hint_index].event_name;
-              return (
-                <Hint
-                  align={{
-                    horizontal: RIGHT,
-                    vertical: TOP
-                  }}
-                  value={{ x: (this.state.hint_position.x - this.props.horizontal_white_space), y: this.state.hint_position.y }}>
-                  <div className="tags has-addons story-curve-hint">
-                    <span className="arrow-left"></span>
-                    <span className="tag is-dark has-text-warning">{"( " + (this.state.hint_position.x_origin+1) + ", " + (this.state.hint_position.y_origin+1) + " )"}</span>
-                    <span className="tag is-success">{event_name}</span>
-                  </div>
-                </Hint>
-              );
-            }
-          }
-        })()}
-        <XAxis
-          orientation="top"
-          tickValues={this.state.date_tic_values}
-          tickFormat={this.dateTicFormat} />
-        <XAxis
-          hideTicks />
-        <Borders style={{
-          bottom: { fill: '#fff' },
-          left: { fill: '#fff' },
-          right: { fill: 'transparent' },
-          top: { fill: 'transparent' }
-        }}/>
-        <YAxis
-          tickSize={0}
-          tickValues={this.state.stage_tic_values}
-          tickFormat={this.stageTicFormat}
-          style={{backgroundColor:"white"}}/>
-        <YAxis
-          tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end })}
-          tickFormat={(value) => { return "" }} />
-      </XYPlot>
+          })()}
+          <XAxis
+            orientation="top"
+            tickValues={this.state.date_tic_values}
+            tickFormat={this.dateTicFormat} />
+          <XAxis
+            hideTicks />
+          <Borders style={{
+            bottom: { fill: '#fff' },
+            left: { fill: '#fff' },
+            right: { fill: 'transparent' },
+            top: { fill: 'transparent' }
+          }}/>
+          <YAxis
+            tickSize={0}
+            tickValues={this.state.stage_tic_values}
+            tickFormat={this.stageTicFormat}
+            style={{backgroundColor:"white"}}/>
+          <YAxis
+            tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end })}
+            tickFormat={(value) => { return "" }} />
+        </XYPlot>
+      </div>
     );
   }
 
