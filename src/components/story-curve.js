@@ -374,6 +374,7 @@ class StoryCurve extends Component {
   componentWillReceiveProps(nextProps) {
     if (!_.isEqual(this.props.highlighted_data, nextProps.highlighted_data)){
       var horizontal_highlighted_data = [];
+      var vertical_highlighted_data = [];
       var highlighted_data = [];
       var hint_position = {};
       if (!_.isEmpty(nextProps.highlighted_data) && nextProps.highlighted_data.x0 && nextProps.highlighted_data.x)  {
@@ -408,9 +409,17 @@ class StoryCurve extends Component {
             y_origin: this.state.origin_event_positions[highlighted_data_index].y
           }
         }
+        vertical_highlighted_data = [{
+          x0: 0,
+          x: this.props.data.length,
+          y0: hint_position.y - 0.5,
+          y: hint_position.y + 0.5,
+          color: "#363636",
+          opacity: .1
+        }];
       }
       this.setState({
-        
+        vertical_highlighted_data: vertical_highlighted_data,
         horizontal_highlighted_data: horizontal_highlighted_data,
         highlighted_data: highlighted_data,
         hint_position: hint_position
@@ -507,6 +516,9 @@ class StoryCurve extends Component {
         {/* Component for display horizontal highlight */}
         <VerticalRectSeries
           data={this.state.horizontal_highlighted_data}
+          stroke="#363636"/>
+        <VerticalRectSeries
+          data={this.state.vertical_highlighted_data}
           stroke="#363636"/>
         {/* Component for display plot */}
         <LineSeries
