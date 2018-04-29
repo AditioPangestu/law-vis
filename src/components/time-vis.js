@@ -103,7 +103,6 @@ class TimeVis extends Component {
                 y0: 0,
                 y: 1,
                 color: time.color,
-                opacity: .3,
               }
             ]
           });
@@ -120,7 +119,6 @@ class TimeVis extends Component {
             y0: 0,
             y: 1,
             color: time.color,
-            opacity: .3
           });
           time_hints[index].push({
             name: time.name,

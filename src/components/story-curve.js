@@ -72,15 +72,17 @@ class StoryCurve extends Component {
     this.stageTicFormat = this.stageTicFormat.bind(this);
     this.dateTicFormat = this.dateTicFormat.bind(this);
     this.generateTimeRect = this.generateTimeRect.bind(this);
+    this.preprocessLocationData = this.preprocessLocationData.bind(this);
   }
 
   componentWillMount(){
-    const { event_positions, stage_areas, line_data, location_positions, origin_event_positions} = this.preprocessRectData(this.props.data);
+    const { event_positions, stage_areas, line_data, origin_event_positions} = this.preprocessRectData(this.props.data);
     const { stage_tic_values, stage_tic_names } = this.generateLawStageTic(stage_areas);
     const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(this.props.data);
     const y_max = _.max(event_positions, (event_position) => { return event_position.y}).y;
     const y_min = _.min(event_positions, (event_position) => { return event_position.y0}).y0;
     const time_positions = this.generateTimeRect(this.props.data,y_min,y_max);
+    const location_positions = this.preprocessLocationData(this.props.data,y_min,y_max)
     this.setState({
       
       event_positions: event_positions,
@@ -146,7 +148,7 @@ class StoryCurve extends Component {
             y0: (y_min),
             y: (y_max + .5*this.rect_height),
             color: datum.location.color,
-            opacity: .3
+            opacity: 1
           });
         }
       } else {
@@ -183,7 +185,7 @@ class StoryCurve extends Component {
               y0: (y_min - .5*this.rect_height),
               y: ((i == data.length - 1) ? y_max : ((y_max + .5*this.rect_height))),
               color: datum.location.color,
-              opacity: .3
+              opacity: 1
             });
           }
         } else {
@@ -223,7 +225,7 @@ class StoryCurve extends Component {
               y0: (y_min - .5 * this.rect_height),
               y: ((i == data.length - 1) ? y_max : ((y_max + .5 * this.rect_height))),
               color: datum.location.color,
-              opacity: .3
+              opacity: 1
             });
           }
         }
@@ -245,6 +247,111 @@ class StoryCurve extends Component {
       stage_areas,
       line_data
     };
+  }
+  
+  preprocessLocationData(data, y_min_view, y_max_view){
+    var location_positions = [];
+    var event_positions = [];
+    var prev_datum = {};
+    for(var i=0;i<data.length;i++){
+      var y_min = null;
+      var y_max = null;
+      const datum = data[i];
+      if(i == 0){
+        var y_base = datum.y - this.rect_height * datum.n / 2;
+        for (var j = 0; j < datum.n; j++) {
+          if(j==0){
+            y_min = y_base;
+          }
+          if (j==(datum.n-1)){
+            y_max = y_base + this.rect_height;
+          }
+          event_positions.push({
+            x0: (datum.x + this.props.horizontal_white_space),
+            x: (datum.x + 1 - this.props.horizontal_white_space),
+            y0: (y_base),
+            y: (y_base + this.rect_height),
+            color: datum.characters[j].color
+          });
+          y_base += this.rect_height;
+        }
+        if (!_.isEmpty(datum.location)) {
+          const y_temp = y_max + 4 * this.rect_height;
+          location_positions.push({
+            x0: (datum.x + this.props.horizontal_white_space),
+            x: (datum.x + 1 - this.props.horizontal_white_space),
+            y0: (y_min),
+            y: (y_temp > y_max_view ? y_max_view:y_temp),
+            color: datum.location.color,
+            opacity: 1
+          });
+        }
+      } else {
+        if (prev_datum.law_stage == datum.law_stage){
+          var y_base = event_positions[event_positions.length - 1].y - (this.rect_height * prev_datum.n / 2) + this.rect_height - (this.rect_height*datum.n / 2);
+          for (var j = 0; j < datum.n; j++) {
+            if (j == 0) {
+              y_min = y_base;
+            }
+            if (j == (datum.n - 1)) {
+              y_max = y_base + this.rect_height;
+            }
+            event_positions.push({
+              x0: (datum.x + this.props.horizontal_white_space),
+              x: (datum.x + 1 - this.props.horizontal_white_space),
+              y0: (y_base),
+              y: (y_base + this.rect_height),
+              color: datum.characters[j].color
+            });
+            y_base+=this.rect_height;
+          }
+          if (!_.isEmpty(datum.location)) {
+            const y0_temp = y_min - 4 * this.rect_height;
+            const y_temp = y_max + 4 * this.rect_height;
+            location_positions.push({
+              x0: (datum.x + this.props.horizontal_white_space),
+              x: (datum.x + 1 - this.props.horizontal_white_space),
+              y0: (y0_temp < y_min_view ? y_min_view : y0_temp),
+              y: (y_temp > y_max_view ? y_max_view : y_temp),
+              color: datum.location.color,
+              opacity: 1
+            });
+          }
+        } else {
+          var y_base = event_positions[event_positions.length - 1].y;;
+          for (var j = 0; j < datum.n; j++) {
+            if (j == 0) {
+              y_min = y_base;
+            }
+            if (j == (datum.n - 1)) {
+              y_max = y_base + this.rect_height;
+            }
+            event_positions.push({
+              x0: (datum.x + this.props.horizontal_white_space),
+              x: (datum.x + 1 - this.props.horizontal_white_space),
+              y0: (y_base),
+              y: (y_base + this.rect_height),
+              color: datum.characters[j].color
+            });
+            y_base += this.rect_height;
+          }
+          if (!_.isEmpty(datum.location)) {
+            const y0_temp = y_min - 4 * this.rect_height;
+            const y_temp = y_max + 4 * this.rect_height;
+            location_positions.push({
+              x0: (datum.x + this.props.horizontal_white_space),
+              x: (datum.x + 1 - this.props.horizontal_white_space),
+              y0: (y0_temp < y_min_view ? y_min_view : y0_temp),
+              y: (y_temp > y_max_view ? y_max_view : y_temp),
+              color: datum.location.color,
+              opacity: 1
+            });
+          }
+        }
+      }
+      prev_datum = datum;
+    }
+    return location_positions;
   }
 
   preprocessLineData(data){
@@ -331,7 +438,7 @@ class StoryCurve extends Component {
           y0: y_min,
           y: y_max,
           color: datum.time.color,
-          opacity: .3
+          opacity: 1
         });
       }
     }
@@ -345,11 +452,11 @@ class StoryCurve extends Component {
     if (index != -1) {
       var name = this.state.stage_tic_names[index];
       var words_of_name = name.split(" ");
-      if(words_of_name.length == 2){
+      if(words_of_name.length == 3){
         return (
           <tspan>
-            <tspan x="0" dy="-.5em">{words_of_name[0]}</tspan>
-            <tspan x="0" dy="1em">{words_of_name[1]}</tspan>
+            <tspan x="0" y="-1.25em" dy="1em">{words_of_name[0]}</tspan>
+            <tspan x="0" y="-0.25em" dy="1em">{words_of_name[1] + " " + words_of_name[2]}</tspan>
           </tspan>
         )
       } else {
@@ -391,7 +498,7 @@ class StoryCurve extends Component {
           y0: this.state.y_min,
           y: this.state.y_max,
           color: "#363636",
-          opacity: .2
+          opacity: .3
         }];
         highlighted_data = _.filter(this.state.event_positions, (datum)=>{
           return ((datum.x0 == nextProps.highlighted_data.x0) && (datum.x == nextProps.highlighted_data.x));
@@ -422,7 +529,7 @@ class StoryCurve extends Component {
           y0: hint_position.y - 0.5,
           y: hint_position.y + 0.5,
           color: "#363636",
-          opacity: .2
+          opacity: .3
         }];
       }
       this.setState({
@@ -464,7 +571,7 @@ class StoryCurve extends Component {
           if (_.findIndex(nextProps.adjust_viewed_location, (color) => { return (color == position.color) }) != -1) {
             return {
               ...position,
-              opacity: .3,
+              opacity: 1,
             };
           } else {
             return {
@@ -487,7 +594,7 @@ class StoryCurve extends Component {
           if (_.findIndex(nextProps.adjust_viewed_time, (color) => { return (color == position.color) }) != -1) {
             return {
               ...position,
-              opacity: .3,
+              opacity: 1,
             };
           } else {
             return {
@@ -525,7 +632,7 @@ class StoryCurve extends Component {
           style={{ 
             position: "absolute",
             zIndex:999999,
-            left: -35,
+            left: -36,
             bottom:35,
             transform: "rotate(-90deg)"
           }}>
@@ -538,7 +645,7 @@ class StoryCurve extends Component {
         </div>
         <XYPlot
           colorType="literal"
-          margin={{ left: 100, top: 65, bottom: 10, right:0  }}
+          margin={{ left: 110, top: 65, bottom: 10, right:0  }}
           width={this.props.width}
           height={this.props.height}
           xDomain={this.props.xDomain}
@@ -550,13 +657,6 @@ class StoryCurve extends Component {
           yRange={[0, this.props.height-75]}>
           <HorizontalGridLines 
             tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
-          {/* Component for display horizontal highlight */}
-          <VerticalRectSeries
-            data={this.state.horizontal_highlighted_data}
-            stroke="#363636"/>
-          <VerticalRectSeries
-            data={this.state.vertical_highlighted_data}
-            stroke="#363636"/>
           {/* Component for display plot */}
           <LineSeries
             color="black"
@@ -574,6 +674,13 @@ class StoryCurve extends Component {
             })}/>
           <VerticalRectSeries
             data={this.state.location_positions} />
+          {/* Component for display horizontal highlight */}
+          <VerticalRectSeries
+            data={this.state.horizontal_highlighted_data}
+            stroke="#363636" />
+          <VerticalRectSeries
+            data={this.state.vertical_highlighted_data}
+            stroke="#363636" />
           {/* Component for display events */}
           <VerticalRectSeries
             data={this.state.event_positions} />

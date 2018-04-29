@@ -103,7 +103,6 @@ class LocationVis extends Component {
                 y0: 0,
                 y: 1,
                 color: location.color,
-                opacity: .3
               }
             ]
           });
@@ -120,7 +119,6 @@ class LocationVis extends Component {
             y0: 0,
             y: 1,
             color: location.color,
-            opacity: .3
           });
           location_hints[index].push({
             name: location.name,

@@ -1534,6 +1534,84 @@
         "date" : "05/12/2016"
       },
       "url": "http://nasional.kompas.com/read/2016/12/05/12524941/kepolisian.finalisasi.pemberkasan.kasus.buni.yani"
+    },
+    {
+      "x": 27,
+      "y": 27,
+      "event_name": "Pengajuan Praperadilan",
+      "n": 3,
+      "characters": [
+        {
+          "color": "",
+          "role": "Pemohon",
+          "value": [
+            {
+              "name": "Buni Yani",
+              "social_status": [
+              ]
+            }
+          ]
+        },
+        {
+          "color": "",
+          "role": "Hakim",
+          "value": [
+            {
+              "name": "Pihak Pengadilan Negeri Jakarta Selatan",
+              "social_status": [
+              ]
+            }
+          ]
+        },
+        {
+          "color": "",
+          "role": "Termohon",
+          "value": [
+            {
+              "name": "Polda Metro Jaya",
+              "social_status": [
+              ]
+            }
+          ]
+        }
+      ],
+      "published_date": "05/12/2016 13:04",
+      "law_stage": "Praperadilan untuk Penuntutan",
+      "event_components": [
+        {
+          "term": "Dasar permintaan praperadilan",
+          "definition": "Soal penetapan sebagai tersangka. Buni Yani juga mempersoalkan surat perintah penangkapan yang diterbitkan Polda Metro Jaya. Surat itu diterbitkan pada hari yang sama dengan saat Buni diperiksa sebagai terlapor. Buni diperiksa sebagai terlapor kemudian ditetapkan sebagai tersangka pada hari yang sama. Bersamaan dengan penetapan Buni sebagai tersangka, Polda Metro Jaya menerbitkan surat perintah penangkapan dan langsung melakukan pemeriksaan Buni sebagai tersangka."
+        },
+        {
+          "term": "Orang yang mengajukan (Pemohon)",
+          "definition": "Buni Yani, Tersangka"
+        },
+        {
+          "term": "Orang yang dikenakan pengajuan (Termohon)",
+          "definition": "Polda Metro Jaya"
+        },
+        {
+          "term": "Orang yang menerima pengajuan",
+          "definition": "Pihak Pengadilan Negeri Jakarta Selatan"
+        },
+        {
+          "term": "Waktu pengajuan",
+          "definition": "05/12/2016"
+        },
+        {
+          "term": "Tempat pengajuan praperadilan",
+          "definition": "Pengadilan Negeri Jakarta Selatan"
+        }
+      ],
+      "location": {
+        "name" : "Pengadilan Negeri Jakarta Selatan",
+        "city" : "Jakarta Selatan"
+      },
+      "time": {
+        "name" : "Siang",
+        "date" : "05/12/2016"
+      },
+      "url": "https://megapolitan.kompas.com/read/2016/12/05/13045761/ajukan.gugatan.praperadilan.buni.yani.juga.persoalkan.surat.perintah.penangkapan."
     }
   ]
 }
