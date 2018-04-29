@@ -1114,7 +1114,9 @@
           "value": [
             {
               "name": "Agus Surono",
-              "social_status": ["Dekan Fakultas Hukum Universitas Al Azhar Indonesia"]
+              "social_status": [
+                "Dekan Fakultas Hukum Universitas Al Azhar Indonesia"
+              ]
             }
           ]
         }
@@ -1269,8 +1271,7 @@
           "value": [
             {
               "name": "Buni Yani",
-              "social_status": [
-              ]
+              "social_status": []
             }
           ]
         }
@@ -1459,7 +1460,7 @@
       "event_components": [
         {
           "term": "Orang yang menyampaikan tanggapan",
-          "definition": "Kombes Awi Setiyono, Kabid Humas Polda Metro Jaya"
+          "definition": "Aldwin Rahardian, Kuasa hukum Buni Yani"
         },
         {
           "term": "Waktu penyampaian tanggapan",
@@ -1474,12 +1475,8 @@
           "definition": "Pihak Buni Yani, pengunggah ulang video pidato Basuki Tjahaja Purnama (Ahok), akan mengajukan gugatan praperadilan ke Pengadilan Negeri Jakarta Selatan pada pekan depan."
         }
       ],
-      "location": {
-       
-      },
-      "time": {
-        
-      },
+      "location": {},
+      "time": {},
       "url": "https://megapolitan.kompas.com/read/2016/11/28/18235211/buni.yani.ajukan.gugatan.praperadilan.pekan.depan"
     },
     {
@@ -1526,18 +1523,18 @@
         }
       ],
       "location": {
-        "name" : "Kompleks Parlemen",
-        "city" : "Jakarta"
+        "name": "Kompleks Parlemen",
+        "city": "Jakarta"
       },
       "time": {
-        "name" : "Siang",
-        "date" : "05/12/2016"
+        "name": "Siang",
+        "date": "05/12/2016"
       },
       "url": "http://nasional.kompas.com/read/2016/12/05/12524941/kepolisian.finalisasi.pemberkasan.kasus.buni.yani"
     },
     {
       "x": 27,
-      "y": 27,
+      "y": 29,
       "event_name": "Pengajuan Praperadilan",
       "n": 3,
       "characters": [
@@ -1547,8 +1544,7 @@
           "value": [
             {
               "name": "Buni Yani",
-              "social_status": [
-              ]
+              "social_status": []
             }
           ]
         },
@@ -1558,8 +1554,7 @@
           "value": [
             {
               "name": "Pihak Pengadilan Negeri Jakarta Selatan",
-              "social_status": [
-              ]
+              "social_status": []
             }
           ]
         },
@@ -1569,14 +1564,13 @@
           "value": [
             {
               "name": "Polda Metro Jaya",
-              "social_status": [
-              ]
+              "social_status": []
             }
           ]
         }
       ],
       "published_date": "05/12/2016 13:04",
-      "law_stage": "Praperadilan untuk Penuntutan",
+      "law_stage": "Praperadilan untuk Penyidikan",
       "event_components": [
         {
           "term": "Dasar permintaan praperadilan",
@@ -1604,14 +1598,332 @@
         }
       ],
       "location": {
-        "name" : "Pengadilan Negeri Jakarta Selatan",
-        "city" : "Jakarta Selatan"
+        "name": "Pengadilan Negeri Jakarta Selatan",
+        "city": "Jakarta Selatan"
       },
       "time": {
-        "name" : "Siang",
-        "date" : "05/12/2016"
+        "name": "Siang",
+        "date": "05/12/2016"
       },
       "url": "https://megapolitan.kompas.com/read/2016/12/05/13045761/ajukan.gugatan.praperadilan.buni.yani.juga.persoalkan.surat.perintah.penangkapan."
+    },
+    {
+      "x": 28,
+      "y": 30,
+      "event_name": "Tanggapan atas kejadian acara hukum pidana",
+      "n": 1,
+      "characters": [
+        {
+          "color": "",
+          "role": "Penasihat Hukum",
+          "value": [
+            {
+              "name": "Aldwin Rahardian",
+              "social_status": [
+                "Kuasa hukum Buni Yani"
+              ]
+            }
+          ]
+        }
+      ],
+      "published_date": "05/12/2016 13:04",
+      "law_stage": "Praperadilan untuk Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang menyampaikan tanggapan",
+          "definition": "Aldwin Rahardian, Kuasa hukum Buni Yani"
+        },
+        {
+          "term": "Tempat penyampaian tanggapan",
+          "definition": "Pengadilan Negeri Jakarta Selatan"
+        },
+        {
+          "term": "Waktu penyampaian tanggapan",
+          "definition": "05/12/2016"
+        },
+        {
+          "term": "Kejadian yang ditanggapi",
+          "definition": "Pengajuan Praperadilan"
+        },
+        {
+          "term": "Tanggapan berupa tindakan yang akan dilakukan",
+          "definition": "Aldwin Rahardian, mengatakan bahwa proses penetapan Buni sebagai tersangka yang disertai dengan surat perintah penangkapan itu tidak lazim. Menurut Aldwin, polisi harusnya melayangkan surat pemanggilan pemeriksaan kepada kliennya sebelum menerbitkan surat perintah penangkapan."
+        }
+      ],
+      "location": {
+        "name": "Pengadilan Negeri Jakarta Selatan",
+        "city": "Jakarta Selatan"
+      },
+      "time": {
+        "name": "Siang",
+        "date": "05/12/2016"
+      },
+      "url": "https://megapolitan.kompas.com/read/2016/12/05/13045761/ajukan.gugatan.praperadilan.buni.yani.juga.persoalkan.surat.perintah.penangkapan."
+    },
+    {
+      "x": 29,
+      "y": 31,
+      "event_name": "Tanggapan atas tanggapan seseorang yang terkait acara hukum pidana",
+      "n": 1,
+      "characters": [
+        {
+          "color": "",
+          "role": "Penasihat Hukum",
+          "value": [
+            {
+              "name": "Unoto Dwi Yulianto",
+              "social_status": [
+                "Kuasa hukum Buni Yani"
+              ]
+            },
+            {
+              "name": "Aldwin Rahardia",
+              "social_status": [
+                "Kuasa hukum Buni Yani"
+              ]
+            }
+          ]
+        }
+      ],
+      "published_date": "05/12/2016 13:04",
+      "law_stage": "Praperadilan untuk Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang menyampaikan tanggapan",
+          "definition": "Unoto Dwi Yulianto, Kuasa hukum Buni Yani"
+        },
+        {
+          "term": "Orang yang ditanggapi",
+          "definition": "Aldwin Rahardia, Kuasa hukum Buni Yani"
+        },
+        {
+          "term": "Tempat penyampaian tanggapan",
+          "definition": "Pengadilan Negeri Jakarta Selatan"
+        },
+        {
+          "term": "Waktu penyampaian tanggapan",
+          "definition": "05/12/2016"
+        },
+        {
+          "term": "Kejadian yang ditanggapi",
+          "definition": "Tanggapan Aldwin tentang Pengajuan Praperadilan"
+        },
+        {
+          "term": "Tanggapan berupa tindakan yang akan dilakukan",
+          "definition": "Unoto Dwi Yulianto, menyampaikan bahwa sesuai dengan Peraturan Kapolri Nomor 12 Tahun 2009 tentang Pengawasan dan Pengendalian Penanganan Tindak Pidana di Lingkungan Kepolisian Negara Republik Indonesia, penangkapan yang bukan operasi tangkap tangan harus didahului dengan pemanggilan. Tersangka bisa ditangkap setelah dua kali mangkir dari pemanggilan."
+        }
+      ],
+      "location": {
+        "name": "Pengadilan Negeri Jakarta Selatan",
+        "city": "Jakarta Selatan"
+      },
+      "time": {
+        "name": "Siang",
+        "date": "05/12/2016"
+      },
+      "url": "https://megapolitan.kompas.com/read/2016/12/05/13045761/ajukan.gugatan.praperadilan.buni.yani.juga.persoalkan.surat.perintah.penangkapan."
+    },
+    {
+      "x": 30,
+      "y": 32,
+      "event_name": "Tanggapan atas kejadian acara hukum pidana",
+      "n": 1,
+      "characters": [
+        {
+          "color": "",
+          "role": "Tersangka",
+          "value": [
+            {
+              "name": "Buni Yani",
+              "social_status": []
+            }
+          ]
+        }
+      ],
+      "published_date": "05/12/2016  14:32",
+      "law_stage": "Praperadilan untuk Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang menyampaikan tanggapan",
+          "definition": "Buni Yani, Tersangka"
+        },
+        {
+          "term": "Tempat penyampaian tanggapan",
+          "definition": "Pengadilan Negeri Jakarta Selatan"
+        },
+        {
+          "term": "Waktu penyampaian tanggapan",
+          "definition": "05/12/2016"
+        },
+        {
+          "term": "Kejadian yang ditanggapi",
+          "definition": "Penetapan Tersangka"
+        },
+        {
+          "term": "Tanggapan berupa tindakan yang akan dilakukan",
+          "definition": "Buni Yani menganggap dirinya tak dapat dijadikan tersangka dalam kasus dugaan pencemaran nama baik dan penghasutan terkait isu suku, agama, ras dan antargolongan (SARA). Ia pun mengajukan praperadilan dan berharap nama baiknya dipulihkan."
+        }
+      ],
+      "location": {
+        "name": "Pengadilan Negeri Jakarta Selatan",
+        "city": "Jakarta Selatan"
+      },
+      "time": {
+        "name": "Siang",
+        "date": "05/12/2016"
+      },
+      "url": "https://megapolitan.kompas.com/read/2016/12/05/14321631/buni.yani.berharap.nama.baiknya.dipulihkan"
+    },
+    {
+      "x": 31,
+      "y": 27,
+      "event_name": "Penyampaian Berita Acara Penyidikan (BAP)",
+      "n": 2,
+      "characters": [
+        {
+          "color": "",
+          "role": "Penyidik",
+          "value": [
+            {
+              "name": "Polda Metro Jaya",
+              "social_status": []
+            }
+          ]
+        },
+        {
+          "color": "",
+          "role": "Penuntut Umum",
+          "value": [
+            {
+              "name": "Kejaksaan",
+              "social_status": []
+            }
+          ]
+        }
+      ],
+      "published_date": "07/12/2016 11:22",
+      "law_stage": "Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang menerima BAP",
+          "definition": "Kejaksaan"
+        },
+        {
+          "term": "Orang yang membuat BAP",
+          "definition": "Polda Metro Jaya"
+        },
+        {
+          "term": "Waktu penyerahan laporan",
+          "definition": "06/12/2016"
+        }
+      ],
+      "location": {},
+      "time": {},
+      "url": "https://megapolitan.kompas.com/read/2016/12/07/11221221/polisi.limpahkan.berkas.perkara.buni.yani.ke.kejaksaan"
+    },
+    {
+      "x": 32,
+      "y": 28,
+      "event_name": "Tanggapan atas kejadian acara hukum pidana",
+      "n": 1,
+      "characters": [
+        {
+          "color": "",
+          "role": "Penyidik",
+          "value": [
+            {
+              "name": "Kombes Wahyu Hadiningrat",
+              "social_status": [
+                "Direktur Reserse Kriminal Khusus Polda Metro Jaya"
+              ]
+            }
+          ]
+        }
+      ],
+      "published_date": "07/12/2016 11:22",
+      "law_stage": "Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang menyampaikan tanggapan",
+          "definition": "Kombes Wahyu Hadiningrat, Direktur Reserse Kriminal Khusus Polda Metro Jaya"
+        },
+        {
+          "term": "Tempat penyampaian tanggapan",
+          "definition": "Mapolda Metro Jaya"
+        },
+        {
+          "term": "Waktu penyampaian tanggapan",
+          "definition": "07/12/2016"
+        },
+        {
+          "term": "Kejadian yang ditanggapi",
+          "definition": "Penyampaian BAP"
+        },
+        {
+          "term": "Tanggapan berupa tindakan yang akan dilakukan",
+          "definition": "Polda Metro Jaya telah melimpahkan berkas perkara dugaan pencemaran nama baik dan penghasutan terkait SARA dengan tersangka Buni Yani ke kejaksaan. Pihaknya masih menunggu apakah berkas tersebut dinyatakan lengkap atau masih perlu dilengkapi."
+        }
+      ],
+      "location": {
+        "name": "Mapolda Metro Jaya",
+        "city": "Jakarta"
+      },
+      "time": {},
+      "url": "https://megapolitan.kompas.com/read/2016/12/07/11221221/polisi.limpahkan.berkas.perkara.buni.yani.ke.kejaksaan"
+    },
+    {
+      "x": 33,
+      "y": 33,
+      "event_name": "Tanggapan atas kejadian acara hukum pidana",
+      "n": 1,
+      "characters": [
+        {
+          "color": "",
+          "role": "Penyidik",
+          "value": [
+            {
+              "name": "Kombes Raden Prabowo Argo Yuwono",
+              "social_status": [
+                "Kabid Humas Polda Metro Jaya"
+              ]
+            }
+          ]
+        }
+      ],
+      "published_date": "07/12/2016 15:31",
+      "law_stage": "Praperadilan untuk Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang menyampaikan tanggapan",
+          "definition": "Kombes Raden Prabowo Argo Yuwono, Kabid Humas Polda Metro Jaya"
+        },
+        {
+          "term": "Tempat penyampaian tanggapan",
+          "definition": "Mapolda Metro Jaya"
+        },
+        {
+          "term": "Waktu penyampaian tanggapan",
+          "definition": "07/12/2016"
+        },
+        {
+          "term": "Kejadian yang ditanggapi",
+          "definition": "Pengajuan Praperadilan"
+        },
+        {
+          "term": "Tanggapan berupa tindakan yang akan dilakukan",
+          "definition": "Argo menambahkan, saat ini pihaknya masih menunggu surat resmi dari Pengadilan Negeri (PN) Jakarta Selatan mengenai gugatan praperadilan tersebut. Nantinya, pihaknya akan mempelajari apa yang digugat Buni Yani."
+        },
+        {
+          "term": "Tanggapan berupa opini",
+          "definition": "Polda Metro Jaya bersiap menghadapi gugatan sidang praperadilan yang diajukan Buni Yani."
+        }
+      ],
+      "location": {
+        "name": "Mapolda Metro Jaya",
+        "city": "Jakarta"
+      },
+      "time": {},
+      "url": "https://megapolitan.kompas.com/read/2016/12/07/11221221/polisi.limpahkan.berkas.perkara.buni.yani.ke.kejaksaan"
     }
   ]
 }
