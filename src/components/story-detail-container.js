@@ -26,7 +26,6 @@ class StoryDetailContainer extends Component {
       closed_details.push(true);
     }
     this.setState({
-      
       closed_details: closed_details,
       default_closed_details: closed_details
     });

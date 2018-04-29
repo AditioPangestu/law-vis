@@ -28,6 +28,7 @@ class Vis extends Component {
       location_length : 0,
       character_length : 0,
       time_length : 0,
+      clicked : false,
     };
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.onZoomIn = this.onZoomIn.bind(this);
@@ -48,6 +49,13 @@ class Vis extends Component {
     this.onResetViewedTime = this.onResetViewedTime.bind(this);
     this.onAddViewedTime = this.onAddViewedTime.bind(this);
     this.onHideAllTime = this.onHideAllTime.bind(this);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(){
+    this.setState({
+      clicked: !this.state.clicked
+    })
   }
 
   componentWillMount(){
@@ -111,7 +119,6 @@ class Vis extends Component {
 
   handleMouseOver(data) {
     this.setState({ 
-      
       highlighted_data : data
     });
   }
@@ -119,7 +126,6 @@ class Vis extends Component {
   onZoomIn() {
     if ((this.state.current_x_window - this.state.current_x0_window) > (this.state.default_x_window/8)) {
       this.setState({
-        
         current_x_window: (this.state.current_x_window - this.state.default_x_window/32),
         current_x0_window: (this.state.current_x0_window + this.state.default_x_window / 32)
       });
@@ -155,7 +161,6 @@ class Vis extends Component {
     const current_x_window = this.state.current_x_window + this.state.default_x_window / 128;
     if (this.state.current_x_window < this.state.default_x_window) {
       this.setState({
-        
         current_x0_window: current_x0_window,
         current_x_window: ((current_x_window > this.state.default_x_window) ? this.state.default_x_window : current_x_window),
       });
@@ -164,7 +169,6 @@ class Vis extends Component {
 
   onResetZoom() {
     this.setState({
-      
       current_x0_window: this.state.default_x0_window,
       current_x_window: this.state.default_x_window,
     });
@@ -173,7 +177,6 @@ class Vis extends Component {
   onMouseDown(event) {
     event.preventDefault();
     this.setState({
-      
       prev_absis: event.clientX,
       is_mouse_down: true
     });
@@ -182,7 +185,6 @@ class Vis extends Component {
   onMouseUp(event) {
     event.preventDefault();
     this.setState({
-      
       prev_absis: 0,
       is_mouse_down: false
     });
@@ -196,14 +198,12 @@ class Vis extends Component {
       const current_x_window = this.state.current_x_window - diff;
       if ((diff < 0) && (this.state.current_x_window < this.state.default_x_window)) {
         this.setState({
-          
           prev_absis : event.clientX,
           current_x0_window: current_x0_window,
           current_x_window: ((current_x_window > this.state.default_x_window) ? this.state.default_x_window : current_x_window),
         });
       } else if ((diff > 0) && (this.state.current_x0_window > this.state.default_x0_window)) {
         this.setState({
-          
           prev_absis: event.clientX,
           current_x0_window: ((current_x0_window < this.state.default_x0_window) ? this.state.default_x0_window : current_x0_window),
           current_x_window: current_x_window,
@@ -238,21 +238,18 @@ class Vis extends Component {
       new_adjust.push(character_color);
     }
     this.setState({
-      
       adjust_viewed_character: new_adjust
     });
   }
 
   onResetViewedCharacter(){
     this.setState({
-      
       adjust_viewed_character: ["all"]
     });
   }
 
   onHideAllCharacter() {
     this.setState({
-      
       adjust_viewed_character: []
     });
   }
@@ -274,21 +271,18 @@ class Vis extends Component {
       new_adjust.push(location_color);
     }
     this.setState({
-      
       adjust_viewed_location: new_adjust
     });
   }
 
   onResetViewedLocation() {
     this.setState({
-      
       adjust_viewed_location: ["all"]
     });
   }
 
   onHideAllLocation() {
     this.setState({
-      
       adjust_viewed_location: []
     });
   }
@@ -310,21 +304,18 @@ class Vis extends Component {
       new_adjust.push(time_color);
     }
     this.setState({
-      
       adjust_viewed_time: new_adjust
     });
   }
 
   onResetViewedTime() {
     this.setState({
-      
       adjust_viewed_time: ["all"]
     });
   }
 
   onHideAllTime() {
     this.setState({
-      
       adjust_viewed_time: []
     });
   }
@@ -379,6 +370,11 @@ class Vis extends Component {
           <span>Ukuran Awal</span>
         </div>
         <div
+          className="button is-static is-small"
+          style={{ backgroundColor: "white", color:"#363636"}}>
+          <span>Pertahankan Pentunjuk {` (${this.state.clicked ? "Aktif" : "Tidak Aktif"})`}</span>
+        </div>
+        <div
           onWheel={this.onWheel}
           onMouseDown={this.onMouseDown}
           onMouseUp={this.onMouseUp}
@@ -394,8 +390,10 @@ class Vis extends Component {
             handleMouseOver={this.handleMouseOver}
             xDomain={[this.state.current_x0_window, this.state.current_x_window]}
             width={this.state.width}
-            height={300}
+            height={350}
             data={this.state.data}
+            clicked={this.state.clicked}
+            onClickForView={this.onClick}
             horizontal_white_space={0.1} />
         </div>
         <CharacterVis
@@ -410,6 +408,8 @@ class Vis extends Component {
           width={this.state.width}
           height={10}
           data={this.state.data}
+          clicked={this.state.clicked}
+          onClickForView={this.onClick}
           horizontal_white_space={0.1}
           vertical_white_space={0.2} />
         <LocationVis
@@ -423,6 +423,8 @@ class Vis extends Component {
           xDomain={[this.state.current_x0_window, this.state.current_x_window]}
           width={this.state.width}
           height={10}
+          clicked={this.state.clicked}
+          onClickForView={this.onClick}
           data={this.state.data}
           horizontal_white_space={0.1}/>
         <TimeVis
@@ -436,6 +438,8 @@ class Vis extends Component {
           xDomain={[this.state.current_x0_window, this.state.current_x_window]}
           width={this.state.width}
           height={10}
+          clicked={this.state.clicked}
+          onClickForView={this.onClick}
           data={this.state.data}
           horizontal_white_space={0.1}/>
       </div>

@@ -63,7 +63,7 @@ class StoryCurve extends Component {
       date_areas : [],
       y_max : 0,
       y_min : 0,
-      hint_position : {}
+      hint_position : {},
     }
     this.preprocessRectData = this.preprocessRectData.bind(this);
     this.preprocessLineData = this.preprocessLineData.bind(this);
@@ -286,7 +286,7 @@ class StoryCurve extends Component {
       var prev_date = moment(sorted_data[0].published_date, "DD/MM/YYYY HH:mm");
       var curr_date = "";
       var prev_idx = 0;
-      date_tic_names.push(moment(prev_date, "DD/MM/YYYY HH:mm").format("DD MMM YY"));
+      date_tic_names.push({ DD: moment(prev_date, "DD/MM/YYYY HH:mm").format("DD"), MMM: moment(prev_date, "DD/MM/YYYY HH:mm").format("MMM"), YYYY: moment(prev_date, "DD/MM/YYYY HH:mm").format("YYYY") });
       date_area.start = 0;
       var i = 1
       for (i = 1; i < sorted_data.length; i++) {
@@ -298,7 +298,7 @@ class StoryCurve extends Component {
           date_areas.push({...date_area});
           date_area.start = prev_idx + i;
           prev_idx = i;
-          date_tic_names.push(curr_date.format("DD MMM YY"));
+          date_tic_names.push({ DD: curr_date.format("DD"), MMM: curr_date.format("MMM"), YYYY: curr_date.format("YYYY")});
         }
         prev_date = _.clone(curr_date,true);
       }
@@ -367,7 +367,14 @@ class StoryCurve extends Component {
       return (date_tic_value == value);
     });
     if (index != -1) {
-      return this.state.date_tic_names[index];
+      const date = this.state.date_tic_names[index];
+      return (
+        <tspan>
+          <tspan x="0" y="-2.5em" dy="1em">{date.DD}</tspan>
+          <tspan x="0" y="-1.5em" dy="1em">{date.MMM}</tspan>
+          <tspan x="0" y="-.5em" dy="1em">{date.YYYY}</tspan>
+        </tspan>
+      )
     }
   }
 
@@ -384,7 +391,7 @@ class StoryCurve extends Component {
           y0: this.state.y_min,
           y: this.state.y_max,
           color: "#363636",
-          opacity: .1
+          opacity: .2
         }];
         highlighted_data = _.filter(this.state.event_positions, (datum)=>{
           return ((datum.x0 == nextProps.highlighted_data.x0) && (datum.x == nextProps.highlighted_data.x));
@@ -415,7 +422,7 @@ class StoryCurve extends Component {
           y0: hint_position.y - 0.5,
           y: hint_position.y + 0.5,
           color: "#363636",
-          opacity: .1
+          opacity: .2
         }];
       }
       this.setState({
@@ -445,7 +452,6 @@ class StoryCurve extends Component {
         });
       }
       this.setState({
-        
         event_positions: new_event_positions,
       });
     }
@@ -469,7 +475,6 @@ class StoryCurve extends Component {
         });
       }
       this.setState({
-        
         location_positions: new_location_positions,
       });
     }
@@ -493,7 +498,6 @@ class StoryCurve extends Component {
         });
       }
       this.setState({
-        
         time_positions: new_time_positions,
       });
     }
@@ -512,8 +516,8 @@ class StoryCurve extends Component {
           }}>
           <p className="is-size-7">
             <b>Tanggal Diketahui Kejadian Pertama Kali</b>
-            <span class="icon">
-              <i class="fas fa-lg fa-long-arrow-alt-right"></i>
+            <span className="icon">
+              <i className="fas fa-lg fa-long-arrow-alt-right"></i>
             </span>
           </p>
         </div>
@@ -526,20 +530,24 @@ class StoryCurve extends Component {
             transform: "rotate(-90deg)"
           }}>
           <p className="is-size-7">
-            <span class="icon">
-              <i class="fas fa-lg fa-long-arrow-alt-left"></i>
+            <span className="icon">
+              <i className="fas fa-lg fa-long-arrow-alt-left"></i>
             </span>
             <b>Alur Cerita</b>
           </p>
         </div>
         <XYPlot
           colorType="literal"
-          margin={{ left: 100, top: 50, bottom: 10, right:0  }}
+          margin={{ left: 100, top: 65, bottom: 10, right:0  }}
           width={this.props.width}
           height={this.props.height}
           xDomain={this.props.xDomain}
-          onMouseLeave={() => handleMouseOver({})}
-          yRange={[0, this.props.height-60]}>
+          onMouseLeave={function(){
+            if (!this.props.clicked){
+              handleMouseOver({})
+            }
+          }.bind(this)}
+          yRange={[0, this.props.height-75]}>
           <HorizontalGridLines 
             tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
           {/* Component for display horizontal highlight */}
@@ -571,7 +579,12 @@ class StoryCurve extends Component {
             data={this.state.event_positions} />
           {/* Component for handle mouse over */}
           <VerticalRectSeries
-            onValueMouseOver={(datapoint, { index }) => handleMouseOver(datapoint)}
+            onValueMouseOver={function (datapoint) {
+              if (!this.props.clicked) {
+                handleMouseOver(datapoint)
+              }
+            }.bind(this)}
+            onValueClick={this.props.onClickForView}
             data={_.map(this.props.data,(datum)=>{
               return {
                 x0: (datum.x + this.props.horizontal_white_space),

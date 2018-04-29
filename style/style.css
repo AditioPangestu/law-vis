@@ -7,7 +7,7 @@
 }
 
 .tags.has-addons {
-  width: 300px;
+  width: 400px;
 }
 
 .character-vis-hint .arrow-left {
@@ -48,8 +48,14 @@
 }
 
 .card-header {
-  height: 2.5rem;
+  min-height: 1.5rem;
+  padding-top: .3rem;
+  padding-bottom: .3rem;
   cursor: pointer;
+}
+
+.card-header-icon {
+  padding: .3rem;
 }
 
 .card-footer {

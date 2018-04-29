@@ -1256,6 +1256,284 @@
         "name": "Malam"
       },
       "url": "https://megapolitan.kompas.com/read/2016/11/24/20070891/merasa.kecewa.buni.yani.akan.ajukan.praperadilan"
+    },
+    {
+      "x": 22,
+      "y": 22,
+      "event_name": "Tanggapan atas kejadian acara hukum pidana",
+      "n": 1,
+      "characters": [
+        {
+          "color": "",
+          "role": "Tersangka",
+          "value": [
+            {
+              "name": "Buni Yani",
+              "social_status": [
+              ]
+            }
+          ]
+        }
+      ],
+      "published_date": "24/11/2016 20:38",
+      "law_stage": "Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang menyampaikan tanggapan",
+          "definition": "Buni Yani, Tersangka"
+        },
+        {
+          "term": "Waktu penyampaian tanggapan",
+          "definition": "24/11/2016"
+        },
+        {
+          "term": "Tempat penyampaian tanggapan",
+          "definition": "Mapolda Metro Jaya"
+        },
+        {
+          "term": "Kejadian yang ditanggapi",
+          "definition": "Penetapan Tersangka"
+        },
+        {
+          "term": "Tanggapan berupa opini",
+          "definition": "Buni Yani merasa perlakuan polisi terhadap dirinya berbeda dibanding dengan perlakuan polisi terhadap Gubernur nonaktif DKI Jakarta Basuki Tjahaja Purnama atau Ahok. Hal yang dirasa berbeda oleh Buni adalah proses penetapan tersangka. Buni menilai, saat Ahok ditetapkan menjadi tersangka dalam kasus dugaan penistaan agama, penyidik terlebih dulu melakukan gelar perkara. Namun, dalam kasusnya, kata Buni, berita acara pemeriksaan (BAP) belum rampung, dirinya sudah ditetapkan menjadi tersangka."
+        }
+      ],
+      "location": {
+        "name": "Mapolda Metro Jaya"
+      },
+      "time": {
+        "color": "#FF9833",
+        "date": "24/11/2016",
+        "name": "Malam"
+      },
+      "url": "https://megapolitan.kompas.com/read/2016/11/24/20070891/merasa.kecewa.buni.yani.akan.ajukan.praperadilan"
+    },
+    {
+      "x": 23,
+      "y": 23,
+      "event_name": "Tanggapan atas tanggapan seseorang yang terkait acara hukum pidana",
+      "n": 2,
+      "characters": [
+        {
+          "color": "",
+          "role": "Penyidik",
+          "value": [
+            {
+              "name": "Kombes Awi Setiyono",
+              "social_status": [
+                "Kabid Humas Polda Metro Jaya"
+              ]
+            }
+          ]
+        },
+        {
+          "color": "",
+          "role": "Penasihat Hukum",
+          "value": [
+            {
+              "name": "Aldwin Rahardia",
+              "social_status": [
+                "Kuasa hukum Buni Yani"
+              ]
+            }
+          ]
+        }
+      ],
+      "published_date": "25/11/2016 16:30",
+      "law_stage": "Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang menyampaikan tanggapan",
+          "definition": "Kombes Awi Setiyono, Kabid Humas Polda Metro Jaya"
+        },
+        {
+          "term": "Orang yang ditanggapi",
+          "definition": "Aldwin Rahardia, Kuasa hukum Buni Yani"
+        },
+        {
+          "term": "Waktu penyampaian tanggapan",
+          "definition": "25/11/2016"
+        },
+        {
+          "term": "Tempat penyampaian tanggapan",
+          "definition": "Mapolda Metro Jaya"
+        },
+        {
+          "term": "Kejadian yang ditanggapi",
+          "definition": "Tanggapan Aldwin tentang akan mengajukan praperadilan"
+        },
+        {
+          "term": "Tanggapan berupa opini",
+          "definition": "Polda Metro Jaya mempersilakan Buni Yani jika ingin mengajukan praperadilan terhadap penetapan dirinya menjadi tersangka dalam kasus penyebaran informasi yang ditujukan untuk menimbulkan rasa kebencian atau permusuhan berdasarkan SARA. Awi meyakini bahwa polisi telah bekerja sesuai prosedur dalan penetapan Buni Yani sebagai tersangka. Oleh karena itu pihaknya siap menghadapi praperadilan tersebut."
+        }
+      ],
+      "location": {
+        "name": "Mapolda Metro Jaya"
+      },
+      "time": {
+        "color": "#FF9833",
+        "date": "25/11/2016",
+        "name": "Siang"
+      },
+      "url": "https://megapolitan.kompas.com/read/2016/11/25/16301311/polisi.siap.jika.buni.yani.ingin.ajukan.praperadilan"
+    },
+    {
+      "x": 24,
+      "y": 24,
+      "event_name": "Tanggapan atas kejadian acara hukum pidana",
+      "n": 1,
+      "characters": [
+        {
+          "color": "",
+          "role": "Penyidik",
+          "value": [
+            {
+              "name": "Kombes Awi Setiyono",
+              "social_status": [
+                "Kabid Humas Polda Metro Jaya"
+              ]
+            }
+          ]
+        }
+      ],
+      "published_date": "25/11/2016 17:54",
+      "law_stage": "Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang menyampaikan tanggapan",
+          "definition": "Kombes Awi Setiyono, Kabid Humas Polda Metro Jaya"
+        },
+        {
+          "term": "Waktu penyampaian tanggapan",
+          "definition": "25/11/2016"
+        },
+        {
+          "term": "Tempat penyampaian tanggapan",
+          "definition": "Mapolda Metro Jaya"
+        },
+        {
+          "term": "Kejadian yang ditanggapi",
+          "definition": "Penetapan Tersangka"
+        },
+        {
+          "term": "Tanggapan berupa tindakan yang akan dilakukan",
+          "definition": "Polda Metro Jaya akan berkoordinasi dengan Jaksa Penuntut Umum terkait berkas perkara kasus Buni Yani. Awi menambahkan, setelah berkoordinasi pihaknya akan segera melimpahkan berkas perkara tersebut ke kejaksaan. Ia berharap JPU menyatakan berkas itu lengkap dan bisa segera dipersidangkan."
+        },
+        {
+          "term": "Tanggapan berupa opini",
+          "definition": " Polisi berusaha agar berkas tersebut segera rampung dan kasusnya bisa disidangkan."
+        }
+      ],
+      "location": {
+        "name": "Mapolda Metro Jaya"
+      },
+      "time": {
+        "color": "#FF9833",
+        "date": "25/11/2016",
+        "name": "Siang"
+      },
+      "url": "https://megapolitan.kompas.com/read/2016/11/25/17544241/polisi.percepat.pelengkapan.berkas.perkara.buni.yani"
+    },
+    {
+      "x": 25,
+      "y": 25,
+      "event_name": "Tanggapan atas kejadian acara hukum pidana",
+      "n": 1,
+      "characters": [
+        {
+          "color": "",
+          "role": "Penasihat Hukum",
+          "value": [
+            {
+              "name": "Aldwin Rahardian",
+              "social_status": [
+                "Kuasa hukum Buni Yani"
+              ]
+            }
+          ]
+        }
+      ],
+      "published_date": "28/11/2016 18:23",
+      "law_stage": "Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang menyampaikan tanggapan",
+          "definition": "Kombes Awi Setiyono, Kabid Humas Polda Metro Jaya"
+        },
+        {
+          "term": "Waktu penyampaian tanggapan",
+          "definition": "28/11/2016"
+        },
+        {
+          "term": "Kejadian yang ditanggapi",
+          "definition": "Pengajuan Praperadilan"
+        },
+        {
+          "term": "Tanggapan berupa tindakan yang akan dilakukan",
+          "definition": "Pihak Buni Yani, pengunggah ulang video pidato Basuki Tjahaja Purnama (Ahok), akan mengajukan gugatan praperadilan ke Pengadilan Negeri Jakarta Selatan pada pekan depan."
+        }
+      ],
+      "location": {
+       
+      },
+      "time": {
+        
+      },
+      "url": "https://megapolitan.kompas.com/read/2016/11/28/18235211/buni.yani.ajukan.gugatan.praperadilan.pekan.depan"
+    },
+    {
+      "x": 26,
+      "y": 26,
+      "event_name": "Tanggapan atas kejadian acara hukum pidana",
+      "n": 1,
+      "characters": [
+        {
+          "color": "",
+          "role": "Penyidik",
+          "value": [
+            {
+              "name": "Jenderal Tito Karnavian",
+              "social_status": [
+                "Kepala Kepolisian RI"
+              ]
+            }
+          ]
+        }
+      ],
+      "published_date": "05/12/2016 12:52",
+      "law_stage": "Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang menyampaikan tanggapan",
+          "definition": " Kepolisian RI, Jenderal Tito Karnavian"
+        },
+        {
+          "term": "Waktu penyampaian tanggapan",
+          "definition": "05/12/2016"
+        },
+        {
+          "term": "Tempat penyampaian tanggapan",
+          "definition": "Kompleks Parlemen, Senayan, Jakarta"
+        },
+        {
+          "term": "Kejadian yang ditanggapi",
+          "definition": "Penyampaian Berkas Acara Pidana"
+        },
+        {
+          "term": "Tanggapan berupa tindakan yang telah dilakukan ",
+          "definition": "Kepolisian tengah menyelesaikan pemberkasan kasus Buni Yani. Sejumlah saksi ahli telah dipanggil untuk dimintai keterangannya."
+        }
+      ],
+      "location": {
+        "name" : "Kompleks Parlemen",
+        "city" : "Jakarta"
+      },
+      "time": {
+        "name" : "Siang",
+        "date" : "05/12/2016"
+      },
+      "url": "http://nasional.kompas.com/read/2016/12/05/12524941/kepolisian.finalisasi.pemberkasan.kasus.buni.yani"
     }
   ]
 }

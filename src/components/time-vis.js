@@ -246,7 +246,11 @@ class TimeVis extends Component {
                     width={this.props.width - 100}
                     height={this.props.height}
                     xDomain={this.props.xDomain}
-                    onMouseLeave={() => handleMouseOver({})}>
+                    onMouseLeave={function () {
+                      if (!this.props.clicked) {
+                        handleMouseOver({})
+                      }
+                    }.bind(this)}>
                     <VerticalRectSeries
                       data={[{
                         x0: (this.props.xDomain[0]),
@@ -295,7 +299,12 @@ class TimeVis extends Component {
                     }} />
                     <VerticalRectSeries
                       opacity={0}
-                      onValueMouseOver={(datapoint, { index }) => handleMouseOver(datapoint)}
+                      onValueMouseOver={function (datapoint) {
+                        if (!this.props.clicked) {
+                          handleMouseOver(datapoint)
+                        }
+                      }.bind(this)}
+                      onValueClick={this.props.onClickForView}
                       data={time_position.positions} />
                     {/* Component for display hint */}
                     {(() => {
