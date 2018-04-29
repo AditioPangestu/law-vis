@@ -276,7 +276,7 @@ class StoryCurve extends Component {
           y_base += this.rect_height;
         }
         if (!_.isEmpty(datum.location)) {
-          const y_temp = y_max + 4 * this.rect_height;
+          const y_temp = y_max + 2 * this.rect_height;
           location_positions.push({
             x0: (datum.x + this.props.horizontal_white_space),
             x: (datum.x + 1 - this.props.horizontal_white_space),
@@ -306,8 +306,8 @@ class StoryCurve extends Component {
             y_base+=this.rect_height;
           }
           if (!_.isEmpty(datum.location)) {
-            const y0_temp = y_min - 4 * this.rect_height;
-            const y_temp = y_max + 4 * this.rect_height;
+            const y0_temp = y_min - 2 * this.rect_height;
+            const y_temp = y_max + 2 * this.rect_height;
             location_positions.push({
               x0: (datum.x + this.props.horizontal_white_space),
               x: (datum.x + 1 - this.props.horizontal_white_space),
@@ -336,8 +336,8 @@ class StoryCurve extends Component {
             y_base += this.rect_height;
           }
           if (!_.isEmpty(datum.location)) {
-            const y0_temp = y_min - 4 * this.rect_height;
-            const y_temp = y_max + 4 * this.rect_height;
+            const y0_temp = y_min - 2 * this.rect_height;
+            const y_temp = y_max + 2 * this.rect_height;
             location_positions.push({
               x0: (datum.x + this.props.horizontal_white_space),
               x: (datum.x + 1 - this.props.horizontal_white_space),
@@ -565,7 +565,7 @@ class StoryCurve extends Component {
     if (!_.isEqual(this.props.adjust_viewed_location, nextProps.adjust_viewed_location)) {
       var new_location_positions = []
       if ((nextProps.adjust_viewed_location.length == 1) && (nextProps.adjust_viewed_location[0] == "all")){
-        new_location_positions = this.preprocessRectData(this.props.data).location_positions;
+        new_location_positions = this.preprocessLocationData(this.props.data, this.state.y_min, this.state.y_max);
       } else {
         new_location_positions = _.map(this.state.location_positions,(position)=>{
           if (_.findIndex(nextProps.adjust_viewed_location, (color) => { return (color == position.color) }) != -1) {
