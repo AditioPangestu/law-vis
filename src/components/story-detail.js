@@ -8,6 +8,7 @@ class StoryDetail extends Component {
   render(){
     return(
       <div
+        id={"story-detail-"+this.props.index}
         className="story-detail card is-shadowless is-radiusless"
         onMouseOver={this.props.onMouseOver}
         onMouseLeave={()=>{this.props.close ? this.props.onMouseLeave():""}}

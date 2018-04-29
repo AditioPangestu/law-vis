@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import _ from "lodash";
+import ReactDOM from 'react-dom';
 
 import { ScrollToHOC, ScrollArea } from "react-scroll-to";
 
@@ -55,10 +56,10 @@ class StoryDetailContainer extends Component {
           const closed_details = _.clone(this.state.default_closed_details,true);
           closed_details[index] = false;
           this.setState({
-            
             closed_details: closed_details,
           },()=>{
-            this.props.scroll(0, index * 45);
+            const offset_top = document.getElementById('story-detail-' + index).offsetTop;            
+            this.props.scroll(0, offset_top);
           });
         }
       } else if ((nextProps.highlighted_data==null) || !nextProps.highlighted_data.stay_open){
@@ -78,6 +79,7 @@ class StoryDetailContainer extends Component {
         </figure>
         <ScrollArea 
           style={{
+            position: "relative",
             flex : 2,            
             overflowY:"scroll",
             height: ((222 + 25*3 + 18*(this.props.location_length + this.props.time_length + this.props.character_length))+"px")
@@ -86,6 +88,7 @@ class StoryDetailContainer extends Component {
             return (
             <StoryDetail
               key={index}
+              index={index}
               onChangeClose={()=>this.onChangeClose(index)}
               onMouseOver={() => {
                 const opened_index = _.findIndex(this.state.closed_details, (closed_detail) => {
@@ -106,7 +109,11 @@ class StoryDetailContainer extends Component {
                     });
                 }
               }}
-              onMouseLeave={()=>this.props.handleMouseOver({stay_open:true})}
+              onMouseLeave={()=> {
+                if (!this.props.clicked) {
+                  this.props.handleMouseOver({stay_open:true})
+                }
+              }}
               close={this.state.closed_details[index]}
               event_components={datum.event_components}
               url={datum.url}

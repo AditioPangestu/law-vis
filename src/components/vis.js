@@ -450,6 +450,8 @@ class Vis extends Component {
     return (
       <div className="story-detail-container">
         <StoryDetailContainer
+          clicked={this.state.clicked}
+          onClickForView={this.onClick}
           location_length={this.state.location_length}
           character_length={this.state.character_length}
           time_length={this.state.time_length}
