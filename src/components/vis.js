@@ -145,8 +145,8 @@ class Vis extends Component {
   }
 
   onPanLeft() {
-    const current_x0_window = this.state.current_x0_window - this.state.default_x_window / 128;
-    const current_x_window = this.state.current_x_window - this.state.default_x_window / 128;
+    const current_x0_window = this.state.current_x0_window - this.state.default_x_window / 8;
+    const current_x_window = this.state.current_x_window - this.state.default_x_window / 8;
     if (this.state.current_x0_window > this.state.default_x0_window) {
       this.setState({
         
@@ -157,8 +157,8 @@ class Vis extends Component {
   }
 
   onPanRight() {
-    const current_x0_window = this.state.current_x0_window + this.state.default_x_window / 128;
-    const current_x_window = this.state.current_x_window + this.state.default_x_window / 128;
+    const current_x0_window = this.state.current_x0_window + this.state.default_x_window / 8;
+    const current_x_window = this.state.current_x_window + this.state.default_x_window / 8;
     if (this.state.current_x_window < this.state.default_x_window) {
       this.setState({
         current_x0_window: current_x0_window,
@@ -193,7 +193,7 @@ class Vis extends Component {
   onMouseMove(event) {
     event.preventDefault();
     if(this.state.is_mouse_down){
-      const diff = ((event.clientX - this.state.prev_absis) / (this.state.width - 100))*4;
+      const diff = ((event.clientX - this.state.prev_absis) / (this.state.width - 100))*16;
       const current_x0_window = this.state.current_x0_window - diff;
       const current_x_window = this.state.current_x_window - diff;
       if ((diff < 0) && (this.state.current_x_window < this.state.default_x_window)) {
