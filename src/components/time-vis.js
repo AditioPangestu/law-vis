@@ -171,6 +171,9 @@ class TimeVis extends Component {
         });
       }
     }
+    if (!_.isEqual(this.props.data, nextProps.data)) {
+      this.preprocessData(nextProps.data);
+    }
   }
 
   onCheckboxButton() {

@@ -29,6 +29,7 @@ class Vis extends Component {
       character_length : 0,
       time_length : 0,
       clicked : false,
+      is_new_date : false,
     };
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.onZoomIn = this.onZoomIn.bind(this);
@@ -62,7 +63,7 @@ class Vis extends Component {
     axios.get("./src/data/color-template.json")
       .then((response)=>{
         const color_template = response.data;
-        axios.get("./src/data/real-data-2.json")
+        axios.get("./src/data/real-data.json")
           .then((response)=>{
             var { data }  = response;
             data.events = this.addColorAttribute(data.events,color_template);
@@ -75,6 +76,48 @@ class Vis extends Component {
             });
           })
       })
+  }
+
+  onNewDateClick(){
+    const is_new_date = !this.state.is_new_date;
+    this.setState({
+      is_new_date
+    });
+    if(!is_new_date){
+      axios.get("./src/data/color-template.json")
+        .then((response) => {
+          const color_template = response.data;
+          axios.get("./src/data/real-data.json")
+            .then((response) => {
+              var { data } = response;
+              data.events = this.addColorAttribute(data.events, color_template);
+              this.setState({
+
+                story_detail_data: data,
+                data: data.events.sort((a, b) => { return a.y - b.y }),
+                current_x_window: data.events.length,
+                default_x_window: data.events.length,
+              });
+            })
+        })
+    } else {
+      axios.get("./src/data/color-template.json")
+        .then((response) => {
+          const color_template = response.data;
+          axios.get("./src/data/real-data-2.json")
+            .then((response) => {
+              var { data } = response;
+              data.events = this.addColorAttribute(data.events, color_template);
+              this.setState({
+
+                story_detail_data: data,
+                data: data.events.sort((a, b) => { return a.y - b.y }),
+                current_x_window: data.events.length,
+                default_x_window: data.events.length,
+              });
+            })
+        })
+    }
   }
 
   addColorAttribute(events,color_template){
@@ -323,7 +366,9 @@ class Vis extends Component {
   renderLeftVis(){
     return (
       <div className="vis">
-        <p className="title">{this.state.story_detail_data.title}</p>
+        <p 
+          onClick={this.onNewDateClick.bind(this)}
+          className="title">{this.state.story_detail_data.title}</p>
         <div
           onClick={this.onPanLeft}
           style={{ width: "102px" }}
@@ -397,7 +442,7 @@ class Vis extends Component {
             horizontal_white_space={0.1} />
         </div>
         <CharacterVis
-          setCharacterLength={function(value){this.setState({character_length:value});console.log(value)}.bind(this)}
+          setCharacterLength={function(value){this.setState({character_length:value})}.bind(this)}
           adjust_viewed_character={this.state.adjust_viewed_character}
           onHideAllCharacter={this.onHideAllCharacter}
           onAddViewedCharacter={this.onAddViewedCharacter}

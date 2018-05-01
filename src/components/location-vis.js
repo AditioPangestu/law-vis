@@ -132,7 +132,6 @@ class LocationVis extends Component {
       location_positions: location_positions,
       location_hints: location_hints,
     });
-    console.log("location_positions",location_positions.length);
     this.props.setLocationLength(location_positions.length);    
   }
 
@@ -171,6 +170,9 @@ class LocationVis extends Component {
           checked: false,
         });
       }
+    }
+    if(!_.isEqual(this.props.data,nextProps.data)){
+      this.preprocessData(nextProps.data);
     }
   }
 

@@ -137,7 +137,6 @@ class CharacterVis extends Component {
       character_positions : character_positions,
       character_hints: character_hints,
     });
-    console.log("character_positions", character_positions.length);    
     this.props.setCharacterLength(character_positions.length);
   }
 
@@ -176,6 +175,9 @@ class CharacterVis extends Component {
           checked: false,
         });
       }
+    }
+    if (!_.isEqual(this.props.data, nextProps.data)) {
+      this.preprocessData(nextProps.data);
     }
   }
 

@@ -69,6 +69,17 @@ class StoryDetailContainer extends Component {
         });
       }
     }
+    if(!_.isEqual(this.props.data, nextProps.data)){
+      const length = nextProps.data.events.length;
+      var closed_details = []
+      for (var i = 0; i < length; i++) {
+        closed_details.push(true);
+      }
+      this.setState({
+        closed_details: closed_details,
+        default_closed_details: closed_details
+      });
+    }
   }
 
   render(){

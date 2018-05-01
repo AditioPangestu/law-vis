@@ -608,6 +608,31 @@ class StoryCurve extends Component {
         time_positions: new_time_positions,
       });
     }
+    if(!_.isEqual(this.props.data, nextProps.data)){
+      const { event_positions, stage_areas, line_data, origin_event_positions } = this.preprocessRectData(nextProps.data);
+      const { stage_tic_values, stage_tic_names } = this.generateLawStageTic(stage_areas);
+      const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(nextProps.data);
+      const y_max = _.max(event_positions, (event_position) => { return event_position.y }).y;
+      const y_min = _.min(event_positions, (event_position) => { return event_position.y0 }).y0;
+      const time_positions = this.generateTimeRect(nextProps.data, y_min, y_max);
+      const location_positions = this.preprocessLocationData(nextProps.data, y_min, y_max)
+      this.setState({
+
+        event_positions: event_positions,
+        location_positions: location_positions,
+        time_positions: time_positions,
+        origin_event_positions: origin_event_positions,
+        stage_areas: stage_areas,
+        stage_tic_values: stage_tic_values,
+        stage_tic_names: stage_tic_names,
+        date_tic_values: date_tic_values,
+        date_tic_names: date_tic_names,
+        date_areas: date_areas,
+        line_data: line_data,
+        y_max: y_max,
+        y_min: y_min,
+      });
+    }
   }
 
   render(){
