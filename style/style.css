@@ -106,3 +106,7 @@
 .card:hover {
   border: 2px solid #363636;
 }
+
+.card.has-border {
+  border: 2px solid #363636;
+}

@@ -59,7 +59,7 @@ class StoryDetailContainer extends Component {
             closed_details: closed_details,
           },()=>{
             const offset_top = document.getElementById('story-detail-' + index).offsetTop;            
-            this.props.scroll(0, offset_top);
+            this.props.scroll(0, offset_top-5);
           });
         }
       } else if ((nextProps.highlighted_data==null) || !nextProps.highlighted_data.stay_open){
