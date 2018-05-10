@@ -674,6 +674,7 @@ class StoryCurve extends Component {
           width={this.props.width}
           height={this.props.height}
           xDomain={this.props.xDomain}
+          yDomain={[this.state.y_min, this.state.y_max]}
           onMouseLeave={function(){
             if (!this.props.clicked){
               handleMouseOver({})

@@ -8,12 +8,16 @@ import LocationVis from "./location-vis";
 import TimeVis from "./time-vis";
 import StoryDetailContainer from "./story-detail-container";
 import index from "react-vis/dist/radar-chart";
+import CustomDatepicker from "./custom-datepicker";
+import DatePicker from "react-datepicker";
+import moment from "moment";
 
 class Vis extends Component {
   constructor(props){
     super(props);
     this.state = { 
       data : [],
+      raw : [],
       highlighted_data : {},
       current_x0_window : 0,
       current_x_window : 0,
@@ -30,6 +34,7 @@ class Vis extends Component {
       time_length : 0,
       clicked : false,
       is_new_date : false,
+      start_date : moment("23 Nov 2016","DD MMM YYYY")
     };
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.onZoomIn = this.onZoomIn.bind(this);
@@ -68,9 +73,9 @@ class Vis extends Component {
             var { data }  = response;
             data.events = this.addColorAttribute(data.events,color_template);
             this.setState({
-              
               story_detail_data: data,
               data: data.events.sort((a, b) => { return a.y - b.y }),
+              raw: data.events.sort((a, b) => { return a.y - b.y }),
               current_x_window: data.events.length,
               default_x_window: data.events.length,
             });
@@ -95,6 +100,7 @@ class Vis extends Component {
 
                 story_detail_data: data,
                 data: data.events.sort((a, b) => { return a.y - b.y }),
+                raw: data.events.sort((a, b) => { return a.y - b.y }),
                 current_x_window: data.events.length,
                 default_x_window: data.events.length,
               });
@@ -109,9 +115,9 @@ class Vis extends Component {
               var { data } = response;
               data.events = this.addColorAttribute(data.events, color_template);
               this.setState({
-
                 story_detail_data: data,
                 data: data.events.sort((a, b) => { return a.y - b.y }),
+                raw: data.events.sort((a, b) => { return a.y - b.y }),
                 current_x_window: data.events.length,
                 default_x_window: data.events.length,
               });
@@ -360,156 +366,223 @@ class Vis extends Component {
   onHideAllTime() {
     this.setState({
       adjust_viewed_time: []
+    }); }
+
+  handleChange(value){
+    this.setState({
+      start_date : moment(value)
+    });
+    const new_data = _.filter(this.state.raw, (datum)=>{
+      return moment(datum.published_date, "DD/MM/YYYY").isSameOrAfter(moment(value));
+    });
+    const new_story_detail_data = _.clone(this.state.story_detail_data,true);
+    new_story_detail_data.events = new_data;
+    var max_x = -99999;
+    var min_x = 99999;
+    for(var i=0;i<new_data.length;i++){
+      const datum = new_data[i];
+      if(max_x < datum.x){
+        max_x = datum.x;
+      }
+      if(min_x > datum.x){
+        min_x = datum.x;
+      }
+    }
+    this.setState({
+      data : new_data,
+      story_detail_data: new_story_detail_data,
+      current_x0_window: min_x,
+      current_x_window: max_x+1,
+      default_x_window: max_x+1,
     });
   }
 
   renderLeftVis(){
     return (
       <div className="vis">
-        <p 
-          onClick={this.onNewDateClick.bind(this)}
-          className="title">{this.state.story_detail_data.title}</p>
-        <div
-          onClick={this.onPanLeft}
-          style={{ width: "102px" }}
-          className="button is-small">
-          <span className="icon">
-            <i className="fas fa-arrow-left"></i>
-          </span>
-          <span>Geser Kiri</span>
-        </div>
-        <div
-          onClick={this.onPanRight}
-          style={{ width: "102px" }}
-          className="button is-small">
-          <span className="icon">
-            <i className="fas fa-arrow-right"></i>
-          </span>
-          <span>Geser Kanan</span>
-        </div>
-        <div
-          onClick={this.onZoomIn}
-          style={{ width: "102px" }}
-          className="button is-small">
-          <span className="icon">
-            <i className="fas fa-search-plus"></i>
-          </span>
-          <span>Perbesar</span>
-        </div>
-        <div
-          onClick={this.onZoomOut}
-          style={{ width: "102px" }}
-          className="button is-small">
-          <span className="icon">
-            <i className="fas fa-search-minus"></i>
-          </span>
-          <span>Perkecil</span>
-        </div>
-        <div
-          onClick={this.onResetZoom}
-          style={{width:"102px"}}
-          className="button is-small">
-          <span className="icon">
-            <i className="fas fa-compress"></i>
-          </span>
-          <span>Ukuran Awal</span>
-        </div>
-        <div
-          className="button is-static is-small"
-          style={{ backgroundColor: "white", color:"#363636"}}>
-          <span>Pertahankan Petunjuk {` (${this.state.clicked ? "Aktif" : "Tidak Aktif"})`}</span>
-        </div>
-        <div
-          onWheel={this.onWheel}
-          onMouseDown={this.onMouseDown}
-          onMouseUp={this.onMouseUp}
-          onMouseMove={this.onMouseMove}
+        <div className="level"
           style={{
-            width: this.state.width,
+            marginBottom : ".75rem"
           }}>
-          <StoryCurve
-            adjust_viewed_time={this.state.adjust_viewed_time}
-            adjust_viewed_character={this.state.adjust_viewed_character}
-            adjust_viewed_location={this.state.adjust_viewed_location}
-            highlighted_data={this.state.highlighted_data}
-            handleMouseOver={this.handleMouseOver}
-            xDomain={[this.state.current_x0_window, this.state.current_x_window]}
-            width={this.state.width}
-            height={350}
-            data={this.state.data}
-            clicked={this.state.clicked}
-            onClickForView={this.onClick}
-            horizontal_white_space={0.1} />
+          <div className="level-left">
+            <div className="level-item">
+              <p 
+                onClick={this.onNewDateClick.bind(this)}
+                className="title is-2">{this.state.story_detail_data.title}</p>
+            </div>
+            <div className="level-item">
+              <div className="is-marginless">
+                <p className="is-size-7">Durasi informasi</p>
+                <div className="is-size-6">
+                  <DatePicker
+                    dateFormat="DD MMM YYYY"
+                    customInput={<CustomDatepicker />}
+                    selected={this.state.start_date}
+                    maxDate={moment()}
+                    onChange={this.handleChange.bind(this)} />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <CharacterVis
-          setCharacterLength={function(value){this.setState({character_length:value})}.bind(this)}
-          adjust_viewed_character={this.state.adjust_viewed_character}
-          onHideAllCharacter={this.onHideAllCharacter}
-          onAddViewedCharacter={this.onAddViewedCharacter}
-          onResetViewedCharacter={this.onResetViewedCharacter}
-          highlighted_data={this.state.highlighted_data}
-          handleMouseOver={this.handleMouseOver}
-          xDomain={[this.state.current_x0_window, this.state.current_x_window]}
-          width={this.state.width}
-          height={10}
-          data={this.state.data}
-          clicked={this.state.clicked}
-          onClickForView={this.onClick}
-          horizontal_white_space={0.1}
-          vertical_white_space={0.2} />
-        <LocationVis
-          setLocationLength={function (value) { this.setState({ location_length: value })}.bind(this)}
-          adjust_viewed_location={this.state.adjust_viewed_location}
-          onHideAllLocation={this.onHideAllLocation}
-          onAddViewedLocation={this.onAddViewedLocation}
-          onResetViewedLocation={this.onResetViewedLocation}
-          highlighted_data={this.state.highlighted_data}
-          handleMouseOver={this.handleMouseOver}
-          xDomain={[this.state.current_x0_window, this.state.current_x_window]}
-          width={this.state.width}
-          height={10}
-          clicked={this.state.clicked}
-          onClickForView={this.onClick}
-          data={this.state.data}
-          horizontal_white_space={0.1}/>
-        <TimeVis
-          setTimeLength={function (value) { this.setState({ time_length: value }) }.bind(this)}        
-          adjust_viewed_time={this.state.adjust_viewed_time}
-          onHideAllTime={this.onHideAllTime}
-          onAddViewedTime={this.onAddViewedTime}
-          onResetViewedTime={this.onResetViewedTime}
-          highlighted_data={this.state.highlighted_data}
-          handleMouseOver={this.handleMouseOver}
-          xDomain={[this.state.current_x0_window, this.state.current_x_window]}
-          width={this.state.width}
-          height={10}
-          clicked={this.state.clicked}
-          onClickForView={this.onClick}
-          data={this.state.data}
-          horizontal_white_space={0.1}/>
-      </div>
+        {(()=>{
+          if(this.state.data.length){
+            return (
+              <div>
+
+                <div
+                  onClick={this.onPanLeft}
+                  style={{ width: "102px" }}
+                  className="button is-small">
+                  <span className="icon">
+                    <i className="fas fa-arrow-left"></i>
+                  </span>
+                  <span>Geser Kiri</span>
+                </div>
+                <div
+                  onClick={this.onPanRight}
+                  style={{ width: "102px" }}
+                  className="button is-small">
+                  <span className="icon">
+                    <i className="fas fa-arrow-right"></i>
+                  </span>
+                  <span>Geser Kanan</span>
+                </div>
+                <div
+                  onClick={this.onZoomIn}
+                  style={{ width: "102px" }}
+                  className="button is-small">
+                  <span className="icon">
+                    <i className="fas fa-search-plus"></i>
+                  </span>
+                  <span>Perbesar</span>
+                </div>
+                <div
+                  onClick={this.onZoomOut}
+                  style={{ width: "102px" }}
+                  className="button is-small">
+                  <span className="icon">
+                    <i className="fas fa-search-minus"></i>
+                  </span>
+                  <span>Perkecil</span>
+                </div>
+                <div
+                  onClick={this.onResetZoom}
+                  style={{width:"102px"}}
+                  className="button is-small">
+                  <span className="icon">
+                    <i className="fas fa-compress"></i>
+                  </span>
+                  <span>Ukuran Awal</span>
+                </div>
+                <div
+                  className="button is-static is-small"
+                  style={{ backgroundColor: "white", color:"#363636"}}>
+                  <span>Pertahankan Petunjuk {` (${this.state.clicked ? "Aktif" : "Tidak Aktif"})`}</span>
+                </div>
+                <div
+                  onWheel={this.onWheel}
+                  onMouseDown={this.onMouseDown}
+                  onMouseUp={this.onMouseUp}
+                  onMouseMove={this.onMouseMove}
+                  style={{
+                    width: this.state.width,
+                  }}>
+                  <StoryCurve
+                    adjust_viewed_time={this.state.adjust_viewed_time}
+                    adjust_viewed_character={this.state.adjust_viewed_character}
+                    adjust_viewed_location={this.state.adjust_viewed_location}
+                    highlighted_data={this.state.highlighted_data}
+                    handleMouseOver={this.handleMouseOver}
+                    xDomain={[this.state.current_x0_window, this.state.current_x_window]}
+                    width={this.state.width}
+                    height={350}
+                    data={this.state.data}
+                    clicked={this.state.clicked}
+                    onClickForView={this.onClick}
+                    horizontal_white_space={0.1} />
+                </div>
+                <CharacterVis
+                  setCharacterLength={function(value){this.setState({character_length:value})}.bind(this)}
+                  adjust_viewed_character={this.state.adjust_viewed_character}
+                  onHideAllCharacter={this.onHideAllCharacter}
+                  onAddViewedCharacter={this.onAddViewedCharacter}
+                  onResetViewedCharacter={this.onResetViewedCharacter}
+                  highlighted_data={this.state.highlighted_data}
+                  handleMouseOver={this.handleMouseOver}
+                  xDomain={[this.state.current_x0_window, this.state.current_x_window]}
+                  width={this.state.width}
+                  height={10}
+                  data={this.state.data}
+                  clicked={this.state.clicked}
+                  onClickForView={this.onClick}
+                  horizontal_white_space={0.1}
+                  vertical_white_space={0.2} />
+                <LocationVis
+                  setLocationLength={function (value) { this.setState({ location_length: value })}.bind(this)}
+                  adjust_viewed_location={this.state.adjust_viewed_location}
+                  onHideAllLocation={this.onHideAllLocation}
+                  onAddViewedLocation={this.onAddViewedLocation}
+                  onResetViewedLocation={this.onResetViewedLocation}
+                  highlighted_data={this.state.highlighted_data}
+                  handleMouseOver={this.handleMouseOver}
+                  xDomain={[this.state.current_x0_window, this.state.current_x_window]}
+                  width={this.state.width}
+                  height={10}
+                  clicked={this.state.clicked}
+                  onClickForView={this.onClick}
+                  data={this.state.data}
+                  horizontal_white_space={0.1}/>
+                <TimeVis
+                  setTimeLength={function (value) { this.setState({ time_length: value }) }.bind(this)}        
+                  adjust_viewed_time={this.state.adjust_viewed_time}
+                  onHideAllTime={this.onHideAllTime}
+                  onAddViewedTime={this.onAddViewedTime}
+                  onResetViewedTime={this.onResetViewedTime}
+                  highlighted_data={this.state.highlighted_data}
+                  handleMouseOver={this.handleMouseOver}
+                  xDomain={[this.state.current_x0_window, this.state.current_x_window]}
+                  width={this.state.width}
+                  height={10}
+                  clicked={this.state.clicked}
+                  onClickForView={this.onClick}
+                  data={this.state.data}
+                  horizontal_white_space={0.1}/>
+              </div>
+              );
+            } else {
+              return (
+                <div>
+                  <p className="title is-2">No data available</p>
+                </div>
+              );
+            }
+          })()}
+        </div>
     );
   }
 
   renderRight(){
-    return (
-      <div className="story-detail-container">
-        <StoryDetailContainer
-          clicked={this.state.clicked}
-          onClickForView={this.onClick}
-          location_length={this.state.location_length}
-          character_length={this.state.character_length}
-          time_length={this.state.time_length}
-          handleMouseOver={this.handleMouseOver}
-          highlighted_data={this.state.highlighted_data}
-          data={this.state.story_detail_data}
-          horizontal_white_space={0.1}/>
-      </div>
-    );
+    if (this.state.data.length) {
+      return (
+        <div className="story-detail-container">
+          <StoryDetailContainer
+            clicked={this.state.clicked}
+            onClickForView={this.onClick}
+            location_length={this.state.location_length}
+            character_length={this.state.character_length}
+            time_length={this.state.time_length}
+            handleMouseOver={this.handleMouseOver}
+            highlighted_data={this.state.highlighted_data}
+            data={this.state.story_detail_data}
+            horizontal_white_space={0.1}/>
+        </div>
+      );
+    }
   }
 
   render(){
-    if (this.state.data.length){
+    if (!_.isEmpty(this.state.story_detail_data)){
       return (
         <section className="section">
           <div className="columns">
@@ -524,10 +597,10 @@ class Vis extends Component {
       );
     } else {
       return (
-        <div>
-          Loading...
-        </div>
-      )
+        <p>
+          Loading ...
+        </p>
+      );
     }
   }
 }
