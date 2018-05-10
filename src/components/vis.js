@@ -258,9 +258,9 @@ class Vis extends Component {
   onWheel(event){
     event.preventDefault();
     if(event.deltaY < 0){
-      this.onZoomOut();
-    } else {
       this.onZoomIn();
+    } else {
+      this.onZoomOut();
     }
   }
 
@@ -417,7 +417,7 @@ class Vis extends Component {
         <div
           className="button is-static is-small"
           style={{ backgroundColor: "white", color:"#363636"}}>
-          <span>Pertahankan Pentunjuk {` (${this.state.clicked ? "Aktif" : "Tidak Aktif"})`}</span>
+          <span>Pertahankan Petunjuk {` (${this.state.clicked ? "Aktif" : "Tidak Aktif"})`}</span>
         </div>
         <div
           onWheel={this.onWheel}

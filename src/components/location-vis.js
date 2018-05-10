@@ -244,7 +244,7 @@ class LocationVis extends Component {
                   <XYPlot
                     colorType="literal"
                     margin={{ left: 0, top: 0, bottom: 0, right: 0 }}
-                    width={this.props.width - 100}
+                    width={this.props.width - 110}
                     height={this.props.height}
                     xDomain={this.props.xDomain}
                     onMouseLeave={function () {
@@ -297,7 +297,7 @@ class LocationVis extends Component {
                       left: { fill: '#fff' },
                       right: { fill: 'transparent' },
                       top: { fill: 'transparent' }
-                    }} />
+                    }}/>
                     <VerticalRectSeries
                       opacity={0}
                       onValueMouseOver={function (datapoint) {
@@ -306,7 +306,10 @@ class LocationVis extends Component {
                         }
                       }.bind(this)}
                       onValueClick={this.props.onClickForView}
-                      data={location_position.positions} />
+                      data={location_position.positions} 
+                      style={{
+                        cursor: "pointer"
+                      }}/>
                     {/* Component for display hint */}
                     {(() => {
                       if (!_.isEmpty(this.state.hint_position)) {
@@ -346,7 +349,6 @@ class LocationVis extends Component {
     );
   }
 }
-
 
 LocationVis.propTypes = {
   data: PropTypes.array.isRequired,

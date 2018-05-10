@@ -393,23 +393,23 @@ class StoryCurve extends Component {
       var prev_date = moment(sorted_data[0].published_date, "DD/MM/YYYY HH:mm");
       var curr_date = "";
       var prev_idx = 0;
-      date_tic_names.push({ DD: moment(prev_date, "DD/MM/YYYY HH:mm").format("DD"), MMM: moment(prev_date, "DD/MM/YYYY HH:mm").format("MMM"), YYYY: moment(prev_date, "DD/MM/YYYY HH:mm").format("YYYY") });
+      date_tic_values.push(prev_idx);
+      date_tic_names.push({ DD: moment(prev_date, "DD/MM/YYYY HH:mm").format("DD"), MMM: moment(prev_date, "DD/MM/YYYY HH:mm").format("MM"), YYYY: moment(prev_date, "DD/MM/YYYY HH:mm").format("YY") });
       date_area.start = 0;
       var i = 1
       for (i = 1; i < sorted_data.length; i++) {
         const datum = sorted_data[i];
         curr_date = moment(datum.published_date, "DD/MM/YYYY HH:mm");
         if (!moment(prev_date).isSame(curr_date,'day')) {
-          date_tic_values.push((prev_idx + i) / 2);
+          date_tic_values.push(i);
           date_area.end = i;
           date_areas.push({...date_area});
           date_area.start = prev_idx + i;
           prev_idx = i;
-          date_tic_names.push({ DD: curr_date.format("DD"), MMM: curr_date.format("MMM"), YYYY: curr_date.format("YYYY")});
+          date_tic_names.push({ DD: curr_date.format("DD"), MMM: curr_date.format("MM"), YYYY: curr_date.format("YY")});
         }
         prev_date = _.clone(curr_date,true);
       }
-      date_tic_values.push((prev_idx + i) / 2);
       date_area.end = i;
       date_areas.push({...date_area});
     } else if (sorted_data.length == 1) {
@@ -477,9 +477,9 @@ class StoryCurve extends Component {
       const date = this.state.date_tic_names[index];
       return (
         <tspan>
-          <tspan x="0" y="-2.5em" dy="1em">{date.DD}</tspan>
-          <tspan x="0" y="-1.5em" dy="1em">{date.MMM}</tspan>
-          <tspan x="0" y="-.5em" dy="1em">{date.YYYY}</tspan>
+          <tspan x=".5em" y="-2.5em" dy="1em">{date.DD}</tspan>
+          <tspan x=".5em" y="-1.5em" dy="1em">{date.MMM}</tspan>
+          <tspan x=".5em" y="-.5em" dy="1em">{date.YYYY}</tspan>
         </tspan>
       )
     }
@@ -553,7 +553,7 @@ class StoryCurve extends Component {
           } else {
             return {
               ...position,
-              opacity: .3,
+              opacity: .25,
             };
           }
         });
@@ -725,12 +725,16 @@ class StoryCurve extends Component {
                 y: this.state.y_max,
               }
             })}
-            opacity={0}/>
+            opacity={0}
+            style={{
+              cursor : "pointer"
+            }}/>
           {/* Component for display rect highlight */}
           <VerticalRectSeries
+            onValueClick={this.props.onClickForView}          
             data={this.state.highlighted_data}
             stroke="#363636"
-            style={{ strokeWidth: 3 }}/>
+            style={{ strokeWidth: 3, cursor: "pointer" }}/>
           {/* Component for display hint */}
           {(() => {
             if (!_.isEmpty(this.state.hint_position)) {

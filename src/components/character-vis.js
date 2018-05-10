@@ -248,7 +248,7 @@ class CharacterVis extends Component {
                   <XYPlot
                     colorType="literal"
                     margin={{ left: 0, top: 0, bottom: 0, right: 0 }}
-                    width={this.props.width-100}
+                    width={this.props.width-110}
                     height={this.props.height}
                     xDomain={this.props.xDomain}
                     onMouseLeave={function () {
@@ -303,7 +303,10 @@ class CharacterVis extends Component {
                         }
                       }.bind(this)}
                       onValueClick={this.props.onClickForView}
-                      data={character_position.positions} />
+                      data={character_position.positions} 
+                      style={{
+                        cursor: "pointer"
+                      }}/>
                     {/* Component for display hint */}
                     {(() => {
                       if (!_.isEmpty(this.state.hint_position)) {
