@@ -37,7 +37,7 @@ class StoryDetailContainer extends Component {
   }
 
   onChangeClose(index){
-    const datum = this.props.data.events[index];
+    const datum = this.state.events[index];
     var temp = _.clone(this.state.closed_details,true);
     temp[index] = !temp[index];
     if(!temp[index]){
@@ -57,11 +57,11 @@ class StoryDetailContainer extends Component {
   componentWillReceiveProps(nextProps) {
     if (!_.isEqual(this.props.highlighted_data, nextProps.highlighted_data)) {
       if (!_.isEmpty(nextProps.highlighted_data) && (!nextProps.highlighted_data.stay_close) && nextProps.highlighted_data.x0 && nextProps.highlighted_data.x){
-        const index = _.findIndex(this.props.data.events, (datum)=>{
-          return (datum.x == (Math.ceil(nextProps.highlighted_data.x0 - this.props.horizontal_white_space)));
-        })
-        if (index != -1) {
-          if(nextProps.highlighted_data.from == "story"){
+        if(nextProps.highlighted_data.from == "story"){
+          const index = _.findIndex(this.state.events, (datum)=>{
+            return (datum.x == (Math.ceil(nextProps.highlighted_data.x0 - this.props.horizontal_white_space)));
+          })
+          if (index != -1) {
             var closed_details = _.clone(this.state.default_closed_details,true);
             closed_details[index] = false;
             this.setState({
@@ -70,7 +70,12 @@ class StoryDetailContainer extends Component {
               const offset_top = document.getElementById('story-detail-' + index).offsetTop;            
               this.props.scroll(0, offset_top-5);
             });
-          } else {
+          }
+        } else {
+          const index = _.findIndex(this.props.data.events, (datum) => {
+            return (datum.x == (Math.ceil(nextProps.highlighted_data.x0 - this.props.horizontal_white_space)));
+          })
+          if (index != -1) {
             const length = this.props.data.events.length;
             var default_closed_details = []
             var closed_details = []
