@@ -503,6 +503,312 @@
     },
     {
       "x": 8,
+      "y": 1,
+      "event_name": "Pemulaian Penyelidikan",
+      "n": 1,
+      "characters": [
+        {
+          "color": "",
+          "role": "Penyelidik",
+          "value": [
+            {
+              "name": "Polda Metro Jaya",
+              "social_status": []
+            }
+          ]
+        }
+      ],
+      "published_date": "24/11/2016 18:22",
+      "law_stage": "Penyelidikan",
+      "event_components": [
+        {
+          "term": "Orang yang memulai",
+          "definition": "Polda Metro Jaya, Penyelidik"
+        },
+        {
+          "term": "Waktu pemulaian",
+          "definition": "19/10/2016"
+        },
+        {
+          "term": "Tahap acara hukum pidana yang dimulai (penyelidikan, penyidikan, penuntutan, pemeriksaan)",
+          "definition": "Penyelidikan"
+        }
+      ],
+      "location": {},
+      "time": {},
+      "url": "https://megapolitan.kompas.com/read/2016/11/24/18225661/.timeline.kasus.buni.yani.dari.pembuatan.laporan.hingga.jadi.tersangka"
+    },
+    {
+      "x": 9,
+      "y": 2,
+      "event_name": "Pemeriksaan saksi",
+      "n": 1,
+      "characters": [
+        {
+          "color": "",
+          "role": "Saksi",
+          "value": [
+            {
+              "name": "Andi Windo",
+              "social_status": []
+            }
+          ]
+        },
+        {
+          "color": "",
+          "role": "Penyelidik",
+          "value": [
+            {
+              "name": "Polda Metro Jaya",
+              "social_status": []
+            }
+          ]
+        }
+      ],
+      "published_date": "24/11/2016 18:22",
+      "law_stage": "Penyelidikan",
+      "event_components": [
+        {
+          "term": "Orang yang memeriksa",
+          "definition": "Polda Metro Jaya, Penyelidik"
+        },
+        {
+          "term": "Orang yang diperiksa",
+          "definition": "Andi Windo, Saksi pelapor"
+        },
+        {
+          "term": "Waktu saksi diperiksa",
+          "definition": "26/10/2016"
+        },
+        {
+          "term": "Peran saksi",
+          "definition": "Pelapor"
+        },
+        {
+          "term": "Tempat saksi diperiksa",
+          "definition": "Mapolda Metro Jaya"
+        }
+      ],
+      "location": {
+        "color": "#79C7E3",
+        "name": "Mapolda Metro Jaya",
+        "city": "Jakarta Pusat"
+      },
+      "time": {},
+      "url": "https://megapolitan.kompas.com/read/2016/11/24/18225661/.timeline.kasus.buni.yani.dari.pembuatan.laporan.hingga.jadi.tersangka"
+    },
+    {
+      "x": 10,
+      "y": 3,
+      "event_name": "Penyitaan",
+      "n": 1,
+      "characters": [
+        {
+          "color": "",
+          "role": "Saksi",
+          "value": [
+            {
+              "name": "Andi Windo",
+              "social_status": []
+            }
+          ]
+        },
+        {
+          "color": "",
+          "role": "Penyelidik",
+          "value": [
+            {
+              "name": "Polda Metro Jaya",
+              "social_status": []
+            }
+          ]
+        }
+      ],
+      "published_date": "24/11/2016 18:22",
+      "law_stage": "Penyelidikan",
+      "event_components": [
+        {
+          "term": "Barang yang disita",
+          "definition": "Satu Unit Flashdisk"
+        },
+        {
+          "term": "Orang yang memiliki barang yang disita",
+          "definition": "Andi Windo, saksi terlapor"
+        },
+        {
+          "term": "Orang yang menyita",
+          "definition": "Polda Metro Jaya"
+        },
+        {
+          "term": "Keterlibatan barang yang disita",
+          "definition": "Barang bukti"
+        }
+      ],
+      "location": {
+        "color": "#79C7E3",
+        "name": "Mapolda Metro Jaya",
+        "city": "Jakarta Pusat"
+      },
+      "time": {},
+      "url": "https://megapolitan.kompas.com/read/2016/11/24/18225661/.timeline.kasus.buni.yani.dari.pembuatan.laporan.hingga.jadi.tersangka"
+    },
+    {
+      "x": 11,
+      "y": 4,
+      "event_name": "Pemulaian Penyidikan",
+      "n": 1,
+      "characters": [
+        {
+          "color": "",
+          "role": "Penyidik",
+          "value": [
+            {
+              "name": "Subdit Cyber Crime Ditreskrimsus Polda Metro Jaya",
+              "social_status": []
+            }
+          ]
+        }
+      ],
+      "published_date": "24/11/2016 18:22",
+      "law_stage": "Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang memulai",
+          "definition": "Subdit Cyber Crime Ditreskrimsus Polda Metro Jaya"
+        },
+        {
+          "term": "Waktu pemulaian",
+          "definition": "25/10/2016"
+        },
+        {
+          "term": "Tahap acara hukum pidana yang dimulai (penyelidikan, penyidikan, penuntutan, pemeriksaan)",
+          "definition": "Penyidikan"
+        }
+      ],
+      "location": {},
+      "time": {},
+      "url": "https://megapolitan.kompas.com/read/2016/11/24/18225661/.timeline.kasus.buni.yani.dari.pembuatan.laporan.hingga.jadi.tersangka"
+    },
+    {
+      "x": 12,
+      "y": 5,
+      "event_name": "Pemeriksaan saksi",
+      "n": 2,
+      "characters": [
+        {
+          "color": "",
+          "role": "Saksi",
+          "value": [
+            {
+              "name": "3 orang saksi",
+              "social_status": []
+            }
+          ]
+        },
+        {
+          "color": "",
+          "role": "Penyidik",
+          "value": [
+            {
+              "name": "Polda Metro Jaya",
+              "social_status": []
+            }
+          ]
+        }
+      ],
+      "published_date": "24/11/2016 18:22",
+      "law_stage": "Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang memeriksa",
+          "definition": "Polda Metro Jaya, Penyidik"
+        },
+        {
+          "term": "Orang yang diperiksa",
+          "definition": "3 orang saksi"
+        },
+        {
+          "term": "Waktu saksi diperiksa",
+          "definition": "07/11/2016"
+        },
+        {
+          "term": "Peran saksi",
+          "definition": "Ahli bahasa, ITE, dan sosiologi"
+        },
+        {
+          "term": "Tempat saksi diperiksa",
+          "definition": "Mapolda Metro Jaya"
+        }
+      ],
+      "location": {
+        "color": "#79C7E3",
+        "name": "Mapolda Metro Jaya",
+        "city": "Jakarta Pusat"
+      },
+      "time": {},
+      "url": "https://megapolitan.kompas.com/read/2016/11/24/18225661/.timeline.kasus.buni.yani.dari.pembuatan.laporan.hingga.jadi.tersangka"
+    },
+    {
+      "x": 13,
+      "y": 6,
+      "event_name": "Pemeriksaan saksi",
+      "n": 2,
+      "characters": [
+        {
+          "color": "",
+          "role": "Saksi",
+          "value": [
+            {
+              "name": "Andi Windo",
+              "social_status": []
+            }
+          ]
+        },
+        {
+          "color": "",
+          "role": "Penyidik",
+          "value": [
+            {
+              "name": "Polda Metro Jaya",
+              "social_status": []
+            }
+          ]
+        }
+      ],
+      "published_date": "24/11/2016 18:22",
+      "law_stage": "Penyidikan",
+      "event_components": [
+        {
+          "term": "Orang yang memeriksa",
+          "definition": "Polda Metro Jaya, Penyidik"
+        },
+        {
+          "term": "Orang yang diperiksa",
+          "definition": "Andi Windo, Saksi pelapor"
+        },
+        {
+          "term": "Waktu saksi diperiksa",
+          "definition": "12/11/2016"
+        },
+        {
+          "term": "Peran saksi",
+          "definition": "Pelapor"
+        },
+        {
+          "term": "Tempat saksi diperiksa",
+          "definition": "Mapolda Metro Jaya"
+        }
+      ],
+      "location": {
+        "color": "#79C7E3",
+        "name": "Mapolda Metro Jaya",
+        "city": "Jakarta Pusat"
+      },
+      "time": {},
+      "url": "https://megapolitan.kompas.com/read/2016/11/24/18225661/.timeline.kasus.buni.yani.dari.pembuatan.laporan.hingga.jadi.tersangka"
+    },
+    {
+      "x": 14,
       "y": 14,
       "event_name": "Tanggapan atas kejadian acara hukum pidana",
       "n": 1,
@@ -553,7 +859,7 @@
       "url": "https://megapolitan.kompas.com/read/2016/11/24/14475441/ahok.enggan.komentari.penetapan.buni.yani.sebagai.tersangka"
     },
     {
-      "x": 9,
+      "x": 15,
       "y": 15,
       "event_name": "Tanggapan atas kejadian acara hukum pidana",
       "n": 1,
@@ -604,7 +910,7 @@
       "url": "https://megapolitan.kompas.com/read/2016/11/24/15181941/becermin.dari.kasus.buni.yani.sandiaga.sampaikan.hal.ini.kepada.pengguna.medsos."
     },
     {
-      "x": 10,
+      "x": 16,
       "y": 16,
       "event_name": "Tanggapan atas kejadian acara hukum pidana",
       "n": 1,
@@ -651,7 +957,7 @@
       "url": "https://megapolitan.kompas.com/read/2016/11/24/15442381/anies.berhenti.menyangkutkan.saya.dengan.buni.yani"
     },
     {
-      "x": 11,
+      "x": 17,
       "y": 17,
       "event_name": "Penetapan Hasil Penahanan",
       "n": 2,
@@ -718,7 +1024,7 @@
       "url": "https://megapolitan.kompas.com/read/2016/11/24/17075241/buni.yani.tak.ditahan.karena.dianggap.kooperatif"
     },
     {
-      "x": 12,
+      "x": 18,
       "y": 18,
       "event_name": "Penetapan Hasil Penangkapan",
       "n": 2,
@@ -795,312 +1101,6 @@
         "name": "Siang"
       },
       "url": "https://megapolitan.kompas.com/read/2016/11/24/17381601/jadi.tersangka.buni.yani.dicegah.ke.luar.negeri"
-    },
-    {
-      "x": 13,
-      "y": 1,
-      "event_name": "Pemulaian Penyelidikan",
-      "n": 1,
-      "characters": [
-        {
-          "color": "",
-          "role": "Penyelidik",
-          "value": [
-            {
-              "name": "Polda Metro Jaya",
-              "social_status": []
-            }
-          ]
-        }
-      ],
-      "published_date": "24/11/2016 18:22",
-      "law_stage": "Penyelidikan",
-      "event_components": [
-        {
-          "term": "Orang yang memulai",
-          "definition": "Polda Metro Jaya, Penyelidik"
-        },
-        {
-          "term": "Waktu pemulaian",
-          "definition": "19/10/2016"
-        },
-        {
-          "term": "Tahap acara hukum pidana yang dimulai (penyelidikan, penyidikan, penuntutan, pemeriksaan)",
-          "definition": "Penyelidikan"
-        }
-      ],
-      "location": {},
-      "time": {},
-      "url": "https://megapolitan.kompas.com/read/2016/11/24/18225661/.timeline.kasus.buni.yani.dari.pembuatan.laporan.hingga.jadi.tersangka"
-    },
-    {
-      "x": 14,
-      "y": 2,
-      "event_name": "Pemeriksaan saksi",
-      "n": 1,
-      "characters": [
-        {
-          "color": "",
-          "role": "Saksi",
-          "value": [
-            {
-              "name": "Andi Windo",
-              "social_status": []
-            }
-          ]
-        },
-        {
-          "color": "",
-          "role": "Penyelidik",
-          "value": [
-            {
-              "name": "Polda Metro Jaya",
-              "social_status": []
-            }
-          ]
-        }
-      ],
-      "published_date": "24/11/2016 18:22",
-      "law_stage": "Penyelidikan",
-      "event_components": [
-        {
-          "term": "Orang yang memeriksa",
-          "definition": "Polda Metro Jaya, Penyelidik"
-        },
-        {
-          "term": "Orang yang diperiksa",
-          "definition": "Andi Windo, Saksi pelapor"
-        },
-        {
-          "term": "Waktu saksi diperiksa",
-          "definition": "26/10/2016"
-        },
-        {
-          "term": "Peran saksi",
-          "definition": "Pelapor"
-        },
-        {
-          "term": "Tempat saksi diperiksa",
-          "definition": "Mapolda Metro Jaya"
-        }
-      ],
-      "location": {
-        "color": "#79C7E3",
-        "name": "Mapolda Metro Jaya",
-        "city": "Jakarta Pusat"
-      },
-      "time": {},
-      "url": "https://megapolitan.kompas.com/read/2016/11/24/18225661/.timeline.kasus.buni.yani.dari.pembuatan.laporan.hingga.jadi.tersangka"
-    },
-    {
-      "x": 15,
-      "y": 3,
-      "event_name": "Penyitaan",
-      "n": 1,
-      "characters": [
-        {
-          "color": "",
-          "role": "Saksi",
-          "value": [
-            {
-              "name": "Andi Windo",
-              "social_status": []
-            }
-          ]
-        },
-        {
-          "color": "",
-          "role": "Penyelidik",
-          "value": [
-            {
-              "name": "Polda Metro Jaya",
-              "social_status": []
-            }
-          ]
-        }
-      ],
-      "published_date": "24/11/2016 18:22",
-      "law_stage": "Penyelidikan",
-      "event_components": [
-        {
-          "term": "Barang yang disita",
-          "definition": "Satu Unit Flashdisk"
-        },
-        {
-          "term": "Orang yang memiliki barang yang disita",
-          "definition": "Andi Windo, saksi terlapor"
-        },
-        {
-          "term": "Orang yang menyita",
-          "definition": "Polda Metro Jaya"
-        },
-        {
-          "term": "Keterlibatan barang yang disita",
-          "definition": "Barang bukti"
-        }
-      ],
-      "location": {
-        "color": "#79C7E3",
-        "name": "Mapolda Metro Jaya",
-        "city": "Jakarta Pusat"
-      },
-      "time": {},
-      "url": "https://megapolitan.kompas.com/read/2016/11/24/18225661/.timeline.kasus.buni.yani.dari.pembuatan.laporan.hingga.jadi.tersangka"
-    },
-    {
-      "x": 16,
-      "y": 4,
-      "event_name": "Pemulaian Penyidikan",
-      "n": 1,
-      "characters": [
-        {
-          "color": "",
-          "role": "Penyidik",
-          "value": [
-            {
-              "name": "Subdit Cyber Crime Ditreskrimsus Polda Metro Jaya",
-              "social_status": []
-            }
-          ]
-        }
-      ],
-      "published_date": "24/11/2016 18:22",
-      "law_stage": "Penyidikan",
-      "event_components": [
-        {
-          "term": "Orang yang memulai",
-          "definition": "Subdit Cyber Crime Ditreskrimsus Polda Metro Jaya"
-        },
-        {
-          "term": "Waktu pemulaian",
-          "definition": "25/10/2016"
-        },
-        {
-          "term": "Tahap acara hukum pidana yang dimulai (penyelidikan, penyidikan, penuntutan, pemeriksaan)",
-          "definition": "Penyidikan"
-        }
-      ],
-      "location": {},
-      "time": {},
-      "url": "https://megapolitan.kompas.com/read/2016/11/24/18225661/.timeline.kasus.buni.yani.dari.pembuatan.laporan.hingga.jadi.tersangka"
-    },
-    {
-      "x": 17,
-      "y": 5,
-      "event_name": "Pemeriksaan saksi",
-      "n": 2,
-      "characters": [
-        {
-          "color": "",
-          "role": "Saksi",
-          "value": [
-            {
-              "name": "3 orang saksi",
-              "social_status": []
-            }
-          ]
-        },
-        {
-          "color": "",
-          "role": "Penyidik",
-          "value": [
-            {
-              "name": "Polda Metro Jaya",
-              "social_status": []
-            }
-          ]
-        }
-      ],
-      "published_date": "24/11/2016 18:22",
-      "law_stage": "Penyidikan",
-      "event_components": [
-        {
-          "term": "Orang yang memeriksa",
-          "definition": "Polda Metro Jaya, Penyidik"
-        },
-        {
-          "term": "Orang yang diperiksa",
-          "definition": "3 orang saksi"
-        },
-        {
-          "term": "Waktu saksi diperiksa",
-          "definition": "07/11/2016"
-        },
-        {
-          "term": "Peran saksi",
-          "definition": "Ahli bahasa, ITE, dan sosiologi"
-        },
-        {
-          "term": "Tempat saksi diperiksa",
-          "definition": "Mapolda Metro Jaya"
-        }
-      ],
-      "location": {
-        "color": "#79C7E3",
-        "name": "Mapolda Metro Jaya",
-        "city": "Jakarta Pusat"
-      },
-      "time": {},
-      "url": "https://megapolitan.kompas.com/read/2016/11/24/18225661/.timeline.kasus.buni.yani.dari.pembuatan.laporan.hingga.jadi.tersangka"
-    },
-    {
-      "x": 18,
-      "y": 6,
-      "event_name": "Pemeriksaan saksi",
-      "n": 2,
-      "characters": [
-        {
-          "color": "",
-          "role": "Saksi",
-          "value": [
-            {
-              "name": "Andi Windo",
-              "social_status": []
-            }
-          ]
-        },
-        {
-          "color": "",
-          "role": "Penyidik",
-          "value": [
-            {
-              "name": "Polda Metro Jaya",
-              "social_status": []
-            }
-          ]
-        }
-      ],
-      "published_date": "24/11/2016 18:22",
-      "law_stage": "Penyidikan",
-      "event_components": [
-        {
-          "term": "Orang yang memeriksa",
-          "definition": "Polda Metro Jaya, Penyidik"
-        },
-        {
-          "term": "Orang yang diperiksa",
-          "definition": "Andi Windo, Saksi pelapor"
-        },
-        {
-          "term": "Waktu saksi diperiksa",
-          "definition": "12/11/2016"
-        },
-        {
-          "term": "Peran saksi",
-          "definition": "Pelapor"
-        },
-        {
-          "term": "Tempat saksi diperiksa",
-          "definition": "Mapolda Metro Jaya"
-        }
-      ],
-      "location": {
-        "color": "#79C7E3",
-        "name": "Mapolda Metro Jaya",
-        "city": "Jakarta Pusat"
-      },
-      "time": {},
-      "url": "https://megapolitan.kompas.com/read/2016/11/24/18225661/.timeline.kasus.buni.yani.dari.pembuatan.laporan.hingga.jadi.tersangka"
     },
     {
       "x": 19,

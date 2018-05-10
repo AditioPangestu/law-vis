@@ -462,7 +462,7 @@ class StoryCurve extends Component {
       } else {
         return (
           <tspan>
-            <tspan x="0" dy="1em">{words_of_name[0]}</tspan>
+            <tspan x="0" y="0">{words_of_name[0]}</tspan>
           </tspan>
         )
       }
@@ -477,9 +477,9 @@ class StoryCurve extends Component {
       const date = this.state.date_tic_names[index];
       return (
         <tspan>
-          <tspan x=".5em" y="-2.5em" dy="1em">{date.DD}</tspan>
-          <tspan x=".5em" y="-1.5em" dy="1em">{date.MMM}</tspan>
-          <tspan x=".5em" y="-.5em" dy="1em">{date.YYYY}</tspan>
+          <tspan x=".6em" y="-1.8em" dy="1em">{date.DD}</tspan>
+          <tspan x=".6em" y="-.8em" dy="1em">{date.MMM}</tspan>
+          <tspan x=".6em" y=".2em" dy="1em">{date.YYYY}</tspan>
         </tspan>
       )
     }
@@ -682,6 +682,8 @@ class StoryCurve extends Component {
           yRange={[0, this.props.height-75]}>
           <HorizontalGridLines 
             tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end})}/>
+          <VerticalGridLines 
+            tickValues={this.state.date_tic_values}/>
           {/* Component for display plot */}
           <LineSeries
             color="black"
@@ -761,6 +763,8 @@ class StoryCurve extends Component {
             }
           })()}
           <XAxis
+            tickSize={0}
+            tickSizeOuter={10}
             orientation="top"
             tickValues={this.state.date_tic_values}
             tickFormat={this.dateTicFormat} />
@@ -778,8 +782,10 @@ class StoryCurve extends Component {
             tickFormat={this.stageTicFormat}
             style={{backgroundColor:"white"}}/>
           <YAxis
+            tickSize={0}
+            tickSizeOuter={80}
             tickValues={_.map(this.state.stage_areas, (stage_area) => { return stage_area.end })}
-            tickFormat={(value) => { return "" }} />
+            tickFormat={(value) => { return "" }}/>
         </XYPlot>
       </div>
     );
