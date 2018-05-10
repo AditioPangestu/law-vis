@@ -44,6 +44,7 @@ class StoryDetailContainer extends Component {
       this.props.handleMouseOver({
         x0: (datum.x + this.props.horizontal_white_space),
         x: (datum.x + 1 - this.props.horizontal_white_space),
+        from: "story"
       })
     } else {
       if(this.props.clicked){
@@ -64,8 +65,8 @@ class StoryDetailContainer extends Component {
           closed_details[index] = false;
           this.setState({
             closed_details: closed_details,
-            query:"",
-            events: this.props.data.events,
+            query: (nextProps.highlighted_data.from != "story"?"":this.state.query),
+            events: (nextProps.highlighted_data.from != "story" ? this.props.data.events : this.state.events),
           },()=>{
             const offset_top = document.getElementById('story-detail-' + index).offsetTop;            
             this.props.scroll(0, offset_top-5);
@@ -115,6 +116,7 @@ class StoryDetailContainer extends Component {
           }}>
           <p className="control has-icons-right">
             <input
+              disabled={this.props.clicked}
               value={this.state.query}
               onFocus={this.handleSearchChange}
               onChange={this.handleSearchChange}
