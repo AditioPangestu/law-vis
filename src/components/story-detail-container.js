@@ -61,16 +61,34 @@ class StoryDetailContainer extends Component {
           return (datum.x == (Math.ceil(nextProps.highlighted_data.x0 - this.props.horizontal_white_space)));
         })
         if (index != -1) {
-          const closed_details = _.clone(this.state.default_closed_details,true);
-          closed_details[index] = false;
-          this.setState({
-            closed_details: closed_details,
-            query: (nextProps.highlighted_data.from != "story"?"":this.state.query),
-            events: (nextProps.highlighted_data.from != "story" ? this.props.data.events : this.state.events),
-          },()=>{
-            const offset_top = document.getElementById('story-detail-' + index).offsetTop;            
-            this.props.scroll(0, offset_top-5);
-          });
+          if(nextProps.highlighted_data.from == "story"){
+            var closed_details = _.clone(this.state.default_closed_details,true);
+            closed_details[index] = false;
+            this.setState({
+              closed_details: closed_details,
+            },()=>{
+              const offset_top = document.getElementById('story-detail-' + index).offsetTop;            
+              this.props.scroll(0, offset_top-5);
+            });
+          } else {
+            const length = this.props.data.events.length;
+            var default_closed_details = []
+            var closed_details = []
+            for (var i = 0; i < length; i++) {
+              closed_details.push(true);
+              default_closed_details.push(true);
+            }
+            closed_details[index] = false;
+            this.setState({
+              query: "",
+              events: this.props.data.events,
+              closed_details: closed_details,
+              default_closed_details: default_closed_details,
+            }, () => {
+              const offset_top = document.getElementById('story-detail-' + index).offsetTop;
+              this.props.scroll(0, offset_top - 5);
+            });
+          }
         }
       } else if ((nextProps.highlighted_data==null) || !nextProps.highlighted_data.stay_open){
         this.setState({
@@ -86,7 +104,8 @@ class StoryDetailContainer extends Component {
       }
       this.setState({
         closed_details: closed_details,
-        default_closed_details: closed_details
+        default_closed_details: closed_details,
+        events : nextProps.data.events
       });
     }
   }
@@ -98,9 +117,27 @@ class StoryDetailContainer extends Component {
       const new_event = _.filter(this.props.data.events, (event)=>{
         return (_.includes(event.event_name.toLowerCase(),query.toLowerCase()));
       });
-      this.setState({ events: new_event });
+      const length = new_event.length;
+      var closed_details = []
+      for (var i = 0; i < length; i++) {
+        closed_details.push(true);
+      }
+      this.setState({ 
+        events: new_event,
+        closed_details: closed_details,
+        default_closed_details: closed_details,
+      });
     } else {
-      this.setState({ events: this.props.data.events });
+      const length = this.props.data.events.length;
+      var closed_details = []
+      for (var i = 0; i < length; i++) {
+        closed_details.push(true);
+      }
+      this.setState({ 
+        events: this.props.data.events,
+        closed_details: closed_details,
+        default_closed_details: closed_details,
+      });
     }
   }
 
@@ -118,7 +155,7 @@ class StoryDetailContainer extends Component {
             <input
               disabled={this.props.clicked}
               value={this.state.query}
-              onFocus={this.handleSearchChange}
+              onFocus={() => this.props.handleMouseOver({})}
               onChange={this.handleSearchChange}
               className="input is-small" type="text" placeholder="Masukkan nama kejadian"/>
               <span className="icon is-small is-right">
