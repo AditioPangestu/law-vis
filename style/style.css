@@ -110,3 +110,7 @@
 .card.has-border {
   border: 2px solid #363636;
 }
+
+.card.has-border:hover {
+  z-index : 10000;
+}

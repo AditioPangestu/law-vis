@@ -542,7 +542,7 @@
       "x": 9,
       "y": 2,
       "event_name": "Pemeriksaan saksi",
-      "n": 1,
+      "n": 2,
       "characters": [
         {
           "color": "",
@@ -601,7 +601,7 @@
       "x": 10,
       "y": 3,
       "event_name": "Penyitaan",
-      "n": 1,
+      "n": 2,
       "characters": [
         {
           "color": "",

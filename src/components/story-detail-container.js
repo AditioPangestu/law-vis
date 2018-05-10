@@ -16,8 +16,11 @@ class StoryDetailContainer extends Component {
     this.state = {
       closed_details : [true,true],
       default_closed_details : [true,true],
+      query : "",
+      events : []
     }
     this.onChangeClose = this.onChangeClose.bind(this);
+    this.handleSearchChange = this.handleSearchChange.bind(this);
   }
 
   componentWillMount(){
@@ -28,7 +31,8 @@ class StoryDetailContainer extends Component {
     }
     this.setState({
       closed_details: closed_details,
-      default_closed_details: closed_details
+      default_closed_details: closed_details,
+      events : this.props.data.events
     });
   }
 
@@ -42,6 +46,9 @@ class StoryDetailContainer extends Component {
         x: (datum.x + 1 - this.props.horizontal_white_space),
       })
     } else {
+      if(this.props.clicked){
+        this.props.onClickForView();
+      }
       this.props.handleMouseOver(null);
     }
   }
@@ -57,6 +64,8 @@ class StoryDetailContainer extends Component {
           closed_details[index] = false;
           this.setState({
             closed_details: closed_details,
+            query:"",
+            events: this.props.data.events,
           },()=>{
             const offset_top = document.getElementById('story-detail-' + index).offsetTop;            
             this.props.scroll(0, offset_top-5);
@@ -64,7 +73,6 @@ class StoryDetailContainer extends Component {
         }
       } else if ((nextProps.highlighted_data==null) || !nextProps.highlighted_data.stay_open){
         this.setState({
-          
           closed_details: this.state.default_closed_details,
         });
       }
@@ -82,12 +90,40 @@ class StoryDetailContainer extends Component {
     }
   }
 
+  handleSearchChange(event) {
+    const query = event.target.value
+    this.setState({ query: query });
+    if (_.size(query) != 0){
+      const new_event = _.filter(this.props.data.events, (event)=>{
+        return (_.includes(event.event_name.toLowerCase(),query.toLowerCase()));
+      });
+      this.setState({ events: new_event });
+    } else {
+      this.setState({ events: this.props.data.events });
+    }
+  }
+
   render(){
     return (
       <div className="story-detail-container">
         <figure className="image is-16by9">
           <img src={this.props.data.image_url}/>
         </figure>
+        <div className="field"
+          style={{
+            margin: ".5rem 0rem"
+          }}>
+          <p className="control has-icons-right">
+            <input
+              value={this.state.query}
+              onFocus={this.handleSearchChange}
+              onChange={this.handleSearchChange}
+              className="input is-small" type="text" placeholder="Masukkan nama kejadian"/>
+              <span className="icon is-small is-right">
+              <i className="fas fa-search"></i>
+              </span>
+          </p>
+        </div>
         <ScrollArea 
           style={{
             position: "relative",
@@ -95,7 +131,7 @@ class StoryDetailContainer extends Component {
             overflowY:"scroll",
             height: ((222 + 25*3 + 18*(this.props.location_length + this.props.time_length + this.props.character_length))+"px")
           }}>
-          {_.map(this.props.data.events,(datum,index)=>{
+          {_.map(this.state.events,(datum,index)=>{
             return (
             <StoryDetail
               key={index}
