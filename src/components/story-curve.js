@@ -78,7 +78,7 @@ class StoryCurve extends Component {
   componentWillMount(){
     const { event_positions, stage_areas, line_data, origin_event_positions} = this.preprocessRectData(this.props.data);
     const { stage_tic_values, stage_tic_names } = this.generateLawStageTic(stage_areas);
-    const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(this.props.data);
+    const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(this.props.data, this.props.xDomain[0]);
     const y_max = _.max(event_positions, (event_position) => { return event_position.y}).y;
     const y_min = _.min(event_positions, (event_position) => { return event_position.y0}).y0;
     const time_positions = this.generateTimeRect(this.props.data,y_min,y_max);
@@ -382,7 +382,7 @@ class StoryCurve extends Component {
     };
   }
   
-  generateDateTic(data){
+  generateDateTic(data, x0){
     var date_tic_names = [];
     var date_tic_values = [];
     var date_areas = [];
@@ -393,7 +393,7 @@ class StoryCurve extends Component {
       var prev_date = moment(sorted_data[0].published_date, "DD/MM/YYYY HH:mm");
       var curr_date = "";
       var prev_idx = 0;
-      date_tic_values.push(prev_idx);
+      date_tic_values.push(x0);
       date_tic_names.push({ DD: moment(prev_date, "DD/MM/YYYY HH:mm").format("DD"), MMM: moment(prev_date, "DD/MM/YYYY HH:mm").format("MM"), YYYY: moment(prev_date, "DD/MM/YYYY HH:mm").format("YY") });
       date_area.start = 0;
       var i = 1
@@ -401,7 +401,7 @@ class StoryCurve extends Component {
         const datum = sorted_data[i];
         curr_date = moment(datum.published_date, "DD/MM/YYYY HH:mm");
         if (!moment(prev_date).isSame(curr_date,'day')) {
-          date_tic_values.push(i);
+          date_tic_values.push(x0+i);
           date_area.end = i;
           date_areas.push({...date_area});
           date_area.start = prev_idx + i;
@@ -413,7 +413,7 @@ class StoryCurve extends Component {
       date_area.end = i;
       date_areas.push({...date_area});
     } else if (sorted_data.length == 1) {
-      date_tic_values = [0];
+      date_tic_values = [x0];
       date_tic_names = [sorted_data[0].published_date];
       date_areas.push({
         start : 0,
@@ -611,7 +611,7 @@ class StoryCurve extends Component {
     if(!_.isEqual(this.props.data, nextProps.data)){
       const { event_positions, stage_areas, line_data, origin_event_positions } = this.preprocessRectData(nextProps.data);
       const { stage_tic_values, stage_tic_names } = this.generateLawStageTic(stage_areas);
-      const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(nextProps.data);
+      const { date_tic_values, date_tic_names, date_areas } = this.generateDateTic(nextProps.data,nextProps.xDomain[0]);
       const y_max = _.max(event_positions, (event_position) => { return event_position.y }).y;
       const y_min = _.min(event_positions, (event_position) => { return event_position.y0 }).y0;
       const time_positions = this.generateTimeRect(nextProps.data, y_min, y_max);

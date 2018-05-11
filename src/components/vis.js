@@ -392,6 +392,7 @@ class Vis extends Component {
       data : new_data,
       story_detail_data: new_story_detail_data,
       current_x0_window: min_x,
+      default_x0_window: min_x,
       current_x_window: max_x+1,
       default_x_window: max_x+1,
     });
@@ -412,7 +413,10 @@ class Vis extends Component {
             </div>
             <div className="level-item">
               <div className="is-marginless">
-                <p className="is-size-7">Durasi informasi</p>
+                <p className="is-size-7"
+                  style={{
+                    marginBottom : "-.3rem"
+                  }}>Durasi informasi</p>
                 <div className="is-size-6">
                   <DatePicker
                     dateFormat="DD MMM YYYY"
@@ -552,8 +556,12 @@ class Vis extends Component {
               );
             } else {
               return (
-                <div>
-                  <p className="title is-2">No data available</p>
+                <div className="hero">
+                  <div className="hero-body is-paddingless">
+                    <div className="container is-paddingless">
+                      <p className="title is-6">No data available</p>
+                    </div>
+                  </div>
                 </div>
               );
             }
