@@ -417,7 +417,10 @@ class Vis extends Component {
                   style={{
                     marginBottom : "-.3rem"
                   }}>Durasi informasi</p>
-                <div className="is-size-6">
+                <div className="is-size-6"
+                  style={{
+                    cursor : "pointer"
+                  }}>
                   <DatePicker
                     dateFormat="DD MMM YYYY"
                     customInput={<CustomDatepicker />}
