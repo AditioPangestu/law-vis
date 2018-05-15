@@ -553,7 +553,7 @@ class StoryCurve extends Component {
           } else {
             return {
               ...position,
-              opacity: .25,
+              opacity: 0.2,
             };
           }
         });

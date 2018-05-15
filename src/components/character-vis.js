@@ -264,8 +264,25 @@ class CharacterVis extends Component {
                         y: 1,
                         color: "#f1f1f1"
                       }]} />
-                    <VerticalRectSeries
-                      data={character_position.positions}/>
+                    {(()=>{
+                      if (this.props.adjust_viewed_character[0] == "all"){
+                        return (
+                          <VerticalRectSeries
+                            data={character_position.positions}/>
+                        );
+                      } if (_.findIndex(this.props.adjust_viewed_character, (color) => { return (color == character_position.positions[0].color) }) != -1) {
+                        return (
+                          <VerticalRectSeries
+                          data={character_position.positions}/>
+                        );
+                      } else {
+                        return (
+                          <VerticalRectSeries
+                            opacity={0.2}
+                            data={character_position.positions}/>
+                        );
+                      }
+                    })()}
                     {(()=>{
                       if (this.state.highlighted_data.length != 0){
                         const hightlight_index = _.findIndex(character_position.positions, (value) => {

@@ -260,15 +260,19 @@ class TimeVis extends Component {
                         y: 1,
                         color: "#f1f1f1"
                       }]} />
-                    <VerticalRectSeries
-                      data={_.map(time_position.positions, (position)=>{
-                        var temp = {...position};
-                        temp.color = "#fff";
-                        temp.opacity = 1;
-                        return temp;
-                      })} />
-                    <VerticalRectSeries
-                      data={time_position.positions} />
+                    {(() => {
+                      if (this.props.adjust_viewed_time[0] == "all") {
+                        return (
+                          <VerticalRectSeries
+                            data={time_position.positions} />
+                        );
+                      } if (_.findIndex(this.props.adjust_viewed_time, (color) => { return (color == time_position.positions[0].color) }) != -1) {
+                        return (
+                          <VerticalRectSeries
+                            data={time_position.positions} />
+                        );
+                      }
+                    })()}
                     {(() => {
                       if (this.state.highlighted_data.length != 0) {
                         const hightlight_index = _.findIndex(time_position.positions, (value) => {
