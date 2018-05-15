@@ -1015,7 +1015,10 @@
           "definition": "Polisi memutuskan tidak menahan Buni karena alasan subyektif dan obyetif. Dari unsur subyektif, kata Awi, polisi berkeyakinan Buni tidak akan melarikan diri dan menghilangkan barang bukti. Sebab, semua barang bukti dalam kasus tersebut sudah disita polisi. Sementara itu, untuk alasan obyektif, Buni dinilai kooperatif selama menjalani pemeriksaan."
         }
       ],
-      "location": {},
+      "location": {
+        "name": "Mapolda Metro Jaya",
+        "city": "Jakarta Pusat" 
+      },
       "time": {
         "color": "#FF9833",
         "date": "24/11/2016",
@@ -1094,7 +1097,10 @@
           "definition": "60 hari"
         }
       ],
-      "location": {},
+      "location": {
+        "name": "Mapolda Metro Jaya",
+        "city": "Jakarta Pusat" 
+      },
       "time": {
         "color": "#FF9833",
         "date": "24/11/2016",
@@ -1146,7 +1152,8 @@
         }
       ],
       "location": {
-        "name": "Mapolda Metro Jaya"
+        "name": "Mapolda Metro Jaya",
+        "city": "Jakarta Pusat" 
       },
       "time": {
         "color": "#FF9833",
