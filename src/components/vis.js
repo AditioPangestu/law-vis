@@ -266,7 +266,11 @@ class Vis extends Component {
     if(event.deltaY < 0){
       this.onZoomIn();
     } else {
-      this.onZoomOut();
+      if ((this.state.current_x0_window == this.state.default_x0_window) && (this.state.current_x_window == this.state.default_x_window)) {
+        window.scrollBy(0, event.deltaY);
+      } else {
+        this.onZoomOut();
+      }
     }
   }
 
