@@ -416,7 +416,7 @@ class Vis extends Component {
                 className="title is-2">{this.state.story_detail_data.title}</p>
             </div>
             <div className="level-item">
-              <div className="is-marginless">
+              {/* <div className="is-marginless">
                 <p className="is-size-7"
                   style={{
                     marginBottom : "-.3rem"
@@ -432,7 +432,7 @@ class Vis extends Component {
                     maxDate={moment()}
                     onChange={this.handleChange.bind(this)} />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
