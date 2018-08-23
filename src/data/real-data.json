@@ -9,7 +9,6 @@
       "n": 2,
       "characters": [
         {
-          "color": "",
           "role": "Saksi",
           "value": [
             {
@@ -23,7 +22,6 @@
           ]
         },
         {
-          "color": "",
           "role": "Penyelidik",
           "value": [
             {
@@ -83,7 +81,6 @@
       "n": 3,
       "characters": [
         {
-          "color": "",
           "role": "Saksi",
           "value": [
             {
@@ -93,7 +90,6 @@
           ]
         },
         {
-          "color": "",
           "role": "Penasihat Hukum",
           "value": [
             {
@@ -103,7 +99,6 @@
           ]
         },
         {
-          "color": "",
           "role": "Penyelidik",
           "value": [
             {
@@ -158,7 +153,6 @@
       "n": 1,
       "characters": [
         {
-          "color": "",
           "role": "Penasihat Hukum",
           "value": [
             {
@@ -200,7 +194,6 @@
         "name": "Mapolda Metro Jaya"
       },
       "time": {
-        "color": "#FF9833",
         "date": "23/11/2016",
         "name": "Siang"
       },
@@ -213,7 +206,6 @@
       "n": 1,
       "characters": [
         {
-          "color": "",
           "role": "Saksi",
           "value": [
             {
@@ -251,7 +243,6 @@
         "name": "Mapolda Metro Jaya"
       },
       "time": {
-        "color": "#FF9833",
         "date": "23/11/2016",
         "name": "Siang"
       },
@@ -264,7 +255,6 @@
       "n": 2,
       "characters": [
         {
-          "color": "#cd3b54",
           "role": "Tersangka",
           "value": [
             {
@@ -274,7 +264,6 @@
           ]
         },
         {
-          "color": "",
           "role": "Penyidik",
           "value": [
             {
@@ -313,12 +302,10 @@
         }
       ],
       "location": {
-        "color": "#79C7E3",
         "name": "Mapolda Metro Jaya",
         "city": "Jakarta"
       },
       "time": {
-        "color": "#FF9833",
         "date": "23/11/2016",
         "name": "Malam"
       },
@@ -331,7 +318,6 @@
       "n": 3,
       "characters": [
         {
-          "color": "",
           "role": "Tersangka",
           "value": [
             {
@@ -341,7 +327,6 @@
           ]
         },
         {
-          "color": "",
           "role": "Penasihat Hukum",
           "value": [
             {
@@ -353,7 +338,6 @@
           ]
         },
         {
-          "color": "",
           "role": "Penyidik",
           "value": [
             {
@@ -388,12 +372,10 @@
         }
       ],
       "location": {
-        "color": "#79C7E3",
         "name": "Mapolda Metro Jaya",
         "city": "Jakarta Pusat"
       },
       "time": {
-        "color": "#FF9833",
         "date": "23/11/2016",
         "name": "Malam"
       },
@@ -406,7 +388,6 @@
       "n": 1,
       "characters": [
         {
-          "color": "",
           "role": "Penyidik",
           "value": [
             {
@@ -439,12 +420,10 @@
         }
       ],
       "location": {
-        "color": "#79C7E3",
         "name": "Mapolda Metro Jaya",
         "city": "Jakarta Pusat"
       },
       "time": {
-        "color": "#FF9833",
         "date": "23/11/2016",
         "name": "Malam"
       },
@@ -457,7 +436,6 @@
       "n": 1,
       "characters": [
         {
-          "color": "",
           "role": "Penasihat Hukum",
           "value": [
             {
@@ -490,12 +468,10 @@
         }
       ],
       "location": {
-        "color": "#79C7E3",
         "name": "Mapolda Metro Jaya",
         "city": "Jakarta Pusat"
       },
       "time": {
-        "color": "#FF9833",
         "date": "23/11/2016",
         "name": "Malam"
       },
