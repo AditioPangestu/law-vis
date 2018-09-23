@@ -1,0 +1,70 @@
+{
+  "character" : [
+    {
+      "role" : "Saksi",
+      "color" : "#f25822"
+    },
+    {
+      "role" : "Tersangka",
+      "color" : "#ed008c"
+    },
+    {
+      "role" : "Terdakwa",
+      "color" : "#d41e4e"
+    },
+    {
+      "role" : "Penasihat Hukum",
+      "color" : "#f7941d"
+    },
+    {
+      "role" : "Termohon",
+      "color" : "#a93799"
+    },
+    {
+      "role" : "Pemohon",
+      "color" : "#56b91e"
+    },
+    {
+      "role" : "Penyelidik",
+      "color" : "#01abce"
+    },
+    {
+      "role" : "Penyidik",
+      "color" : "#204b7c"
+    },
+    {
+      "role" : "Penuntut Umum",
+      "color" : "#5c2e91"
+    },
+    {
+      "role" : "Hakim",
+      "color" : "#00a65e"
+    },
+    {
+      "role" : "Peran Lain",
+      "color" : "#d8df20"
+    }
+  ],
+  "time" : [
+    {
+      "name" : "Siang",
+      "color" : "#fff59d"
+    },
+    {
+      "name" : "Malam",
+      "color" : "#cbc7e9"
+    }
+  ],
+  "location" : [
+    "#ffcdd2",
+    "#bbdefb",
+    "#e1bee7",
+    "#b2e8f7",
+    "#f8bbd0",
+    "#c8e6c9",
+    "#ffe6b2",
+    "#b2dfdb",
+    "#fde8eb",
+    "#dbedc8"
+  ]
+}
